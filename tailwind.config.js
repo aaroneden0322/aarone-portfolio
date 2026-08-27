@@ -7,14 +7,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: "#080A0F",
-        ink: "#E9ECF4",
-        "ink-muted": "#93A0B5",
-        border: "rgba(232,236,243,0.09)",
-        circuit: "#3FE0C5",
-        flow: "#FF6A4D",
-        "flow-soft": "#FF8A6B",
-        volt: "#8B7CFF",
+        bg: "rgb(var(--color-bg) / <alpha-value>)",
+        ink: "rgb(var(--color-ink) / <alpha-value>)",
+        "ink-muted": "rgb(var(--color-ink-muted) / <alpha-value>)",
+        border: "var(--color-border)",
+        circuit: "rgb(var(--color-circuit) / <alpha-value>)",
+        flow: "rgb(var(--color-flow) / <alpha-value>)",
+        "flow-soft": "rgb(var(--color-flow-soft) / <alpha-value>)",
+        volt: "rgb(var(--color-volt) / <alpha-value>)",
+        surface: "rgb(var(--color-surface) / <alpha-value>)",
+        "accent-ink": "#080A0F",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Arial", "Helvetica", "sans-serif"],
