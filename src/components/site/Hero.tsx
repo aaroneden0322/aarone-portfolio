@@ -34,7 +34,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#laneframe"
-              className="rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-bg transition-transform hover:scale-[1.03]"
+              className="rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
             >
               See the Laneframe build
             </a>
@@ -48,7 +48,7 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={150}>
-          <div className="mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-white/[0.02]">
+          <div className="mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface/[0.02]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/portrait.jpg"

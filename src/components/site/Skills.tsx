@@ -119,7 +119,7 @@ function Pill({ tool, reverse }: { tool: Tool; reverse?: boolean }) {
   return (
     <span
       onMouseMove={handleMove}
-      className="glow-card group mx-2 flex shrink-0 select-none items-center gap-3 rounded-2xl border border-border bg-white/[0.02] py-2.5 pl-2.5 pr-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
+      className="glow-card group mx-2 flex shrink-0 select-none items-center gap-3 rounded-2xl border border-border bg-surface/[0.02] py-2.5 pl-2.5 pr-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
     >
       <span
         className={

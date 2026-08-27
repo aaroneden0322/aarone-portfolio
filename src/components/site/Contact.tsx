@@ -87,7 +87,7 @@ export default function Contact() {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="mt-1 w-full rounded-lg border border-border bg-white/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
+                className="mt-1 w-full rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
               />
             </div>
             <div>
@@ -100,7 +100,7 @@ export default function Contact() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="mt-1 w-full rounded-lg border border-border bg-white/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
+                className="mt-1 w-full rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
               />
             </div>
             <div>
@@ -113,13 +113,13 @@ export default function Contact() {
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-1 w-full resize-y rounded-lg border border-border bg-white/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
+                className="mt-1 w-full resize-y rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
               />
             </div>
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-bg transition-transform hover:scale-[1.01] disabled:opacity-60"
+              className="w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.01] disabled:opacity-60"
             >
               {status === "sending" ? "Sending…" : "Send Message"}
             </button>

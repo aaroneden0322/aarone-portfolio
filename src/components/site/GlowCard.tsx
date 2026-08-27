@@ -16,7 +16,7 @@ export default function GlowCard({
   return (
     <div
       onMouseMove={handleMove}
-      className={`glow-card rounded-2xl border border-border bg-white/[0.02] ${className}`}
+      className={`glow-card rounded-2xl border border-border bg-surface/[0.02] ${className}`}
     >
       {children}
     </div>

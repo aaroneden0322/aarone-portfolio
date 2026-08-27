@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -18,7 +19,7 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-flow-soft to-volt font-display text-sm font-bold text-bg">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-flow-soft to-volt font-display text-sm font-bold text-accent-ink">
             AD
           </span>
           <span className="font-display text-base font-semibold text-ink">
@@ -38,7 +39,8 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <a
             href="#contact"
             className="rounded-full border border-circuit/60 px-5 py-2 text-sm font-medium text-circuit transition-colors hover:bg-circuit/10"
@@ -47,20 +49,23 @@ export default function Nav() {
           </a>
         </div>
 
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          className="text-ink md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-            )}
-          </svg>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            className="text-ink"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -70,7 +75,7 @@ export default function Nav() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-2 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
+              className="rounded-md px-2 py-2 text-sm text-ink-muted hover:bg-surface/5 hover:text-ink"
             >
               {l.label}
             </a>
