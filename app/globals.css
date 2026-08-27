@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #080a0f;
+  background-image:
+    radial-gradient(rgba(232, 236, 243, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Scroll-reveal system. Base (hidden) state lives in plain CSS; the
+   "reveal" -> "reveal is-visible" transition below is applied via
+   @apply so the animate-fade-up utility class is always literally
+   consumed somewhere in the compiled CSS and Tailwind's content-based
+   purge never strips @keyframes fade-up out of production. Do not
+   change this to a hand-written `animation: fade-up ...` rule — that
+   exact mistake has shipped to production twice before. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.reveal.is-visible {
+  @apply animate-fade-up;
+}
+
+/* Tool-stack marquee rows. Each row's track is duplicated in JSX so a
+   -50% translateX loops seamlessly; the utility classes below are the
+   literal `animate-marquee` / `animate-marquee-reverse` class names so
+   purge always sees them used. */
+.marquee-track {
+  @apply flex w-max animate-marquee;
+}
+.marquee-track-reverse {
+  @apply flex w-max animate-marquee-reverse;
+}
+.marquee-row:hover .marquee-track,
+.marquee-row:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
+/* Node-connector divider dots */
+.node-dot {
+  @apply animate-pulse-dot;
+}
+
+/* Ambient background drift blobs */
+.drift-blob {
+  @apply animate-drift;
+}
+
+/* Glow hover-border card used across case-study / platform / skill cards */
+.glow-card {
+  position: relative;
+  isolation: isolate;
+}
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(63, 224, 197, 0.55),
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+::selection {
+  background: rgba(63, 224, 197, 0.35);
+  color: #e9ecf4;
+}
