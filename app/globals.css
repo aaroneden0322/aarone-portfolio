@@ -2,8 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens. Dark is the default (:root), light overrides via
+   [data-theme="light"] on <html> (set by ThemeToggle / the blocking
+   FOUC-prevention script in layout.tsx). bg/ink/ink-muted/circuit/flow/
+   flow-soft/volt/surface are stored as "R G B" triplets so Tailwind's
+   rgb(var(--x) / <alpha-value>) pattern in tailwind.config.js can apply
+   opacity modifiers (e.g. bg-circuit/10); border/dot-grid/selection are
+   stored as full rgba() strings since they're never used with a
+   modifier. accent-ink (tailwind config, fixed #080A0F) is intentionally
+   NOT a variable here — it's the always-dark text color used on top of
+   bright accent buttons regardless of theme. */
 :root {
   color-scheme: dark;
+  --color-bg: 8 10 15;
+  --color-ink: 233 236 244;
+  --color-ink-muted: 147 160 181;
+  --color-border: rgba(232, 236, 243, 0.09);
+  --color-circuit: 63 224 197;
+  --color-flow: 255 106 77;
+  --color-flow-soft: 255 138 107;
+  --color-volt: 139 124 255;
+  --color-surface: 255 255 255;
+  --dot-grid: rgba(232, 236, 243, 0.06);
+  --selection-bg: rgba(63, 224, 197, 0.35);
+  --selection-fg: #e9ecf4;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: 250 251 253;
+  --color-ink: 15 23 32;
+  --color-ink-muted: 81 96 112;
+  --color-border: rgba(15, 23, 32, 0.1);
+  --color-circuit: 13 148 136;
+  --color-flow: 217 68 46;
+  --color-flow-soft: 196 60 34;
+  --color-volt: 109 92 231;
+  --color-surface: 15 23 32;
+  --dot-grid: rgba(15, 23, 32, 0.05);
+  --selection-bg: rgba(13, 148, 136, 0.25);
+  --selection-fg: #0f1720;
 }
 
 html {
@@ -11,10 +49,9 @@ html {
 }
 
 body {
-  background-color: #080a0f;
-  background-image:
-    radial-gradient(rgba(232, 236, 243, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
   background-size: 28px 28px;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Scroll-reveal system. Base (hidden) state lives in plain CSS; the
@@ -70,7 +107,7 @@ body {
   padding: 1px;
   background: radial-gradient(
     220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-    rgba(63, 224, 197, 0.55),
+    rgb(var(--color-circuit) / 0.55),
     transparent 70%
   );
   -webkit-mask:
@@ -88,6 +125,6 @@ body {
 }
 
 ::selection {
-  background: rgba(63, 224, 197, 0.35);
-  color: #e9ecf4;
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }

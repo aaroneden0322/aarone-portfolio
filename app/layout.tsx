@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,7 +29,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="bg-bg text-ink font-sans antialiased">{children}</body>
+      <body className="bg-bg text-ink font-sans antialiased">
+        {/* Blocking theme-init script: dark is the default (no attribute
+            needed — :root already holds the dark values), so this only
+            has work to do for a returning visitor who chose light mode.
+            Runs before first paint (strategy="beforeInteractive") so
+            there is no flash of dark before switching to light. */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
