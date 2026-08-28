@@ -98,6 +98,21 @@ body {
 .glow-card {
   position: relative;
   isolation: isolate;
+  /* Ambient halo that ramps from nothing to a soft colored glow on
+     hover, layered underneath the cursor-tracked spotlight below. The
+     resting state repeats the same shadow layer count/order as the
+     hover state (just at zero alpha/size) so the browser can actually
+     interpolate the transition instead of snapping between "none" and
+     a multi-layer box-shadow. */
+  box-shadow:
+    0 0 0 0 rgb(var(--color-circuit) / 0),
+    0 0 0 0 rgb(var(--color-circuit) / 0);
+  transition: box-shadow 0.45s ease;
+}
+.glow-card:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--color-circuit) / 0.16),
+    0 16px 48px -8px rgb(var(--color-circuit) / 0.3);
 }
 .glow-card::before {
   content: "";
@@ -127,4 +142,22 @@ body {
 ::selection {
   background: var(--selection-bg);
   color: var(--selection-fg);
+}
+
+/* Shared button/CTA hover-lighting effect — a soft colored halo that
+   ramps from zero to full intensity on hover, for the same "added
+   emphasis" reason as .glow-card above. Same zero-alpha-layer-matching
+   trick so the ramp actually transitions instead of snapping in. */
+.btn-glow {
+  /* A faint resting glow that ramps up to a much stronger one on
+     hover — genuinely "low to high", not just off/on. */
+  box-shadow:
+    0 0 0 0 rgb(var(--color-circuit) / 0.4),
+    0 0 10px 0 rgb(var(--color-circuit) / 0.12);
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+.btn-glow:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--color-circuit) / 0.45),
+    0 0 26px 2px rgb(var(--color-circuit) / 0.35);
 }
