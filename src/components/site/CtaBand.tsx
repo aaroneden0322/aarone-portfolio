@@ -10,7 +10,7 @@ export default function CtaBand({ text }: { text: string }) {
           </p>
           <a
             href="#contact"
-            className="mt-8 inline-block rounded-full bg-circuit px-7 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
+            className="btn-glow mt-8 inline-block rounded-full bg-circuit px-7 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
           >
             Let&rsquo;s talk
           </a>

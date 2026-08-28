@@ -34,13 +34,13 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#laneframe"
-              className="rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
+              className="btn-glow rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
             >
               See the Laneframe build
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-circuit/60"
+              className="btn-glow rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-circuit/60"
             >
               Let&rsquo;s talk
             </a>

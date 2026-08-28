@@ -19,9 +19,12 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-flow-soft to-volt font-display text-sm font-bold text-accent-ink">
-            AD
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/nav-avatar.png"
+            alt="Aarone Den Patayan"
+            className="h-9 w-9 rounded-lg border border-border object-cover"
+          />
           <span className="font-display text-base font-semibold text-ink">
             Aarone Den Patayan
           </span>
@@ -43,7 +46,7 @@ export default function Nav() {
           <ThemeToggle />
           <a
             href="#contact"
-            className="rounded-full border border-circuit/60 px-5 py-2 text-sm font-medium text-circuit transition-colors hover:bg-circuit/10"
+            className="btn-glow rounded-full border border-circuit/60 px-5 py-2 text-sm font-medium text-circuit transition-colors hover:bg-circuit/10"
           >
             Let&rsquo;s talk
           </a>
@@ -83,7 +86,7 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 rounded-full border border-circuit/60 px-5 py-2 text-center text-sm font-medium text-circuit"
+            className="btn-glow mt-2 rounded-full border border-circuit/60 px-5 py-2 text-center text-sm font-medium text-circuit"
           >
             Let&rsquo;s talk
           </a>

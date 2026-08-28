@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
+import WorkflowBackground from "./WorkflowBackground";
 
 const PLATFORMS = [
   {
@@ -37,7 +38,12 @@ const STATS = [
 
 export default function Laneframe() {
   return (
-    <section id="laneframe" className="mx-auto max-w-6xl px-6 py-8">
+    <section
+      id="laneframe"
+      className="relative mx-auto max-w-6xl overflow-hidden px-6 py-8"
+    >
+      <WorkflowBackground />
+      <div className="relative">
       <Reveal>
         <p className="font-display text-sm font-semibold tracking-[0.15em] text-circuit">
           FEATURED CASE STUDY
@@ -106,6 +112,7 @@ export default function Laneframe() {
           ))}
         </div>
       </Reveal>
+      </div>
     </section>
   );
 }

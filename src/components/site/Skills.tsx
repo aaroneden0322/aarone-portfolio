@@ -145,7 +145,7 @@ function Pill({ tool, reverse }: { tool: Tool; reverse?: boolean }) {
 function MarqueeRow({ items, reverse }: { items: Tool[]; reverse?: boolean }) {
   const doubled = [...items, ...items];
   return (
-    <div className="marquee-row overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+    <div className="marquee-row overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
       <div className={reverse ? "marquee-track-reverse" : "marquee-track"}>
         {doubled.map((tool, i) => (
           <Pill key={`${tool.label}-${i}`} tool={tool} reverse={reverse} />

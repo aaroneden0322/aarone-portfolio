@@ -71,7 +71,7 @@ export default function Contact() {
         <p className="mt-4 max-w-2xl text-ink-muted">
           Have a build that needs stress-testing, or a marketing system
           that&rsquo;s outgrown manual work? Tell me what you&rsquo;re dealing
-          with — I&rsquo;ll get back to you within a couple of business days.
+          with — I&rsquo;ll get back to you within 24 hours.
         </p>
       </Reveal>
 
@@ -119,14 +119,13 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.01] disabled:opacity-60"
+              className="btn-glow w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.01] disabled:opacity-60"
             >
               {status === "sending" ? "Sending…" : "Send Message"}
             </button>
             {status === "sent" && (
               <p className="text-sm text-circuit">
-                Thanks — I&rsquo;ll get back to you within a couple of
-                business days.
+                Thanks — I&rsquo;ll get back to you within 24 hours.
               </p>
             )}
             {status === "error" && (
@@ -156,14 +155,14 @@ export default function Contact() {
             <div className="mt-3 flex flex-wrap gap-3">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
+                className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
               >
                 Email Me
               </a>
               <button
                 type="button"
                 onClick={handleCopy}
-                className="rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
+                className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
               >
                 {copied ? "Copied!" : "Copy address"}
               </button>
@@ -179,7 +178,7 @@ export default function Contact() {
                   href={w.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
+                  className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
                 >
                   {w.label}
                 </a>

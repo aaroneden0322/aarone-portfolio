@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import WorkflowBackground from "./WorkflowBackground";
 
 const STEPS = [
   {
@@ -25,7 +26,12 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section id="process" className="mx-auto max-w-6xl px-6 py-8">
+    <section
+      id="process"
+      className="relative mx-auto max-w-6xl overflow-hidden px-6 py-8"
+    >
+      <WorkflowBackground />
+      <div className="relative">
       <Reveal>
         <p className="font-display text-sm font-semibold tracking-[0.15em] text-circuit">
           PROCESS
@@ -51,6 +57,7 @@ export default function Process() {
             <p className="mt-2 max-w-2xl text-sm text-ink-muted">{s.body}</p>
           </Reveal>
         ))}
+      </div>
       </div>
     </section>
   );
