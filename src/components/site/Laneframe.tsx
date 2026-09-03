@@ -11,8 +11,8 @@ const PLATFORMS = [
   },
   {
     name: "Make",
-    status: "In Progress",
-    statusColor: "text-flow",
+    status: "Complete",
+    statusColor: "text-circuit",
     body: "[Placeholder — current state of the Make build.]",
   },
   {
@@ -52,9 +52,9 @@ export default function Laneframe() {
           Laneframe: Four Platforms, One Specification
         </h2>
         <p className="mt-4 max-w-3xl text-ink-muted">
-          [Summary placeholder — one lead-intake automation specification,
-          built independently on four platforms for a composite client,
-          instrumented identically and measured honestly.]
+          One lead-intake automation specification, built independently on
+          four platforms for a composite client, instrumented identically and
+          measured honestly.
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -62,15 +62,15 @@ export default function Laneframe() {
             Active build
           </span>
           <span className="text-sm text-ink-muted">
-            [Status placeholder — actively building: n8n and Make live,
-            Zapier and GoHighLevel in progress]
+            n8n and Make builds complete — Zapier and GoHighLevel not yet
+            started.
           </span>
         </div>
 
         <p className="mt-4 max-w-3xl text-xs text-ink-muted/80">
-          Methodology note: [Methodology note placeholder — every number on
-          this page is either measured during a real build or a formula with
-          its inputs named; unmeasured items are marked, never estimated]
+          Methodology note: every number on this page is either measured
+          during a real build or a formula with its inputs named —
+          unmeasured items are marked, never estimated.
         </p>
       </Reveal>
 
