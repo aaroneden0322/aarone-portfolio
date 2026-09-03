@@ -23,7 +23,7 @@ export default function Hero() {
             Marketing &amp; AI Automation Specialist
           </p>
           <p className="mt-1 text-sm text-ink-muted/70">
-            | n8n &bull; Make &bull; GoHighLevel &bull; Zapier
+            n8n &bull; Make &bull; GoHighLevel &bull; Zapier
           </p>
           <p className="mt-4 max-w-xl text-ink-muted">
             I design and build marketing automation systems — lead routing,
