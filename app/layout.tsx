@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Aarone Den Patayan — Marketing & AI Specialist",
+  title: "Aarone Den Patayan — Marketing & AI Automation Specialist",
   description:
     "I design and build marketing automation systems — lead routing, billing and dunning, multi-step nurture sequences — for founders and marketing teams who need something that works the first time a real customer hits it wrong.",
 };

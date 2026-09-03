@@ -94,6 +94,17 @@ body {
   @apply animate-drift;
 }
 
+/* Hero ambient glow accents — subtle animated halos behind the portrait
+   photo and the primary "Let's talk" CTA. Same restrained, low-alpha,
+   blurred-blob language as .drift-blob above (not a loud add-on effect),
+   just breathing in place behind its element instead of drifting. Uses
+   the literal `animate-glow-pulse` utility class so Tailwind's
+   content-based purge never strips @keyframes glow-pulse (see the
+   purge-safety note on .reveal above). */
+.hero-glow {
+  @apply animate-glow-pulse;
+}
+
 /* Glow hover-border card used across case-study / platform / skill cards */
 .glow-card {
   position: relative;
