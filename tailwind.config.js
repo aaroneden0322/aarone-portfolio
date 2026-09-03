@@ -47,6 +47,10 @@ module.exports = {
           "0%, 100%": { opacity: "0.55", transform: "scale(1)" },
           "50%": { opacity: "1", transform: "scale(1.35)" },
         },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "0.55", transform: "scale(1)" },
+          "50%": { opacity: "0.9", transform: "scale(1.06)" },
+        },
       },
       animation: {
         marquee: "marquee 32s linear infinite",
@@ -55,6 +59,7 @@ module.exports = {
         dashflow: "dashflow 1.2s linear infinite",
         drift: "drift 7s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2.4s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 4.5s ease-in-out infinite",
       },
     },
   },
