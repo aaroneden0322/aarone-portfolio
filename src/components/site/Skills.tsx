@@ -62,12 +62,6 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
       { label: "Human-in-the-Loop", category: "Approval Gate", Icon: HumanLoopIcon, tint: "rgba(255,106,77,0.1)", ring: "rgba(255,106,77,0.28)" },
       { label: "Tool-Calling", category: "Function Calling", Icon: ToolCallingIcon, tint: "rgba(139,124,255,0.1)", ring: "rgba(139,124,255,0.28)" },
       { label: "Probe Testing", category: "Adversarial QA", Icon: ProbeTestingIcon, tint: "rgba(63,224,197,0.1)", ring: "rgba(63,224,197,0.28)" },
-    ],
-    reverse: true,
-  },
-  {
-    heading: "AI MODELS & PLATFORMS",
-    items: [
       { label: "OpenAI", category: "AI & LLM", Icon: OpenAiIcon, tint: "rgba(16,163,127,0.1)", ring: "rgba(16,163,127,0.28)" },
       { label: "Claude", category: "AI & LLM", Icon: ClaudeIcon, tint: "rgba(217,119,6,0.1)", ring: "rgba(217,119,6,0.28)" },
       { label: "Grok", category: "AI & LLM", Icon: GrokIcon, tint: "rgba(255,255,255,0.08)", ring: "rgba(255,255,255,0.2)" },
@@ -77,9 +71,10 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
       { label: "LangChain", category: "AI Framework", Icon: LangChainIcon, tint: "rgba(16,185,129,0.1)", ring: "rgba(16,185,129,0.28)" },
       { label: "OpenRouter", category: "AI Gateway", Icon: OpenRouterIcon, tint: "rgba(20,184,166,0.1)", ring: "rgba(20,184,166,0.28)" },
     ],
+    reverse: true,
   },
   {
-    heading: "INTEGRATION & DATA",
+    heading: "INTEGRATIONS & PRODUCTIVITY",
     items: [
       { label: "HubSpot", category: "CRM & Marketing", Icon: HubSpotIcon, tint: "rgba(255,122,89,0.1)", ring: "rgba(255,122,89,0.28)" },
       { label: "Postgres", category: "Database", Icon: PostgresIcon, tint: "rgba(51,103,145,0.14)", ring: "rgba(90,150,200,0.28)" },
@@ -88,12 +83,6 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
       { label: "Notion", category: "Knowledge Base", Icon: NotionIcon, tint: "rgba(255,255,255,0.08)", ring: "rgba(255,255,255,0.2)" },
       { label: "Asana", category: "Project Mgmt", Icon: AsanaIcon, tint: "rgba(240,106,106,0.1)", ring: "rgba(240,106,106,0.28)" },
       { label: "Apollo.io", category: "Lead Intelligence", Icon: ApolloIcon, tint: "rgba(124,58,237,0.1)", ring: "rgba(124,58,237,0.28)" },
-    ],
-    reverse: true,
-  },
-  {
-    heading: "PRODUCTIVITY & COMMS",
-    items: [
       { label: "Stripe", category: "Payment Gateway", Icon: StripeIcon, tint: "rgba(99,91,255,0.1)", ring: "rgba(99,91,255,0.28)" },
       { label: "Canva", category: "Design & Assets", Icon: CanvaIcon, tint: "rgba(0,196,204,0.1)", ring: "rgba(0,196,204,0.28)" },
       { label: "Gmail", category: "Email Dispatch", Icon: GmailIcon, tint: "rgba(234,67,53,0.1)", ring: "rgba(234,67,53,0.28)" },

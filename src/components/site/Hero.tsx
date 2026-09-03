@@ -20,7 +20,10 @@ export default function Hero() {
             first.
           </h1>
           <p className="mt-4 text-lg font-medium text-ink-muted">
-            Marketing &amp; AI Specialist
+            Marketing &amp; AI Automation Specialist{" "}
+            <span className="text-ink-muted/70">
+              | n8n &bull; Make &bull; GoHighLevel &bull; Zapier
+            </span>
           </p>
           <p className="mt-4 max-w-xl text-ink-muted">
             I design and build marketing automation systems — lead routing,
@@ -40,21 +43,31 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="btn-glow rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-circuit/60"
+              className="btn-glow relative rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-circuit/60"
             >
+              <span
+                aria-hidden="true"
+                className="hero-glow pointer-events-none absolute -inset-2 -z-10 rounded-full bg-circuit/20 blur-lg"
+              />
               Let&rsquo;s talk
             </a>
           </div>
         </Reveal>
 
         <Reveal delay={150}>
-          <div className="mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface/[0.02]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/portrait.jpg"
-              alt="Aarone Den Patayan"
-              className="h-full w-full object-cover object-top"
+          <div className="relative mx-auto w-full max-w-sm">
+            <div
+              aria-hidden="true"
+              className="hero-glow pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-circuit/25 via-volt/15 to-flow/15 blur-2xl"
             />
+            <div className="aspect-[2/3] w-full overflow-hidden rounded-3xl border border-border bg-surface/[0.02]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/portrait.jpg"
+                alt="Aarone Den Patayan"
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
           </div>
         </Reveal>
       </div>
