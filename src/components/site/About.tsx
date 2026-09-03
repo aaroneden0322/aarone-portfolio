@@ -3,16 +3,16 @@ import GlowCard from "./GlowCard";
 
 const CARDS = [
   {
-    title: "Patch-based iterative delivery",
-    body: "Builds ship in small, reviewable changes instead of one big handoff. Each patch is tested and confirmed working before the next one starts, so problems surface early and stay easy to trace.",
+    title: "Architect the Spec",
+    body: "AI-assisted pipelines turn your marketing strategy into a concrete, automation-ready blueprint.",
   },
   {
-    title: "Zero-knowledge-loss handoffs",
-    body: "Every session ends with a written handoff — decisions made, what's still open, what to check next — so context never has to be re-explained or rediscovered between sessions, platforms, or people.",
+    title: "Build the Engine",
+    body: "Backend logic built in n8n, Make, Zapier, or GoHighLevel — wired straight into the CRMs and tools your team already uses.",
   },
   {
-    title: "Execution-ready outputs",
-    body: "Specs and playbooks are written for the person who has to actually build them: exact steps, named inputs, no guesswork. If a number isn't measured yet, it's marked unmeasured — never estimated.",
+    title: "Stress-Test, Then Hand Off",
+    body: "Broken on purpose with bad data and edge cases before launch, then delivered as a playbook your team can run on day one.",
   },
 ];
 
@@ -27,17 +27,10 @@ export default function About() {
           How I Work
         </h2>
         <p className="mt-6 max-w-3xl text-ink-muted">
-          I&rsquo;m Aarone Den Patayan, a marketing &amp; AI specialist. I
-          build multi-prompt AI pipelines that turn a business&rsquo;s
-          marketing strategy into automation-ready specs — then build the
-          automation itself, on whichever platform fits the job: n8n, Make,
-          Zapier, or GoHighLevel, wired into the CRMs, databases, and
-          messaging tools a team already runs on, like HubSpot, Postgres,
-          Airtable, and Slack. From there I operationalize those specs into
-          playbooks, copy, and dashboards a real team can execute against.
-          Most of the value gets lost at the handoff between strategy and
-          build — so I treat documentation and testing as part of the
-          deliverable, not an afterthought.
+          I&rsquo;m Aarone Den Patayan, a Marketing &amp; AI Automation
+          Specialist. Most of a project&rsquo;s value gets lost in the
+          handoff between strategy and execution — so I treat resilience,
+          testing, and documentation as core deliverables, not extras.
         </p>
       </Reveal>
 
