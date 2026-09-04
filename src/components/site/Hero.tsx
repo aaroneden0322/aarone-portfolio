@@ -13,7 +13,7 @@ export default function Hero() {
       <AiSphere />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-8 pt-16 md:grid-cols-2 md:items-center md:pt-24">
-        <Reveal delay={150} className="order-first md:order-last">
+        <Reveal delay={150} className="order-last">
           <div className="relative mx-auto w-full max-w-[160px] sm:max-w-sm">
             <div
               aria-hidden="true"
@@ -30,7 +30,7 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        <Reveal className="order-last md:order-first">
+        <Reveal className="order-first">
           <p className="font-display text-sm font-semibold tracking-[0.15em] text-circuit">
             AARONE DEN PATAYAN
           </p>
@@ -54,13 +54,13 @@ export default function Hero() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <a
               href="#laneframe"
-              className="btn-glow rounded-full bg-circuit px-6 py-3 text-center text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03] sm:w-auto"
+              className="btn-glow order-2 rounded-full bg-circuit px-6 py-3 text-center text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03] sm:order-1 sm:w-auto"
             >
               See the Laneframe build
             </a>
             <a
               href="#contact"
-              className="btn-glow relative rounded-full border border-border px-6 py-3 text-center text-sm font-semibold text-ink transition-colors hover:border-circuit/60 sm:w-auto"
+              className="btn-glow relative order-1 rounded-full border border-border px-6 py-3 text-center text-sm font-semibold text-ink transition-colors hover:border-circuit/60 sm:order-2 sm:w-auto"
             >
               <span
                 aria-hidden="true"

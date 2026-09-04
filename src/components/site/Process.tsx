@@ -4,19 +4,19 @@ import WorkflowBackground from "./WorkflowBackground";
 const STEPS = [
   {
     title: "Map the failure surface",
-    body: "Before writing a single node, I list everything that could break it: malformed data, unsupported requests, edge cases a happy-path demo would never hit.",
+    body: "Before I build a single workflow, I list everything that could break it: malformed data, missing fields, rate limits, duplicate triggers — the edge cases a happy-path demo would never hit.",
   },
   {
     title: "Build against probes, not demos",
-    body: "Every build gets a written set of adversarial test questions — things it should answer, things it shouldn't, and near-misses designed to tempt a confident wrong answer — before it's called done.",
+    body: "Every workflow gets fed the inputs it will actually see in production — bad data, retried webhooks, out-of-order triggers, third-party API hiccups — before it's called done, not just the one clean example that looks good in a walkthrough.",
   },
   {
-    title: "Route AI judgment through a human gate",
-    body: "Anything an AI system drafts for a real customer passes through approval before it goes out. Automation should remove the busywork, not the judgment call.",
+    title: "Route irreversible actions through a human gate",
+    body: "Anything that touches money, sends a message to a real customer, or can't be easily undone gets a review step before it fires. Automation should remove the busywork, not the judgment call.",
   },
   {
     title: "Test for consistency, not just correctness",
-    body: "AI tools don't behave identically run to run. I re-run the same prompt and check where the answer drifts, not just whether it passed once.",
+    body: "Automations run at all hours and get hit with retries and duplicate triggers, but still have to produce the same result every time. I re-run each build under those conditions and check where it drifts, not just whether it passed once.",
   },
   {
     title: "Document the limits, not just the wins",
