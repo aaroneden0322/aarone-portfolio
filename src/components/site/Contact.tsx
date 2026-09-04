@@ -121,7 +121,7 @@ export default function Contact() {
               disabled={status === "sending"}
               className="btn-glow w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.01] disabled:opacity-60"
             >
-              {status === "sending" ? "Sending…" : "Send Message"}
+              {status === "sending" ? "Sending…" : "Send My Message"}
             </button>
             {status === "sent" && (
               <p className="text-sm text-circuit">

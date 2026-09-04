@@ -49,7 +49,7 @@ export default function Hero() {
                 aria-hidden="true"
                 className="hero-glow pointer-events-none absolute -inset-2 -z-10 rounded-full bg-circuit/20 blur-lg"
               />
-              Let&rsquo;s talk
+              Fix My Bottleneck
             </a>
           </div>
         </Reveal>

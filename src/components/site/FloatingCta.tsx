@@ -46,7 +46,7 @@ export default function FloatingCta() {
           : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
-      Let&rsquo;s talk
+      Fix My Bottleneck
     </a>
   );
 }
