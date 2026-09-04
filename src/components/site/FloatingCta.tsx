@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function FloatingCta() {
   const [pastHero, setPastHero] = useState(false);
   const [nearContact, setNearContact] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -37,14 +38,23 @@ export default function FloatingCta() {
 
   const visible = pastHero && !nearContact;
 
+  // Idle it sits semi-opaque (so page content scrolling underneath stays
+  // legible, like iOS's AssistiveTouch button) and brightens to fully
+  // opaque on touch/press — it doesn't relocate, just dims/undims.
+  const opacityClasses = !visible
+    ? "pointer-events-none translate-y-4 opacity-0"
+    : pressed
+      ? "translate-y-0 opacity-100"
+      : "translate-y-0 opacity-60";
+
   return (
     <a
       href="#contact"
-      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-all duration-300 md:hidden ${
-        visible
-          ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-4 opacity-0"
-      }`}
+      onPointerDown={() => setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerCancel={() => setPressed(false)}
+      onPointerLeave={() => setPressed(false)}
+      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-all duration-300 md:hidden ${opacityClasses}`}
     >
       Fix My Bottleneck
     </a>
