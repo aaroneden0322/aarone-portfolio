@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import NodeDivider from "./NodeDivider";
+import AiSphere from "./AiSphere";
 
 export default function Hero() {
   return (
@@ -9,6 +10,7 @@ export default function Hero() {
         className="drift-blob pointer-events-none absolute right-0 top-24 h-80 w-80 rounded-full bg-flow/10 blur-3xl"
         style={{ animationDelay: "2.4s" }}
       />
+      <AiSphere />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-8 pt-16 md:grid-cols-2 md:items-center md:pt-24">
         <Reveal delay={150} className="order-first md:order-last">
