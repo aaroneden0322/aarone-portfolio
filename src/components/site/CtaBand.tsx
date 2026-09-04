@@ -12,7 +12,7 @@ export default function CtaBand({ text }: { text: string }) {
             href="#contact"
             className="btn-glow mt-8 inline-block rounded-full bg-circuit px-7 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
           >
-            Let&rsquo;s talk
+            Fix My Bottleneck
           </a>
         </div>
       </Reveal>

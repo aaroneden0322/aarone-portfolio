@@ -48,7 +48,7 @@ export default function Nav() {
             href="#contact"
             className="btn-glow rounded-full border border-circuit/60 px-5 py-2 text-sm font-medium text-circuit transition-colors hover:bg-circuit/10"
           >
-            Let&rsquo;s talk
+            Fix My Bottleneck
           </a>
         </div>
 
@@ -88,7 +88,7 @@ export default function Nav() {
             onClick={() => setOpen(false)}
             className="btn-glow mt-2 rounded-full border border-circuit/60 px-5 py-2 text-center text-sm font-medium text-circuit"
           >
-            Let&rsquo;s talk
+            Fix My Bottleneck
           </a>
         </nav>
       )}
