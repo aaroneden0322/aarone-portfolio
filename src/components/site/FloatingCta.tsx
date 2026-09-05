@@ -41,11 +41,15 @@ export default function FloatingCta() {
   // Idle it sits semi-opaque (so page content scrolling underneath stays
   // legible, like iOS's AssistiveTouch button) and brightens to fully
   // opaque on touch/press — it doesn't relocate, just dims/undims.
+  // Appearing/disappearing (pastHero flipping, or Contact scrolling into
+  // view) fades over a longer, eased duration instead of a quick snap, so
+  // it never feels like it's just blinking on/off — only the fade itself
+  // is slowed down; the touch dim/brighten stays snappy.
   const opacityClasses = !visible
-    ? "pointer-events-none translate-y-4 opacity-0"
+    ? "pointer-events-none translate-y-4 opacity-0 duration-700 ease-out"
     : pressed
-      ? "translate-y-0 opacity-100"
-      : "translate-y-0 opacity-60";
+      ? "translate-y-0 opacity-100 duration-300 ease-out"
+      : "translate-y-0 opacity-60 duration-700 ease-out";
 
   return (
     <a
@@ -54,7 +58,7 @@ export default function FloatingCta() {
       onPointerUp={() => setPressed(false)}
       onPointerCancel={() => setPressed(false)}
       onPointerLeave={() => setPressed(false)}
-      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-all duration-300 md:hidden ${opacityClasses}`}
+      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-all ${opacityClasses}`}
     >
       Fix My Bottleneck
     </a>
