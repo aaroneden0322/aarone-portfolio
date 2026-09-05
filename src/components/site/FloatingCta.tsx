@@ -41,15 +41,30 @@ export default function FloatingCta() {
   // Idle it sits semi-opaque (so page content scrolling underneath stays
   // legible, like iOS's AssistiveTouch button) and brightens to fully
   // opaque on touch/press — it doesn't relocate, just dims/undims.
-  // Appearing/disappearing (pastHero flipping, or Contact scrolling into
-  // view) fades over a longer, eased duration instead of a quick snap, so
-  // it never feels like it's just blinking on/off — only the fade itself
-  // is slowed down; the touch dim/brighten stays snappy.
   const opacityClasses = !visible
-    ? "pointer-events-none translate-y-4 opacity-0 duration-700 ease-out"
+    ? "pointer-events-none translate-y-4 opacity-0"
     : pressed
-      ? "translate-y-0 opacity-100 duration-300 ease-out"
-      : "translate-y-0 opacity-60 duration-700 ease-out";
+      ? "translate-y-0 opacity-100"
+      : "translate-y-0 opacity-60";
+
+  // .btn-glow (globals.css) declares its own `transition: box-shadow 0.4s
+  // ease, transform 0.3s ease` and, being defined after Tailwind's
+  // utilities layer, that shorthand wins the cascade outright — it
+  // replaces transition-property entirely, silently dropping "opacity"
+  // from what's animated. That's why the appear/disappear fade never
+  // actually eased: only the slide (transform) was ever transitioning:
+  // opacity was snapping instantly the whole time regardless of any
+  // Tailwind duration-*/ease-* class. Fix: declare the transition inline
+  // (highest specificity, wins over the .btn-glow class rule) so opacity
+  // gets its own eased duration while box-shadow keeps its original
+  // 0.4s hover-glow ramp and transform keeps pace with the fade.
+  const fadeMs = pressed && visible ? 300 : 700;
+  const transitionStyle = {
+    transitionProperty: "opacity, transform, box-shadow",
+    transitionDuration: `${fadeMs}ms, ${fadeMs}ms, 400ms`,
+    transitionTimingFunction:
+      "cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), ease",
+  };
 
   return (
     <a
@@ -58,7 +73,8 @@ export default function FloatingCta() {
       onPointerUp={() => setPressed(false)}
       onPointerCancel={() => setPressed(false)}
       onPointerLeave={() => setPressed(false)}
-      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-all ${opacityClasses}`}
+      style={transitionStyle}
+      className={`btn-glow fixed bottom-6 right-6 z-50 rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 md:hidden ${opacityClasses}`}
     >
       Fix My Bottleneck
     </a>
