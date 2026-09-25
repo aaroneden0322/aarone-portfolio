@@ -7,25 +7,25 @@ const PLATFORMS = [
     name: "n8n",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "[Placeholder — what the n8n build covers and how it was instrumented.]",
+    body: "Two builds — a lead-routing intake rebuild and a subscription billing & dunning workflow — each run through a fixed set of break tests (malformed data, revoked credentials, retried webhooks) and confirmed live, not just a passing screenshot.",
   },
   {
     name: "Make",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "[Placeholder — current state of the Make build.]",
+    body: "Three builds — lead capture with dedupe, a subscription dunning ladder, and an AI concierge agent behind a human-approval gate — stress-tested against the same break scenarios, including a real webhook-queue incident found and fixed mid-build.",
   },
   {
     name: "Zapier",
-    status: "Not Started",
-    statusColor: "text-ink-muted",
-    body: "[Placeholder — planned scope for the Zapier build.]",
+    status: "Complete",
+    statusColor: "text-circuit",
+    body: "Three builds — a lead-routing rebuild, a trial-to-demo router, and a documentation support agent. The agent's self-policed coverage rule was deliberately probed and found weaker than n8n's numeric confidence gate — a measured finding, not a hunch.",
   },
   {
     name: "GoHighLevel",
-    status: "Not Started",
-    statusColor: "text-ink-muted",
-    body: "[Placeholder — planned scope for the GoHighLevel build.]",
+    status: "In Progress",
+    statusColor: "text-flow",
+    body: "The demo-lifecycle phase is built and verified; the next phase hasn't started. This card updates as that work lands — not before.",
   },
 ];
 
@@ -62,8 +62,7 @@ export default function Laneframe() {
             Active build
           </span>
           <span className="text-sm text-ink-muted">
-            n8n and Make builds complete — Zapier and GoHighLevel not yet
-            started.
+            n8n, Make, and Zapier builds complete — GoHighLevel in progress.
           </span>
         </div>
 
