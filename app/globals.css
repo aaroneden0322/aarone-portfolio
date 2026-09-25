@@ -7,11 +7,14 @@
    FOUC-prevention script in layout.tsx). bg/ink/ink-muted/circuit/flow/
    flow-soft/volt/surface are stored as "R G B" triplets so Tailwind's
    rgb(var(--x) / <alpha-value>) pattern in tailwind.config.js can apply
-   opacity modifiers (e.g. bg-circuit/10); border/dot-grid/selection are
-   stored as full rgba() strings since they're never used with a
-   modifier. accent-ink (tailwind config, fixed #080A0F) is intentionally
-   NOT a variable here — it's the always-dark text color used on top of
-   bright accent buttons regardless of theme. */
+   opacity modifiers (e.g. bg-circuit/10); border/selection are stored as
+   full rgba() strings since they're never used with a modifier.
+   accent-ink (tailwind config, fixed #080A0F) is intentionally NOT a
+   variable here — it's the always-dark text color used on top of bright
+   accent buttons regardless of theme. (The old --dot-grid token that used
+   to drive the static body background is gone — that background is now
+   the animated NodeGraphBackground canvas layer, mounted in layout.tsx,
+   which reads --color-ink-muted / --color-flow directly.) */
 :root {
   color-scheme: dark;
   --color-bg: 8 10 15;
@@ -23,7 +26,6 @@
   --color-flow-soft: 255 138 107;
   --color-volt: 139 124 255;
   --color-surface: 255 255 255;
-  --dot-grid: rgba(232, 236, 243, 0.06);
   --selection-bg: rgba(63, 224, 197, 0.35);
   --selection-fg: #e9ecf4;
 }
@@ -39,7 +41,6 @@
   --color-flow-soft: 196 60 34;
   --color-volt: 109 92 231;
   --color-surface: 15 23 32;
-  --dot-grid: rgba(15, 23, 32, 0.05);
   --selection-bg: rgba(13, 148, 136, 0.25);
   --selection-fg: #0f1720;
 }
@@ -49,8 +50,6 @@ html {
 }
 
 body {
-  background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
-  background-size: 28px 28px;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
