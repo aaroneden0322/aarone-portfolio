@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import PlatformBuildPage from "@/components/site/PlatformBuildPage";
 import n8n from "@/data/laneframe/n8n";
 import make from "@/data/laneframe/make";
+import zapier from "@/data/laneframe/zapier";
 import type { PlatformPageData } from "@/data/laneframe/types";
 
 const PLATFORMS: Record<string, PlatformPageData> = {
   n8n,
   make,
+  zapier,
 };
 
 export function generateStaticParams() {
