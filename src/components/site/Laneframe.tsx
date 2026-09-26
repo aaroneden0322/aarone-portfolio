@@ -22,7 +22,7 @@ const PLATFORMS = [
     status: "Complete",
     statusColor: "text-circuit",
     body: "Three builds — a lead-routing rebuild, a trial-to-demo router, and a documentation support agent. The agent's self-policed coverage rule was deliberately probed and found weaker than n8n's numeric confidence gate — a measured finding, not a hunch.",
-    href: "/#work",
+    href: "/laneframe/zapier",
   },
   {
     name: "GoHighLevel",
