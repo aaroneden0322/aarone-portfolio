@@ -1,12 +1,12 @@
 const NAV_COL_1 = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Case Studies" },
-  { href: "#process", label: "Process" },
+  { href: "/#about", label: "About" },
+  { href: "/#work", label: "Case Studies" },
+  { href: "/#process", label: "Process" },
 ];
 const NAV_COL_2 = [
-  { href: "#laneframe", label: "Laneframe" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#laneframe", label: "Laneframe" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#contact", label: "Contact" },
 ];
 const SOCIALS = [
   { href: "https://linkedin.com/in/aarone-den-patayan-688974341", label: "LinkedIn" },
