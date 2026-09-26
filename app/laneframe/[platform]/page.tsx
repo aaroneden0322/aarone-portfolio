@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PlatformBuildPage from "@/components/site/PlatformBuildPage";
 import n8n from "@/data/laneframe/n8n";
+import make from "@/data/laneframe/make";
 import type { PlatformPageData } from "@/data/laneframe/types";
 
 const PLATFORMS: Record<string, PlatformPageData> = {
   n8n,
+  make,
 };
 
 export function generateStaticParams() {
