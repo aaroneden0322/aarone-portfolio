@@ -1,9 +1,11 @@
 import Nav from "./Nav";
 import Footer from "./Footer";
 import FloatingCta from "./FloatingCta";
+import BackToTop from "./BackToTop";
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
 import CtaBand from "./CtaBand";
+import ProofGrid from "./ProofGrid";
 import type { BuildStatus, PlatformPageData } from "@/data/laneframe/types";
 
 const STATUS_COLOR: Record<BuildStatus, string> = {
@@ -74,7 +76,7 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                       {build.title}
                     </h2>
                   </div>
-                  <span
+               <span
                     className={`text-xs font-semibold ${STATUS_COLOR[build.status]}`}
                   >
                     {build.status}
@@ -122,27 +124,7 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                   </p>
                 )}
 
-                {build.proof.length > 0 && (
-                  <div className="mt-8 grid gap-4 md:grid-cols-2">
-                    {build.proof.map((p) => (
-                      <figure
-                        key={p.src}
-                        className="overflow-hidden rounded-xl border border-border"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={p.src}
-                          alt={p.alt}
-                          loading="lazy"
-                          className="w-full"
-                        />
-                        <figcaption className="border-t border-border bg-surface/[0.02] px-4 py-3 text-xs text-ink-muted">
-                          {p.caption}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                )}
+                <ProofGrid proof={build.proof} />
               </GlowCard>
             </Reveal>
           </section>
@@ -171,6 +153,7 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
       </main>
       <Footer />
       <FloatingCta />
+      <BackToTop />
     </>
   );
 }
