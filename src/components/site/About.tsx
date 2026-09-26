@@ -3,16 +3,16 @@ import GlowCard from "./GlowCard";
 
 const CARDS = [
   {
-    title: "Architect the Spec",
-    body: "AI-assisted pipelines turn your marketing strategy into a concrete, automation-ready blueprint.",
+    title: "Plan It",
+    body: "I turn your marketing plan into a clear, step-by-step build plan.",
   },
   {
-    title: "Build the Engine",
-    body: "Backend logic built in n8n, Make, Zapier, or GoHighLevel — wired straight into the CRMs and tools your team already uses.",
+    title: "Build It",
+    body: "Connected to the tools your team already uses — your customer database, email, calendar, and chat.",
   },
   {
-    title: "Stress-Test, Then Hand Off",
-    body: "Broken on purpose with bad data and edge cases before launch, then delivered as a playbook your team can run on day one.",
+    title: "Test It Hard, Then Hand It Over",
+    body: "I break it on purpose before launch, then give your team simple instructions they can follow from day one.",
   },
 ];
 
@@ -29,8 +29,8 @@ export default function About() {
         <p className="mt-6 max-w-3xl text-ink-muted">
           I&rsquo;m Aarone Den Patayan, a Marketing &amp; AI Automation
           Specialist. Most of a project&rsquo;s value gets lost in the
-          handoff between strategy and execution — so I treat resilience,
-          testing, and documentation as core deliverables, not extras.
+          gap between the plan and the build — so testing and clear
+          instructions are part of the job, not optional extras.
         </p>
       </Reveal>
 

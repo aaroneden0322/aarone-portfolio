@@ -58,18 +58,18 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
   {
     heading: "AI & AGENTS",
     items: [
-      { label: "AI Agents", category: "Autonomous Systems", Icon: AiAgentsIcon, tint: "rgba(63,224,197,0.1)", ring: "rgba(63,224,197,0.28)" },
-      { label: "Human-in-the-Loop", category: "Approval Gate", Icon: HumanLoopIcon, tint: "rgba(255,106,77,0.1)", ring: "rgba(255,106,77,0.28)" },
-      { label: "Tool-Calling", category: "Function Calling", Icon: ToolCallingIcon, tint: "rgba(139,124,255,0.1)", ring: "rgba(139,124,255,0.28)" },
-      { label: "Probe Testing", category: "Adversarial QA", Icon: ProbeTestingIcon, tint: "rgba(63,224,197,0.1)", ring: "rgba(63,224,197,0.28)" },
+      { label: "AI Agents", category: "AI that does tasks", Icon: AiAgentsIcon, tint: "rgba(63,224,197,0.1)", ring: "rgba(63,224,197,0.28)" },
+      { label: "Human Sign-off", category: "A person approves first", Icon: HumanLoopIcon, tint: "rgba(255,106,77,0.1)", ring: "rgba(255,106,77,0.28)" },
+      { label: "AI Actions", category: "AI that uses your apps", Icon: ToolCallingIcon, tint: "rgba(139,124,255,0.1)", ring: "rgba(139,124,255,0.28)" },
+      { label: "Break Testing", category: "Broken on purpose", Icon: ProbeTestingIcon, tint: "rgba(63,224,197,0.1)", ring: "rgba(63,224,197,0.28)" },
       { label: "OpenAI", category: "AI & LLM", Icon: OpenAiIcon, tint: "rgba(16,163,127,0.1)", ring: "rgba(16,163,127,0.28)" },
       { label: "Claude", category: "AI & LLM", Icon: ClaudeIcon, tint: "rgba(217,119,6,0.1)", ring: "rgba(217,119,6,0.28)" },
       { label: "Grok", category: "AI & LLM", Icon: GrokIcon, tint: "rgba(255,255,255,0.08)", ring: "rgba(255,255,255,0.2)" },
       { label: "Gemini", category: "AI & LLM", Icon: GeminiIcon, tint: "rgba(78,140,255,0.1)", ring: "rgba(78,140,255,0.28)" },
       { label: "Lovable", category: "AI App Builder", Icon: LovableIcon, tint: "rgba(255,79,122,0.1)", ring: "rgba(255,79,122,0.28)" },
       { label: "Vapi", category: "Voice AI", Icon: VapiIcon, tint: "rgba(168,85,247,0.1)", ring: "rgba(168,85,247,0.28)" },
-      { label: "LangChain", category: "AI Framework", Icon: LangChainIcon, tint: "rgba(16,185,129,0.1)", ring: "rgba(16,185,129,0.28)" },
-      { label: "OpenRouter", category: "AI Gateway", Icon: OpenRouterIcon, tint: "rgba(20,184,166,0.1)", ring: "rgba(20,184,166,0.28)" },
+      { label: "LangChain", category: "AI toolkit", Icon: LangChainIcon, tint: "rgba(16,185,129,0.1)", ring: "rgba(16,185,129,0.28)" },
+      { label: "OpenRouter", category: "Many AI models, one place", Icon: OpenRouterIcon, tint: "rgba(20,184,166,0.1)", ring: "rgba(20,184,166,0.28)" },
     ],
     reverse: true,
   },
@@ -78,7 +78,7 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
     items: [
       { label: "HubSpot", category: "CRM & Marketing", Icon: HubSpotIcon, tint: "rgba(255,122,89,0.1)", ring: "rgba(255,122,89,0.28)" },
       { label: "Postgres", category: "Database", Icon: PostgresIcon, tint: "rgba(51,103,145,0.14)", ring: "rgba(90,150,200,0.28)" },
-      { label: "Airtable", category: "Relational DB", Icon: AirtableIcon, tint: "rgba(252,180,0,0.1)", ring: "rgba(252,180,0,0.28)" },
+      { label: "Airtable", category: "Smart spreadsheet", Icon: AirtableIcon, tint: "rgba(252,180,0,0.1)", ring: "rgba(252,180,0,0.28)" },
       { label: "Slack", category: "Team Chat", Icon: SlackIcon, tint: "rgba(224,30,90,0.1)", ring: "rgba(224,30,90,0.28)" },
       { label: "Notion", category: "Knowledge Base", Icon: NotionIcon, tint: "rgba(255,255,255,0.08)", ring: "rgba(255,255,255,0.2)" },
       { label: "Asana", category: "Project Mgmt", Icon: AsanaIcon, tint: "rgba(240,106,106,0.1)", ring: "rgba(240,106,106,0.28)" },
@@ -87,11 +87,11 @@ const GROUPS: { heading: string; items: Tool[]; reverse?: boolean }[] = [
       { label: "Canva", category: "Design & Assets", Icon: CanvaIcon, tint: "rgba(0,196,204,0.1)", ring: "rgba(0,196,204,0.28)" },
       { label: "Gmail", category: "Email Dispatch", Icon: GmailIcon, tint: "rgba(234,67,53,0.1)", ring: "rgba(234,67,53,0.28)" },
       { label: "Google Workspace", category: "Ecosystem", Icon: GoogleWorkspaceIcon, tint: "rgba(66,133,244,0.1)", ring: "rgba(66,133,244,0.28)" },
-      { label: "Google Docs", category: "Document Gen", Icon: GoogleDocsIcon, tint: "rgba(66,133,244,0.1)", ring: "rgba(66,133,244,0.28)" },
+      { label: "Google Docs", category: "Auto-filled documents", Icon: GoogleDocsIcon, tint: "rgba(66,133,244,0.1)", ring: "rgba(66,133,244,0.28)" },
       { label: "Google Sheets", category: "Data & Sync", Icon: GoogleSheetsIcon, tint: "rgba(15,157,88,0.1)", ring: "rgba(15,157,88,0.28)" },
       { label: "Google Calendar", category: "Scheduling", Icon: GoogleCalendarIcon, tint: "rgba(66,133,244,0.1)", ring: "rgba(66,133,244,0.28)" },
       { label: "Telegram", category: "Bot Automation", Icon: TelegramIcon, tint: "rgba(34,158,217,0.1)", ring: "rgba(34,158,217,0.28)" },
-      { label: "WhatsApp", category: "Messaging API", Icon: WhatsAppIcon, tint: "rgba(37,211,102,0.1)", ring: "rgba(37,211,102,0.28)" },
+      { label: "WhatsApp", category: "Customer messaging", Icon: WhatsAppIcon, tint: "rgba(37,211,102,0.1)", ring: "rgba(37,211,102,0.28)" },
     ],
   },
 ];
@@ -155,9 +155,8 @@ export default function Skills() {
           Skills &amp; Tools
         </h2>
         <p className="mt-4 max-w-3xl text-ink-muted">
-          The platforms, integrations, and testing practices behind every
-          build below. Stack keeps moving — just like the pipelines it
-          builds.
+          The tools I build with, and how I test what I build. The list
+          keeps growing.
         </p>
       </Reveal>
 

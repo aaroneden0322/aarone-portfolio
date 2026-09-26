@@ -39,17 +39,21 @@ export default function Hero() {
             first.
           </h1>
           <p className="mt-4 max-w-xl text-lg font-medium text-ink-muted">
-            I build automation systems in n8n, Make, Zapier, and GoHighLevel
-            — then stress-test each one against real failure cases before you
-            ever see it.
+            I set up the systems that follow up with your leads, chase failed
+            payments, and keep customers in the loop — automatically. Then I
+            try hard to break them before you ever use them.
           </p>
           <p className="mt-4 max-w-xl text-ink-muted">
-            Lead routing, billing and dunning, multi-step nurture sequences —
-            built for founders and marketing teams who need something that
-            works the first time a real customer hits it wrong. Every build
-            gets broken on purpose with malformed data, timeouts, and edge
-            cases before it ever reaches your business, so the failure modes
-            get found on my time, not yours.
+            New enquiries sent to the right person in under a minute. Failed
+            card payments chased before you lose the customer. Follow-up
+            emails that go out on time, every time. I feed every build bad
+            form entries, apps that go down, and the odd cases that usually
+            slip through — so problems show up on my desk, not in front of
+            your customers.
+          </p>
+          <p className="mt-3 max-w-xl text-sm text-ink-muted">
+            Built on n8n, Make, Zapier, or GoHighLevel — whichever fits your
+            business.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <a

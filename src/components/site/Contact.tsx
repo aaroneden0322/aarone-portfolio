@@ -69,8 +69,8 @@ export default function Contact() {
           Let&rsquo;s Talk
         </h2>
         <p className="mt-4 max-w-2xl text-ink-muted">
-          Have a build that needs stress-testing, or a marketing system
-          that&rsquo;s outgrown manual work? Tell me what you&rsquo;re dealing
+          Got a system that keeps breaking, or marketing work that&rsquo;s
+          outgrown doing it by hand? Tell me what you&rsquo;re dealing
           with — I&rsquo;ll get back to you within 24 hours.
         </p>
       </Reveal>

@@ -4,15 +4,15 @@ import GlowCard from "./GlowCard";
 const CASES = [
   {
     n: "01",
-    title: "AI Customer-Service Agent, With a Human in the Loop",
-    body: "A knowledge-grounded AI agent that answers customer questions accurately — and knows when to say 'I don't know' and hand off to a person. Every AI-drafted reply passes human review before it reaches a real customer, tested against a 12-question boundary set that includes near-misses designed to tempt a confident wrong answer.",
+    title: "AI Customer-Service Assistant That Checks With a Person First",
+    body: "An AI assistant that answers only from your own help documents — and says “I don’t know, let me get someone” instead of guessing. Every reply is approved by a person before a customer sees it. It was tested with 12 tricky questions, some designed to tempt it into a confident wrong answer.",
     tags: ["AI Agents", "Human-in-the-Loop"],
     status: "Write-up coming",
   },
   {
     n: "02",
-    title: "Multi-Prompt Strategy Document Pipeline",
-    body: "A five-prompt generation pipeline that assembles a full GoHighLevel strategy document — tagging conventions applied systematically rather than re-generated per client, output styled in each client's own brand colors, not mine.",
+    title: "AI-Written Marketing Automation Plans",
+    body: "A five-step AI process that writes a complete GoHighLevel marketing plan for a business — with consistent labels every time, and styled in the client’s own brand colours, not mine.",
     tags: ["GoHighLevel", "AI Content Pipeline"],
     status: "Write-up coming",
   },

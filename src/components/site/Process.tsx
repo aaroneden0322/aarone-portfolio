@@ -3,20 +3,20 @@ import WorkflowBackground from "./WorkflowBackground";
 
 const STEPS = [
   {
-    title: "Map the failure surface",
-    body: "Before I build a single workflow, I list everything that could break it: malformed data, missing fields, rate limits, duplicate triggers — the edge cases a happy-path demo would never hit.",
+    title: "List everything that could go wrong",
+    body: "Before I build anything, I list everything that could break it: half-filled forms, the same form sent twice, apps that go down — the odd cases a perfect demo would never show.",
   },
   {
-    title: "Build against probes, not demos",
-    body: "Every workflow gets fed the inputs it will actually see in production — bad data, retried webhooks, out-of-order triggers, third-party API hiccups — before it's called done, not just the one clean example that looks good in a walkthrough.",
+    title: "Test with messy real-world data, not a perfect demo",
+    body: "Every build gets fed what it will actually see once it’s live — bad data, messages that arrive twice or out of order, other apps having a bad day — before it’s called done, not just the one clean example that looks good in a walkthrough.",
   },
   {
-    title: "Route irreversible actions through a human gate",
+    title: "A person approves anything involving money or customers",
     body: "Anything that touches money, sends a message to a real customer, or can't be easily undone gets a review step before it fires. Automation should remove the busywork, not the judgment call.",
   },
   {
-    title: "Test for consistency, not just correctness",
-    body: "Automations run at all hours and get hit with retries and duplicate triggers, but still have to produce the same result every time. I re-run each build under those conditions and check where it drifts, not just whether it passed once.",
+    title: "Make sure it gives the same result every time",
+    body: "Automations run at all hours and get hit with repeats and duplicates, but still have to produce the same result every time. I re-run each build under those conditions and check where it slips, not just whether it passed once.",
   },
   {
     title: "Document the limits, not just the wins",

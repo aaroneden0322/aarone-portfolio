@@ -7,28 +7,28 @@ const PLATFORMS = [
     name: "n8n",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "Three builds — a trial-to-demo lead router, a subscription billing & dunning workflow, and a documentation support agent — each run through a fixed set of break tests (malformed data, revoked credentials, retried webhooks) and confirmed live, not just a passing screenshot.",
+    body: "Three systems: one that sorts new leads and books demos, one that chases failed subscription payments, and an AI helper that answers questions from your help docs. Each was deliberately broken the same way and checked live — not just a passing screenshot.",
     href: "/laneframe/n8n",
   },
   {
     name: "Make",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "Three builds — lead capture with dedupe, a subscription dunning ladder, and an AI concierge agent behind a human-approval gate — stress-tested against the same break scenarios, including a real webhook-queue incident found and fixed mid-build.",
+    body: "The same three jobs on Make: capturing leads without duplicates, chasing failed payments, and an AI helper whose replies a person approves before they go out. Testing uncovered a real problem — messages piling up while the system was switched off — which I found and fixed.",
     href: "/laneframe/make",
   },
   {
     name: "Zapier",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "Three builds — a lead-routing rebuild, a trial-to-demo router, and a documentation support agent. The agent's self-policed coverage rule was deliberately probed and found weaker than n8n's numeric confidence gate — a measured finding, not a hunch.",
+    body: "Three systems: lead sorting from a web form, lead sorting from email, and an AI support helper. On Zapier, the AI helper was more likely than the n8n version to answer questions it should have passed to a person — I measured that rather than guessed it.",
     href: "/laneframe/zapier",
   },
   {
     name: "GoHighLevel",
     status: "In Progress",
     statusColor: "text-flow",
-    body: "The demo-lifecycle phase is built and verified; the next phase hasn't started. This card updates as that work lands — not before.",
+    body: "The first stage — handling demo bookings from start to finish — is built and checked. The next stage hasn't started yet. This card updates when that work is done, not before.",
     href: "/#work",
   },
 ];
@@ -53,12 +53,13 @@ export default function Laneframe() {
             FEATURED CASE STUDY
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
-            Laneframe: Four Platforms, One Specification
+            Laneframe: One Job, Built Four Ways
           </h2>
           <p className="mt-4 max-w-3xl text-ink-muted">
-            One lead-intake automation specification, built independently on
-            four platforms for a composite client, instrumented identically and
-            measured honestly.
+            I built the same lead-handling system on four popular automation
+            tools for a realistic sample business (not a real client), then
+            tested each one the same way — so you can see what each tool is
+            good at, and where it struggles.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -71,9 +72,9 @@ export default function Laneframe() {
           </div>
 
           <p className="mt-4 max-w-3xl text-xs text-ink-muted/80">
-            Methodology note: every number on this page is either measured
-            during a real build or a formula with its inputs named —
-            unmeasured items are marked, never estimated.
+            How I count: every number here was measured in a real test or
+            shows how it was worked out. If I didn&rsquo;t measure it, I say
+            so.
           </p>
         </Reveal>
 

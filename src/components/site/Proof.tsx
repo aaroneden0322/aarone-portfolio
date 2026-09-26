@@ -3,13 +3,13 @@ import Reveal from "./Reveal";
 const STATS = [
   {
     value: "12/12",
-    label: "Adversarial probes passed",
-    body: "The most recent AI agent build — a knowledge-grounded customer-service agent — tested against answerable, undocumented, and near-miss questions designed to tempt a confident wrong answer.",
+    label: "Trick questions handled correctly",
+    body: "My latest AI assistant was asked questions it could answer, questions it couldn’t, and near-misses designed to catch it out. It got all 12 right.",
   },
   {
-    value: "0",
-    label: "Platforms benchmarked independently",
-    body: "The flagship automation build is being built separately on n8n, Make, Zapier, and GoHighLevel — same specification, measured honestly, nothing cherry-picked.",
+    value: "4",
+    label: "Tools compared side by side",
+    body: "The same lead-handling system, built separately on n8n, Make, Zapier, and GoHighLevel and tested the same way. Three are finished; GoHighLevel is in progress. Nothing cherry-picked.",
   },
   {
     value: "0",
