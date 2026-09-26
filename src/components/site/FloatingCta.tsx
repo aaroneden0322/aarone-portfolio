@@ -9,7 +9,7 @@ export default function FloatingCta() {
 
   useEffect(() => {
     function onScroll() {
-      // Real native window scroll â do not route this through any
+      // Real native window scroll — do not route this through any
       // smooth-scroll wrapper, and don't call scrollTo() to test it.
       setPastHero(window.scrollY > 480);
     }
@@ -17,7 +17,7 @@ export default function FloatingCta() {
     onScroll();
 
     // The Contact section has its own real "Send Message" CTA, and the
-    // Footer follows right after it â the floating pill is redundant
+    // Footer follows right after it — the floating pill is redundant
     // (and visually overlaps the QR code / footer links) from that point
     // on, so hide it as soon as Contact starts entering the viewport.
     const contactEl = document.getElementById("contact");
@@ -40,7 +40,7 @@ export default function FloatingCta() {
 
   // Idle it sits semi-opaque (so page content scrolling underneath stays
   // legible, like iOS's AssistiveTouch button) and brightens to fully
-  // opaque on touch/press â it doesn't relocate, just dims/undims.
+  // opaque on touch/press — it doesn't relocate, just dims/undims.
   const opacityClasses = !visible
     ? "pointer-events-none translate-y-4 opacity-0"
     : pressed
@@ -49,7 +49,7 @@ export default function FloatingCta() {
 
   // .btn-glow (globals.css) declares its own `transition: box-shadow 0.4s
   // ease, transform 0.3s ease` and, being defined after Tailwind's
-  // utilities layer, that shorthand wins the cascade outright â it
+  // utilities layer, that shorthand wins the cascade outright — it
   // replaces transition-property entirely, silently dropping "opacity"
   // from what's animated. That's why the appear/disappear fade never
   // actually eased: only the slide (transform) was ever transitioning:
