@@ -65,7 +65,7 @@ export default function ProofGrid({ proof }: { proof: BuildProof[] }) {
         type="button"
         onClick={() => setOpenIndex(null)}
         aria-label="Close"
-        className="fixed right-4 top-4 z-[61] flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/90 text-ink shadow-lg backdrop-blur hover:border-circuit/40 hover:text-circuit"
+        className="fixed right-4 top-4 z-[61] flex h-11 w-11 items-center justify-center rounded-full border border-border bg-bg/90 text-ink shadow-lg backdrop-blur hover:border-circuit/40 hover:text-circuit"
       >
         <svg
           width="18"
