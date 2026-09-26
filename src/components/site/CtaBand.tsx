@@ -9,7 +9,7 @@ export default function CtaBand({ text }: { text: string }) {
             {text}
           </p>
           <a
-            href="#contact"
+            href="/#contact"
             className="btn-glow mt-8 inline-block rounded-full bg-circuit px-7 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
           >
             Fix My Bottleneck
