@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -18,16 +19,31 @@ export default function BackToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  const opacityClasses = !visible
+    ? "pointer-events-none translate-y-4 opacity-0"
+    : pressed
+      ? "translate-y-0 opacity-100"
+      : "translate-y-0 opacity-60";
+
+  const fadeMs = pressed && visible ? 300 : 700;
+  const transitionStyle = {
+    transitionProperty: "opacity, transform, box-shadow",
+    transitionDuration: `${fadeMs}ms, ${fadeMs}ms, 400ms`,
+    transitionTimingFunction:
+      "cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), ease",
+  };
+
   return (
     <button
       type="button"
       onClick={handleClick}
+      onPointerDown={() => setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerCancel={() => setPressed(false)}
+      onPointerLeave={() => setPressed(false)}
       aria-label="Back to top"
-      className={`fixed bottom-6 left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/80 text-ink shadow-lg backdrop-blur transition-all duration-300 ease-out hover:border-circuit/40 hover:text-circuit ${
-        visible
-          ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-4 opacity-0"
-      }`}
+      style={transitionStyle}
+      className={`btn-glow fixed bottom-6 left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-circuit text-accent-ink shadow-lg shadow-circuit/20 ${opacityClasses}`}
     >
       <svg
         width="18"
