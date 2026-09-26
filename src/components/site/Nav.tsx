@@ -4,12 +4,12 @@ import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#laneframe", label: "Laneframe" },
-  { href: "#work", label: "Case Studies" },
-  { href: "#skills", label: "Skills" },
-  { href: "#process", label: "Process" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#laneframe", label: "Laneframe" },
+  { href: "/#work", label: "Case Studies" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#process", label: "Process" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Nav() {
@@ -18,7 +18,7 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/nav-avatar.png"
@@ -45,7 +45,7 @@ export default function Nav() {
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
           <a
-            href="#contact"
+            href="/#contact"
             className="btn-glow rounded-full border border-circuit/60 px-5 py-2 text-sm font-medium text-circuit transition-colors hover:bg-circuit/10"
           >
             Fix My Bottleneck
@@ -84,7 +84,7 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="btn-glow mt-2 rounded-full border border-circuit/60 px-5 py-2 text-center text-sm font-medium text-circuit"
           >
