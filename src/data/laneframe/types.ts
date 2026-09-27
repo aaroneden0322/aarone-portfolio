@@ -2,6 +2,9 @@ export type BuildStatus = "Complete" | "In Progress" | "Not Started";
 
 export interface BuildFinding {
   headline: string;
+  /** Plain-English one-liner shown to every visitor. */
+  plain?: string;
+  /** Full technical explanation, shown inside "Technical detail". */
   detail: string;
 }
 
@@ -19,6 +22,8 @@ export interface PlatformBuild {
   whatItDoes: string;
   testedAgainst: string[];
   whatWeFound: BuildFinding[];
+  /** Plain-English version of the caveat, shown to every visitor. */
+  caveatPlain?: string;
   caveat?: string;
   proof: BuildProof[];
 }

@@ -5,50 +5,54 @@ const zapier: PlatformPageData = {
   name: "Zapier",
   status: "3 of 3 builds complete",
   tagline:
-    "Pay-per-task billing on a hard, undocumented step ceiling — the platform that forced real architecture trade-offs instead of just absorbing them.",
+    "You pay per completed step, and each automation has a hard size limit — the tool that forced the hardest trade-offs.",
   whyThisPlatform: [
     {
-      label: "Task billing, and a documentation gap caught on a live run",
+      label: "It charged less than its own help pages said",
       detail:
-        "A successful action step costs 1 task; a halted or skipped step costs 0. Zapier's own docs predict a Sub-Zap call should cost more than what a real measured run actually billed — a genuine platform-documentation-vs-observed-reality gap, confirmed against the account's own live task counter, not assumed from the docs.",
+        "A completed step costs 1 unit and a skipped one costs nothing. On one live run, Zapier charged less than its own documentation predicted — confirmed against the account’s real usage counter.",
     },
     {
-      label: "A real step ceiling that changed what got built, not just how",
+      label: "A size limit changed what got built",
       detail:
-        "A hard ~32-step-per-Zap limit (the UI's own counter under-reports it) forced a parent/child Sub-Zap split — and, under that same pressure, two planned features (Twilio SMS, company enrichment) were dropped outright rather than kept in degraded form the way n8n's and Make's builds both did.",
+        "Each Zap is capped at about 32 steps. To fit, the build was split into smaller linked parts, and two planned features (text messages and company lookups) had to be dropped — n8n and Make kept both.",
     },
     {
-      label: "No native workflow export on this plan",
+      label: "No way to export or back it up",
       detail:
-        "Unlike n8n's full JSON export or Make's blueprint export, there is no re-importable format for a Zap or Sub-Zap here — confirmed by checking the editor's own menus directly. The live Zaps themselves are the only durable record of the build.",
+        "On this plan there’s no file you can export to copy or restore a build, unlike n8n and Make. The live Zaps are the only record.",
     },
   ],
   builds: [
     {
       id: "Z1",
-      title: "Trial-to-Demo Router",
+      title: "Lead Sorter & Demo Booker",
       status: "Complete",
       summary:
-        "Takes inbound leads, deduplicates and scores them, and routes each one to the right next step — the same specification as n8n's and Make's Trial-to-Demo Router, split here across a parent Zap and two child Sub-Zaps to fit under Zapier's step ceiling.",
+        "Takes in leads, removes duplicates, scores them and sends each one to the right next step — the same job as the n8n and Make versions, split into three linked parts to fit under Zapier’s size limit.",
       whatItDoes:
         "A webhook receives the lead, two Formatter steps normalize it, a guard-halted-logging Sub-Zap call and filter catch malformed intake, two HubSpot lookups guard against duplicates, and a three-way Paths router sends Founder/SDR/self-serve leads to their own CRM, Slack, and Sheets actions — with a second Sub-Zap handling existing-lead re-engagement and dormancy scoring.",
       testedAgainst: [
-        "Malformed intake payloads",
-        "Duplicate & dormant leads",
-        "A live guard-halt run against a real Sub-Zap",
+        "Badly filled-in forms",
+        "Duplicate and long-silent leads",
+        "A live test of the safety check",
       ],
       whatWeFound: [
         {
-          headline: "Zapier's own documented Sub-Zap billing doesn't match what a live run actually charges",
+          headline: "Zapier’s bill didn’t match its own documentation",
+          plain: "Zapier’s help pages said this run should cost 2 units; the account’s own counter showed it cost 1. A real gap between what the docs say and what actually happens, disclosed here.",
           detail:
             "Zapier's help docs predict a 2-action Sub-Zap child bills 2 tasks for those actions alone. A real, live guard-halted run — confirmed against the account's own task counter moving by exactly +1, not assumed from a green checkmark — billed only 1. A genuine, disclosed gap between the platform's own documentation and its observed behavior, never resolved against Zapier support.",
         },
         {
-          headline: "The step ceiling isn't just friction — it deleted two features outright",
+          headline: "The size limit forced two features out",
+          plain: "To stay under the limit, the company-lookup and text-message steps were removed completely. On n8n and Make they were kept and fail gracefully. This build is smaller than planned because of Zapier, not by choice.",
           detail:
             "A permanently-failing enrichment call and an undeliverable Twilio SMS step were both removed entirely to free up step slots, rather than kept in a degraded, gracefully-skipped form the way the same failures were handled on n8n and Make. The finished build is structurally smaller than its original specification because of a platform constraint, not a design choice.",
         },
       ],
+      caveatPlain:
+        "Only 2 of the 5 standard break tests could be run. The other 3 tested features that were removed because of the size limit — so they weren’t built, rather than built and passed.",
       caveat:
         "Only 2 of the 5 standard break probes were run live; the other 3 (downstream timeout, enrichment failure, out-of-hours delay) are disclosed as structurally not applicable — the features they'd test were the two dropped above, not features that were built and passed.",
       proof: [
@@ -68,29 +72,33 @@ const zapier: PlatformPageData = {
     },
     {
       id: "Z2",
-      title: "Trial-to-Demo Router — Email Intake",
+      title: "Lead Sorter — Email Version",
       status: "Complete",
       summary:
-        "The same router specification reached through a second intake channel — an inbound email parser instead of a webhook — because Zapier can't share one trigger shape across intake types the way a single n8n or Make workflow can branch internally.",
+        "The same lead sorter, but taking leads from incoming emails instead of a web form — because on Zapier, each way in needs its own build.",
       whatItDoes:
         "An Email Parser mailbox extracts lead fields from inbound referral emails, feeds the same fit-scoring and dedupe logic as Z1's router, and reuses Z1's own re-engagement Sub-Zap rather than duplicating it — a single 30-step Zap with no dedicated child Sub-Zaps of its own.",
       testedAgainst: [
-        "A genuine, freshly-worded referral email (not a trained template)",
-        "A second email deliberately phrased to mirror the trained template",
-        "Duplicate-arrival dormancy logic (via cached-sample code execution)",
+        "A genuinely new referral email",
+        "An email written to match the training example",
+        "Repeat enquiries from the same lead",
       ],
       whatWeFound: [
         {
-          headline: "A normal-sounding lead tripped the guard-halt on a live send",
+          headline: "A normal-looking email was stopped by the safety check",
+          plain: "A real referral email was read wrongly — two details came out wrong and the company website was missing. The safety check stopped it, as designed, so no bad data reached the customer database.",
           detail:
             "A genuinely new referral email — not a synthetic malformed test — mis-extracted two fields and produced no domain at all, correctly triggering Path B's guard rather than routing to CRM logic with bad data. Zero HubSpot lookups fired, exactly as the guard is meant to do.",
         },
         {
-          headline: "A second live test root-caused a durable configuration defect, not a phrasing problem",
+          headline: "The second test found the real cause",
+          plain: "Rewording the email fixed two of the three wrong details, but not the website. The cause was a setup mistake inside one step — a real bug, not a one-off.",
           detail:
             "Rewording the test email to match the trained template fixed two of three broken fields but not the domain extractor, which was found to be reading a stale, broken field reference — a real bug in the step's own configuration, confirmed by inspecting its live Data In (a literal \"1\" instead of an email), not a one-off fluke.",
         },
       ],
+      caveatPlain:
+        "This build has never taken a lead all the way through on a live test — both attempts were stopped by the safety check, and it won’t until that setup mistake is fixed.",
       caveat:
         "This build has never reached its own Founder/SDR/self-serve success path on a live run — both live-fire attempts hit the guard-halt before getting there, and the root-caused domain-extractor bug means a third attempt wouldn't be expected to succeed without first fixing that step's field mapping.",
       proof: [
@@ -110,29 +118,33 @@ const zapier: PlatformPageData = {
     },
     {
       id: "Z3",
-      title: "Support Triage Agent",
+      title: "AI Support-Ticket Assistant",
       status: "Complete",
       summary:
-        "An AI agent that classifies and answers support tickets from real documentation, escalating anything it can't ground in a quoted passage — the same specification as n8n's and Make's documentation support agent, built here with no dedicated approval-gate control and no retrieval-confidence score to fall back on.",
+        "An AI assistant that sorts and answers support tickets from real documents and passes anything it can’t back up with a quote to a person — the same job as the n8n and Make versions, but Zapier has no built-in approval step or confidence score.",
       whatItDoes:
         "A support ticket is classified, checked against two attached knowledge documents, and either answered with a quoted passage or escalated. Nothing reaches a customer without human approval — enforced entirely by a system-prompt rule and the deliberate choice of a draft-only Gmail action, since Zapier's Agents builder has no dedicated approval-gate toggle at all.",
       testedAgainst: [
-        "A 12-question probe set (4 covered, 4 uncovered, 4 near-miss)",
-        "A multi-branch mega-ticket touching every tool at once",
-        "An organic Linear tool failure",
+        "12 test questions (4 answerable, 4 not covered, 4 near-miss)",
+        "One big ticket that uses every tool at once",
+        "A real failure in a connected app",
       ],
       whatWeFound: [
         {
-          headline: "The escalation rule failed on half of the questions it exists to protect",
+          headline: "The hand-off rule failed half the time it mattered",
+          plain: "It answered all 4 straightforward questions correctly. But on the 8 questions it should have passed to a person, it got 4 wrong — once even denying it could hand off at all.",
           detail:
             "8 of 12 probes passed overall, but the coverage rule — \"if you can't quote a passage, escalate\" — failed on 4 of the 8 uncovered and near-miss questions, including one case where the agent flatly denied having any escalation process when asked to invoke it. Zero failures occurred on the 4 covered questions; the gap is entirely in judgment calls, not lookups.",
         },
         {
-          headline: "An urgent-outage alert was silently never sent, and nothing surfaced the miss",
+          headline: "An urgent alert was never sent — and nothing flagged it",
+          plain: "Given a ticket about an outage, the AI said it would post an urgent Slack alert, then never did. Its own log confirms it, and nothing warned a person that the alert was missed.",
           detail:
             "Fed a ticket containing the system prompt's own trigger phrase for an outage, the agent narrated an intention to post a Slack alert and then never did — confirmed by the run's own tool-usage log, which shows no Slack call at all. The ticket was still otherwise handled correctly, but the one safety action its own rules were written to guarantee simply didn't fire, and no summary or log flagged that gap to a human.",
         },
       ],
+      caveatPlain:
+        "When a connected app genuinely failed, the AI flagged it clearly and gave a manual workaround — that kind of failure it handles well. The judgment calls above are where it doesn’t.",
       caveat:
         "A genuine Linear tool failure (a required Team field with no valid default) surfaced correctly — the agent flagged it plainly and produced a manual fallback a human could act on — which is the one failure class this build handles reliably. The prompt-level judgment failures above are the one it doesn't.",
       proof: [
