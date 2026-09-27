@@ -29,7 +29,7 @@ const PLATFORMS = [
     status: "In Progress",
     statusColor: "text-flow",
     body: "The first stage — handling demo bookings from start to finish — is built and checked. The next stage hasn't started yet. This card updates when that work is done, not before.",
-    href: "/#work",
+    href: null,
   },
 ];
 
@@ -91,12 +91,18 @@ export default function Laneframe() {
                   </span>
                 </div>
                 <p className="mt-3 text-sm text-ink-muted">{p.body}</p>
-                <a
-                  href={p.href}
-                  className="mt-4 inline-block text-sm font-medium text-circuit hover:underline"
-                >
-                  View full build →
-                </a>
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    className="mt-4 inline-block text-sm font-medium text-circuit hover:underline"
+                  >
+                    View full build →
+                  </a>
+                ) : (
+                  <p className="mt-4 text-sm font-medium text-ink-muted">
+                    Full write-up once it&rsquo;s finished
+                  </p>
+                )}
               </GlowCard>
             </Reveal>
           ))}

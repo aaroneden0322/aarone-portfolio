@@ -18,7 +18,7 @@ const ALL_PLATFORMS = [
   { slug: "n8n", label: "n8n" },
   { slug: "make", label: "Make" },
   { slug: "zapier", label: "Zapier" },
-  { slug: "gohighlevel", label: "GoHighLevel" },
+  { slug: "gohighlevel", label: "GoHighLevel", comingSoon: true },
 ];
 
 export default function PlatformBuildPage({ data }: { data: PlatformPageData }) {
@@ -162,7 +162,15 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
               SEE THE SAME JOB BUILT ON ANOTHER TOOL
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              {siblings.map((s) => (
+              {siblings.map((s) =>
+                "comingSoon" in s ? (
+                  <span
+                    key={s.slug}
+                    className="rounded-full border border-border px-4 py-2 text-sm text-ink-muted/70"
+                  >
+                    {s.label} · in progress
+                  </span>
+                ) : (
                 <a
                   key={s.slug}
                   href={`/laneframe/${s.slug}`}
@@ -170,7 +178,8 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                 >
                   {s.label} →
                 </a>
-              ))}
+                )
+              )}
             </div>
           </Reveal>
         </section>
