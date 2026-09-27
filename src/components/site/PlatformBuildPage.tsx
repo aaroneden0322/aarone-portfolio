@@ -84,13 +84,10 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                 </div>
 
                 <p className="mt-4 max-w-3xl text-ink-muted">{build.summary}</p>
-                <p className="mt-4 max-w-3xl text-sm text-ink-muted">
-                  {build.whatItDoes}
-                </p>
 
                 <div className="mt-6">
                   <p className="text-xs font-semibold tracking-[0.1em] text-ink-muted">
-                    TESTED AGAINST
+                    WHAT I THREW AT IT
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {build.testedAgainst.map((t) => (
@@ -113,16 +110,43 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                       <p className="font-display text-sm font-semibold text-ink">
                         {f.headline}
                       </p>
-                      <p className="mt-2 text-sm text-ink-muted">{f.detail}</p>
+                      <p className="mt-2 text-sm text-ink-muted">
+                        {f.plain ?? f.detail}
+                      </p>
                     </div>
                   ))}
                 </div>
 
-                {build.caveat && (
-                  <p className="mt-6 max-w-3xl text-xs text-ink-muted/80">
-                    Methodology note: {build.caveat}
+                {(build.caveatPlain ?? build.caveat) && (
+                  <p className="mt-6 max-w-3xl text-sm text-ink-muted">
+                    <span className="font-semibold text-ink">Honest note:</span>{" "}
+                    {build.caveatPlain ?? build.caveat}
                   </p>
                 )}
+
+                <details className="group mt-6 rounded-xl border border-border px-5 py-4">
+                  <summary className="cursor-pointer list-none text-sm [&::-webkit-details-marker]:hidden font-semibold text-circuit">
+                    <span className="group-open:hidden">+ Show technical detail</span>
+                    <span className="hidden group-open:inline">− Hide technical detail</span>
+                    <span className="ml-2 text-xs font-normal text-ink-muted">
+                      for builders and technical reviewers
+                    </span>
+                  </summary>
+                  <div className="mt-4 space-y-4 text-sm text-ink-muted">
+                    <p>{build.whatItDoes}</p>
+                    {build.whatWeFound.map((f) => (
+                      <div key={f.headline}>
+                        <p className="font-semibold text-ink">{f.headline}</p>
+                        <p className="mt-1">{f.detail}</p>
+                      </div>
+                    ))}
+                    {build.caveat && (
+                      <p className="text-xs text-ink-muted/80">
+                        Methodology note: {build.caveat}
+                      </p>
+                    )}
+                  </div>
+                </details>
 
                 <ProofGrid proof={build.proof} />
               </GlowCard>
@@ -130,12 +154,12 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
           </section>
         ))}
 
-        <CtaBand text="Want a build stress-tested like this before it reaches your customers?" />
+        <CtaBand text="Want your next automation tested like this before your customers touch it?" />
 
         <section className="mx-auto max-w-5xl px-6 pb-8">
           <Reveal>
             <p className="text-xs font-semibold tracking-[0.1em] text-ink-muted">
-              SEE THE SAME SPECIFICATION ON ANOTHER PLATFORM
+              SEE THE SAME JOB BUILT ON ANOTHER TOOL
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               {siblings.map((s) => (
