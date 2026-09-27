@@ -34,10 +34,10 @@ const PLATFORMS = [
 ];
 
 const STATS = [
-  { value: "0", label: "CAPTURE FIELDS" },
-  { value: "0", label: "FAILURE PROBES" },
-  { value: "0", label: "PLATFORMS" },
-  { value: "[--]", label: "[STAT PLACEHOLDER]" },
+  { value: "4", label: "TOOLS, SAME JOB" },
+  { value: "5", label: "BREAK TESTS, RUN THE SAME WAY ON EACH" },
+  { value: "8", label: "REQUIREMENTS EVERY BUILD MUST MEET" },
+  { value: "16", label: "DETAILS RECORDED FOR EVERY BUILD" },
 ];
 
 export default function Laneframe() {

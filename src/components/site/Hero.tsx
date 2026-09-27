@@ -1,6 +1,19 @@
 import Reveal from "./Reveal";
 import NodeDivider from "./NodeDivider";
 import AiSphere from "./AiSphere";
+import {
+  N8nIcon,
+  MakeIcon,
+  ZapierIcon,
+  GoHighLevelIcon,
+} from "./SkillIcons";
+
+const PLATFORMS = [
+  { label: "n8n", Icon: N8nIcon },
+  { label: "Make", Icon: MakeIcon },
+  { label: "Zapier", Icon: ZapierIcon },
+  { label: "GoHighLevel", Icon: GoHighLevelIcon },
+];
 
 export default function Hero() {
   return (
@@ -51,10 +64,25 @@ export default function Hero() {
             slip through — so problems show up on my desk, not in front of
             your customers.
           </p>
-          <p className="mt-3 max-w-xl text-sm text-ink-muted">
-            Built on n8n, Make, Zapier, or GoHighLevel — whichever fits your
-            business.
-          </p>
+          <div className="mt-5 flex max-w-xl flex-wrap items-center gap-2">
+            <span className="mr-1 font-display text-xs font-semibold tracking-[0.15em] text-circuit">
+              BUILT ON
+            </span>
+            {PLATFORMS.map(({ label, Icon }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/[0.03] px-3 py-1 text-xs font-semibold text-ink transition-colors hover:border-circuit/50"
+              >
+                <span aria-hidden="true" className="h-4 w-4 shrink-0">
+                  <Icon />
+                </span>
+                {label}
+              </span>
+            ))}
+            <span className="text-sm text-ink-muted">
+              — whichever fits your business.
+            </span>
+          </div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <a
               href="#laneframe"
