@@ -79,8 +79,8 @@ export default function Hero() {
                 {label}
               </span>
             ))}
-            <span className="text-sm text-ink-muted">
-              — whichever fits your business.
+            <span className="w-full pt-1 text-sm text-ink-muted">
+              Whichever fits your business.
             </span>
           </div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
