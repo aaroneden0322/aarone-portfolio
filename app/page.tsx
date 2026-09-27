@@ -19,7 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <Laneframe />
-        <CtaBand text="Want a build stress-tested like this before it reaches your customers?" />
+        <CtaBand text="Want your next automation tested like this before your customers touch it?" />
         <CaseStudies />
         <Proof />
         <Skills />
