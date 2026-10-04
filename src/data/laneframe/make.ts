@@ -5,17 +5,17 @@ const make: PlatformPageData = {
   name: "Make",
   status: "3 of 3 builds complete",
   tagline:
-    "A fully hosted, visual tool — you pay per step, so the price depends on how far each lead travels through the system.",
+    "A fully hosted, visual tool. You pay per step, so the price depends on how far each lead travels through the system.",
   whyThisPlatform: [
     {
       label: "The price depends on the path",
       detail:
-        "Every step counts toward your bill. A bad lead stopped early cost 4 steps; a high-value lead that went all the way cost 19 — nearly 5 times as much. Measured on real runs, not taken from the documentation.",
+        "Every step counts toward your bill. A bad lead stopped early cost 4 steps; a high-value lead that went all the way cost 19, nearly 5 times as much. Measured on real runs, not taken from the documentation.",
     },
     {
       label: "Nothing to host or maintain",
       detail:
-        "Make runs everything for you — no server to look after. The upkeep shows up elsewhere: wiring up connections, free-plan limits, and logic tucked inside small formula boxes.",
+        "Make runs everything for you, with no server to look after. The upkeep shows up elsewhere: wiring up connections, free-plan limits, and logic tucked inside small formula boxes.",
     },
     {
       label: "A built-in backup plan for each step",
@@ -29,7 +29,7 @@ const make: PlatformPageData = {
       title: "Lead Sorter & Demo Booker",
       status: "Complete",
       summary:
-        "Takes in leads from several places, removes duplicates, scores them and sends each one to the right next step — the same job as the n8n version, built separately on Make.",
+        "Takes in leads from several places, removes duplicates, scores them and sends each one to the right next step. It’s the same job as the n8n version, built separately on Make.",
       whatItDoes:
         "A webhook receives the lead, normalizes it, checks a Data Store for duplicate or dormant submissions, enriches company data, scores fit, and routes it one of several ways depending on tier and timing — including holding a Founder-tier lead's SMS send until business hours in Manila rather than sending it overnight. High-value leads get a real HubSpot deal and a live text message, not just a log entry.",
       testedAgainst: [
@@ -42,19 +42,19 @@ const make: PlatformPageData = {
       whatWeFound: [
         {
           headline: "A failed text message didn’t show up in Make’s own history",
-          plain: "When the text message failed, Make still marked the run a success. The only warning was a Slack alert and a log entry I’d built in — someone watching Make alone would have seen nothing wrong.",
+          plain: "When the text message failed, Make still marked the run a success. The only warning was a Slack alert and a log entry I’d built in. Someone watching Make alone would have seen nothing wrong.",
           detail:
             "Forcing a real invalid-token failure on the SMS step still reported a clean top-level SUCCESS, because the built-in error handler caught it and resumed the run. The only honest signal anywhere was a Slack alert and a log row — a person watching only Make's own history would see nothing wrong.",
         },
         {
           headline: "Make blocks a broken connection before it can run",
-          plain: "When I pointed the build at a fake customer-database connection, Make refused to save it. That kind of mistake can’t sneak into a live run — the platform itself stops it.",
+          plain: "When I pointed the build at a fake customer-database connection, Make refused to save it. That kind of mistake can’t sneak into a live run, because the platform itself stops it.",
           detail:
             "Attempting to point the HubSpot step at a fake connection ID was rejected by Make's own API at save time, before the scenario could ever execute — a stale or revoked connection can't silently reach runtime the way a bad API key can, because the platform itself is the guard.",
         },
       ],
       caveatPlain:
-        "One issue is still open: when a text is held until business hours, the time it logs for the send is off by several hours. Leads still go to the right place — only the logged time is wrong — and I’m disclosing it rather than hiding it.",
+        "One issue is still open: when a text is held until business hours, the time it logs for the send is off by several hours. Leads still go to the right place; only the logged time is wrong.",
       caveat:
         "One open item found during testing: the out-of-hours queue correctly holds the SMS send, but the timestamp it logs for the queued send is miscalculated by several hours due to a timezone-arithmetic bug. The routing decision itself is unaffected — only the logged time is wrong — and it's disclosed here rather than smoothed over.",
       proof: [
@@ -77,7 +77,7 @@ const make: PlatformPageData = {
       title: "Failed-Payment Recovery",
       status: "Complete",
       summary:
-        "Retries failed subscription payments, sends reminders that space out over time, and only brings in a person when recovery really fails — the same job as the n8n version, built on Make.",
+        "Retries failed subscription payments, sends reminders that space out over time, and only brings in a person when recovery really fails. It’s the same job as the n8n version, built on Make.",
       whatItDoes:
         "A Stripe webhook triggers the scenario, which checks for a duplicate event, verifies the account exists, and — on a failed payment — runs three retry attempts with backoff before opening a multi-step dunning sequence: widening wait-and-notify cycles, then a downgrade to read-only access, a Slack alert, and a churn-queue entry if nothing recovers.",
       testedAgainst: [
@@ -90,19 +90,19 @@ const make: PlatformPageData = {
       whatWeFound: [
         {
           headline: "Make’s “success” label can’t be trusted on its own",
-          plain: "A payment connection set up for the wrong account showed a clean success while nothing was actually saved. I only caught it by checking the real billing records — not Make’s dashboard.",
+          plain: "A payment connection set up for the wrong account showed a clean success while nothing was actually saved. I only caught it by checking the real billing records, not Make’s dashboard.",
           detail:
             "A Stripe connection quietly holding a restricted key for the wrong account produced a clean top-level success while every downstream write silently failed. It was only caught by checking the actual billing records, not by anything Make's dashboard reported.",
         },
         {
           headline: "Only half the payment process had a safety net",
-          plain: "The build talks to the payment system twice per event, but only the second step retries and alerts on failure. When I broke the first one, it failed silently in under a second — no retry, no warning.",
+          plain: "The build talks to the payment system twice per event, but only the second step retries and alerts on failure. When I broke the first one, it failed silently in under a second, with no retry and no warning.",
           detail:
             "The scenario makes two sequential Stripe calls per event. Only the second one has the 3-attempt retry and escalation wired onto it — mangling the API key proved the first call dies silently in under a second, with zero retries and zero alerts, landing unnoticed in Make's incomplete-executions queue.",
         },
       ],
       caveatPlain:
-        "The second problem is reported as found, not fixed: adding the same retry and alert to the first payment step is still to do.",
+        "The second problem is found but not fixed yet: the same retry and alert still need adding to the first payment step.",
       caveat:
         "The second finding above is disclosed as found, not as fixed: production hardening would mean wiring the same retry and escalation protection onto the first Stripe call, which this build has not yet done.",
       proof: [
@@ -125,7 +125,7 @@ const make: PlatformPageData = {
       title: "AI Concierge Assistant",
       status: "Complete",
       summary:
-        "An AI assistant that answers customer questions from a real knowledge base and passes anything it isn’t sure about to a person — nothing goes out until a human approves it. The same job as the n8n version.",
+        "An AI assistant that answers customer questions from a real knowledge base and passes anything it isn’t sure about to a person. Nothing goes out until a human approves it. It’s the same job as the n8n version.",
       whatItDoes:
         "An inbound email triggers Make's native AI Agent module, which retrieves from a knowledge base, can check calendar availability or draft a booking hold, and proposes either a direct reply or an escalation. Nothing reaches a real customer without a human approving it first through a separate Human Gate scenario, which reads the agent's proposal and writes the final decision.",
       testedAgainst: [
@@ -137,7 +137,7 @@ const make: PlatformPageData = {
       whatWeFound: [
         {
           headline: "One broken connection stopped every reply",
-          plain: "I removed its calendar connection. After that it refused every message — even simple questions that had nothing to do with the calendar.",
+          plain: "I removed its calendar connection. After that it refused every message, even simple questions that had nothing to do with the calendar.",
           detail:
             "Deleting one of the agent's three tool connections blocked the entire module for every incoming message, including ones that never needed that tool — confirmed by sending both a calendar-relevant and a calendar-irrelevant question and watching both get identically refused before the model ever ran.",
         },

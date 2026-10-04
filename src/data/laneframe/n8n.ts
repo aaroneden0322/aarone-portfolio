@@ -5,22 +5,22 @@ const n8n: PlatformPageData = {
   name: "n8n",
   status: "3 of 3 builds complete",
   tagline:
-    "Runs on a server I control, and costs the same flat monthly fee no matter how complex a job gets.",
+    "Runs on a server I control, for a flat monthly fee no matter how complex the job gets.",
   whyThisPlatform: [
     {
       label: "Same price, however complex",
       detail:
-        "Each run costs the same whether it takes 4 steps or 37. I checked this against n8n’s own run history, not just its documentation.",
+        "Each run costs the same whether it takes 4 steps or 37. I checked this in n8n’s own run history.",
     },
     {
       label: "Gets cheaper the more you use it",
       detail:
-        "The real cost is a fixed $5.35-a-month server, so the cost per run drops as volume grows — the opposite of tools that charge per step.",
+        "The real cost is a fixed $5.35-a-month server, so the cost per run drops as volume grows. Tools that charge per step work the other way.",
     },
     {
       label: "You own it",
       detail:
-        "It runs on a server we control, so there are no outside usage limits or plan tiers getting in the way.",
+        "It runs on a server we control, so there are no outside usage limits or plan tiers to work around.",
     },
   ],
   builds: [
@@ -29,7 +29,7 @@ const n8n: PlatformPageData = {
       title: "Lead Sorter & Demo Booker",
       status: "Complete",
       summary:
-        "Takes inbound leads from five different sources, cleans and scores them, and routes each one to the right next step — automatically, in under a minute.",
+        "Takes leads from five sources, cleans and scores them, and routes each one to the right next step in under a minute.",
       whatItDoes:
         "Leads come in from five different intake sources in five different shapes. This workflow normalizes all of them into one format, screens out anything malformed before it can cause downstream problems, checks for duplicate or dormant leads, enriches company data, scores fit, and then routes each lead one of four ways — straight to the founder, to a sales rep with automatic round-robin assignment, into a self-serve email sequence, or into a re-engagement flow for leads that have gone cold. High-value leads also get a real text message, not just an email.",
       testedAgainst: [
@@ -48,7 +48,7 @@ const n8n: PlatformPageData = {
         },
         {
           headline: "Every lead is logged, whatever happens to it",
-          plain: "Whether a lead is passed on, stopped by a safety check, or flagged as a duplicate, it’s recorded in one master log — so you can always see what happened to it.",
+          plain: "Whether a lead is passed on, stopped by a safety check, or flagged as a duplicate, it’s recorded in one master log, so you can always see what happened to it.",
           detail:
             "Success, guard-halt, or duplicate — every outcome writes to a master log, so nothing about how a lead was handled is ever a mystery after the fact.",
         },
@@ -84,19 +84,19 @@ const n8n: PlatformPageData = {
       whatWeFound: [
         {
           headline: "Found and fixed a check that could never work",
-          plain: "The step meant to notice when a customer’s payment had recovered could never actually fire. I fixed it — and fixing it revealed a second hidden bug, which I also fixed and re-checked live.",
+          plain: "The step meant to notice when a customer’s payment had recovered could never actually fire. I fixed it, and that revealed a second hidden bug, which I also fixed and re-checked live.",
           detail:
             "A recovery-check condition was written in a way that could never evaluate true — meaning it would have silently failed to detect when a customer's payment actually recovered. Fixed and re-verified live; fixing it also exposed a second, unrelated bug (a database column reference that didn't exist), which was fixed and confirmed the same way.",
         },
         {
           headline: "A broken connection looked exactly like a lost customer",
-          plain: "When the payment connection was cut, the alert looked identical to a customer cancelling. Whoever watches the system couldn’t tell “our setup broke” from “we lost a customer” — a blind spot you only find by breaking things on purpose.",
+          plain: "When the payment connection was cut, the alert looked identical to a customer cancelling. Whoever watches the system couldn’t tell “our setup broke” from “we lost a customer”. You only find a blind spot like that by breaking things on purpose.",
           detail:
             "Deliberately revoking the payment provider's API key produced the exact same operator-facing alert as a customer's subscription genuinely lapsing. Without extra work, whoever is monitoring this system can't tell \"our integration broke\" from \"we lost a customer\" — a real blind spot that only surfaces when you actually test failure modes instead of just the happy path.",
         },
       ],
       caveatPlain:
-        "Both problems were found by deliberately breaking things that already worked. They’re fixed and re-checked on real runs, not just on paper.",
+        "Both problems were found by deliberately breaking things that already worked. They’re fixed and re-checked on real runs.",
       caveat:
         "Both findings above were caught because we deliberately broke things that were already working. That's the point of testing this way — the bugs were real, and they're fixed and re-verified against live execution logs, not just reasoned about on paper.",
       proof: [
@@ -129,19 +129,19 @@ const n8n: PlatformPageData = {
       whatWeFound: [
         {
           headline: "Replies in 4.8 seconds",
-          plain: "Timed on a real question from start to finished reply, and confirmed on a second run — not an estimate.",
+          plain: "Timed on a real question from start to finished reply, and confirmed on a second run. Not an estimate.",
           detail:
             "Not an estimate — timed directly from a real webhook call to final reply, and re-confirmed on a second run.",
         },
         {
           headline: "Fails safely when something breaks",
-          plain: "I cut its access to the help docs, then asked it a real question. It didn’t crash or guess — it told the customer honestly, opened a support ticket and alerted the team.",
+          plain: "I cut its access to the help docs, then asked it a real question. It didn’t crash or guess. It told the customer what happened, opened a support ticket and alerted the team.",
           detail:
             "We deliberately broke the database credential the agent uses to retrieve documentation, then sent it a real question. It didn't crash, and it didn't guess — it refused cleanly, filed a support ticket, and alerted the team, exactly as designed.",
         },
         {
-          headline: "Results reported honestly, not rounded up",
-          plain: "It handled every question it was built for correctly, but 2 of the 60 test questions that were off-topic still slipped through to an answer. I report that rather than hide it.",
+          headline: "Two off-topic questions still got an answer",
+          plain: "It handled every question it was built for correctly, but 2 of the 60 off-topic test questions still got an answer.",
           detail:
             "Out of 60 test questions, 2 genuine false-positive risks were found and are disclosed plainly rather than smoothed over — the agent correctly refuses every in-scope question, but a small number of out-of-scope questions still slip through to an answer.",
         },
