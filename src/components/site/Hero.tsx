@@ -52,17 +52,16 @@ export default function Hero() {
             first.
           </h1>
           <p className="mt-4 max-w-xl text-lg font-medium text-ink-muted">
-            I set up the systems that follow up with your leads, chase failed
-            payments, and keep customers in the loop — automatically. Then I
-            try hard to break them before you ever use them.
+            I set up systems that follow up with your leads, chase failed
+            payments, and keep customers in the loop. Then I try hard to
+            break them before you ever use them.
           </p>
           <p className="mt-4 max-w-xl text-ink-muted">
-            New enquiries sent to the right person in under a minute. Failed
-            card payments chased before you lose the customer. Follow-up
-            emails that go out on time, every time. I feed every build bad
-            form entries, apps that go down, and the odd cases that usually
-            slip through — so problems show up on my desk, not in front of
-            your customers.
+            New enquiries reach the right person in under a minute. Failed
+            card payments get chased before you lose the customer. Follow-up
+            emails go out on schedule. I test every build with bad form
+            entries, apps that are down, and the odd cases that usually slip
+            through, so problems land on my desk first.
           </p>
           <div className="mt-5 flex max-w-xl flex-wrap items-center gap-2">
             <span className="mr-1 font-display text-xs font-semibold tracking-[0.15em] text-circuit">
@@ -80,7 +79,7 @@ export default function Hero() {
               </span>
             ))}
             <span className="w-full pt-1 text-sm text-ink-muted">
-              Whichever fits your business.
+              I use whichever fits your business.
             </span>
           </div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">

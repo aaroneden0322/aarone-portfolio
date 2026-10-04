@@ -155,8 +155,7 @@ export default function Skills() {
           Skills &amp; Tools
         </h2>
         <p className="mt-4 max-w-3xl text-ink-muted">
-          The tools I build with, and how I test what I build. The list
-          keeps growing.
+          The tools I build with, and how I test what I build.
         </p>
       </Reveal>
 

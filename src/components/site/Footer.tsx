@@ -23,7 +23,7 @@ export default function Footer() {
             Aarone Den Patayan
           </p>
           <p className="mt-2 text-sm text-ink-muted">
-            Built to break first, so it doesn&rsquo;t break for you.
+            I break it first, so it doesn&rsquo;t break for you.
           </p>
         </div>
 

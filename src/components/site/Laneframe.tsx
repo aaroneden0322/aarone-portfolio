@@ -7,28 +7,28 @@ const PLATFORMS = [
     name: "n8n",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "Three systems: one that sorts new leads and books demos, one that chases failed subscription payments, and an AI helper that answers questions from your help docs. Each was deliberately broken the same way and checked live — not just a passing screenshot.",
+    body: "Three systems: one that sorts new leads and books demos, one that chases failed subscription payments, and an AI helper that answers questions from your help docs. I broke each one the same way and checked it live, not from a screenshot.",
     href: "/laneframe/n8n",
   },
   {
     name: "Make",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "The same three jobs on Make: capturing leads without duplicates, chasing failed payments, and an AI helper whose replies a person approves before they go out. Testing uncovered a real problem — messages piling up while the system was switched off — which I found and fixed.",
+    body: "The same three jobs on Make: capturing leads without duplicates, chasing failed payments, and an AI helper whose replies a person approves before they go out. Testing turned up a real problem (messages piling up while the system was switched off) and I found and fixed it.",
     href: "/laneframe/make",
   },
   {
     name: "Zapier",
     status: "Complete",
     statusColor: "text-circuit",
-    body: "Three systems: lead sorting from a web form, lead sorting from email, and an AI support helper. On Zapier, the AI helper was more likely than the n8n version to answer questions it should have passed to a person — I measured that rather than guessed it.",
+    body: "Three systems: lead sorting from a web form, lead sorting from email, and an AI support helper. On Zapier, the AI helper was more likely than the n8n version to answer questions it should have passed to a person. I measured that.",
     href: "/laneframe/zapier",
   },
   {
     name: "GoHighLevel",
     status: "In Progress",
     statusColor: "text-flow",
-    body: "The first stage — handling demo bookings from start to finish — is built and checked. The next stage hasn't started yet. This card updates when that work is done, not before.",
+    body: "The first stage, handling demo bookings from start to finish, is built and checked. The next stage hasn't started. This card updates when that work is done.",
     href: null,
   },
 ];
@@ -58,8 +58,8 @@ export default function Laneframe() {
           <p className="mt-4 max-w-3xl text-ink-muted">
             I built the same lead-handling system on four popular automation
             tools for a realistic sample business (not a real client), then
-            tested each one the same way — so you can see what each tool is
-            good at, and where it struggles.
+            tested each one the same way. You can see what each tool does
+            well and where it struggles.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -73,8 +73,8 @@ export default function Laneframe() {
 
           <p className="mt-4 max-w-3xl text-xs text-ink-muted/80">
             How I count: every number here was measured in a real test or
-            shows how it was worked out. If I didn&rsquo;t measure it, I say
-            so.
+            comes with the formula that produced it. If I didn&rsquo;t
+            measure something, I say so.
           </p>
         </Reveal>
 

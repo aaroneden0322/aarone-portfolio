@@ -119,7 +119,7 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
 
                 {(build.caveatPlain ?? build.caveat) && (
                   <p className="mt-6 max-w-3xl text-sm text-ink-muted">
-                    <span className="font-semibold text-ink">Honest note:</span>{" "}
+                    <span className="font-semibold text-ink">Worth knowing:</span>{" "}
                     {build.caveatPlain ?? build.caveat}
                   </p>
                 )}

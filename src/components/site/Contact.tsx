@@ -71,7 +71,7 @@ export default function Contact() {
         <p className="mt-4 max-w-2xl text-ink-muted">
           Got a system that keeps breaking, or marketing work that&rsquo;s
           outgrown doing it by hand? Tell me what you&rsquo;re dealing
-          with — I&rsquo;ll get back to you within 24 hours.
+          with, and I&rsquo;ll reply within 24 hours.
         </p>
       </Reveal>
 
@@ -125,12 +125,12 @@ export default function Contact() {
             </button>
             {status === "sent" && (
               <p className="text-sm text-circuit">
-                Thanks — I&rsquo;ll get back to you within 24 hours.
+                Thanks, I&rsquo;ll get back to you within 24 hours.
               </p>
             )}
             {status === "error" && (
               <p className="text-sm text-flow">
-                Something went wrong sending that — email me directly instead
+                Something went wrong sending that. Email me directly instead
                 at {CONTACT_EMAIL}.
               </p>
             )}

@@ -4,23 +4,23 @@ import WorkflowBackground from "./WorkflowBackground";
 const STEPS = [
   {
     title: "List everything that could go wrong",
-    body: "Before I build anything, I list everything that could break it: half-filled forms, the same form sent twice, apps that go down — the odd cases a perfect demo would never show.",
+    body: "Before I build anything, I list what could break it: half-filled forms, the same form sent twice, apps that go down. These are the cases a perfect demo never shows.",
   },
   {
-    title: "Test with messy real-world data, not a perfect demo",
-    body: "Every build gets fed what it will actually see once it’s live — bad data, messages that arrive twice or out of order, other apps having a bad day — before it’s called done, not just the one clean example that looks good in a walkthrough.",
+    title: "Test with messy, real-world data",
+    body: "Before a build counts as done, I feed it what it will see once it’s live: bad data, messages that arrive twice or out of order, other apps having a bad day.",
   },
   {
     title: "A person approves anything involving money or customers",
-    body: "Anything that touches money, sends a message to a real customer, or can't be easily undone gets a review step before it fires. Automation should remove the busywork, not the judgment call.",
+    body: "Anything that touches money, messages a real customer, or can't easily be undone gets a review step before it runs. Automation should take over the busywork and leave the judgment calls to a person.",
   },
   {
     title: "Make sure it gives the same result every time",
-    body: "Automations run at all hours and get hit with repeats and duplicates, but still have to produce the same result every time. I re-run each build under those conditions and check where it slips, not just whether it passed once.",
+    body: "Automations run at all hours and get hit with repeats and duplicates, so they have to give the same result each time. I re-run each build under those conditions and check where it slips.",
   },
   {
-    title: "Document the limits, not just the wins",
-    body: "Every build ships with an honest account of what it can and can't do yet — no polished demo standing in for a guarantee.",
+    title: "Write down the limits",
+    body: "Every build ships with a plain account of what it can and can't do yet.",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function Process() {
           How I Test Before I Trust
         </h2>
         <p className="mt-4 max-w-3xl text-ink-muted">
-          The delivery process, from scoping to launch — built around finding
+          The delivery process, from scoping to launch, built around finding
           what breaks before a customer does.
         </p>
       </Reveal>

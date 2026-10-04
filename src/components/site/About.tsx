@@ -8,10 +8,10 @@ const CARDS = [
   },
   {
     title: "Build It",
-    body: "Connected to the tools your team already uses — your customer database, email, calendar, and chat.",
+    body: "I connect it to the tools your team already uses: your customer database, email, calendar, and chat.",
   },
   {
-    title: "Test It Hard, Then Hand It Over",
+    title: "Test It, Then Hand It Over",
     body: "I break it on purpose before launch, then give your team simple instructions they can follow from day one.",
   },
 ];
@@ -28,9 +28,9 @@ export default function About() {
         </h2>
         <p className="mt-6 max-w-3xl text-ink-muted">
           I&rsquo;m Aarone Den Patayan, a Marketing &amp; AI Automation
-          Specialist. Most of a project&rsquo;s value gets lost in the
-          gap between the plan and the build — so testing and clear
-          instructions are part of the job, not optional extras.
+          Specialist. Most of a project&rsquo;s value gets lost between
+          the plan and the build, so testing and clear instructions are part
+          of the job.
         </p>
       </Reveal>
 
