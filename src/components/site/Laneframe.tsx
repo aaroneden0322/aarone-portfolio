@@ -28,8 +28,8 @@ const PLATFORMS = [
     name: "GoHighLevel",
     status: "In Progress",
     statusColor: "text-flow",
-    body: "The first stage, handling demo bookings from start to finish, is built and checked. The next stage hasn't started. This card updates when that work is done.",
-    href: null,
+    body: "The demo-booking workflows are built and checked. The finished build on the page is an AI helper that qualifies leads by email, with hard limits on what it is allowed to do. I tested it by switching the AI off and by trying to make it book too early.",
+    href: "/laneframe/gohighlevel",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function Laneframe() {
               Active build
             </span>
             <span className="text-sm text-ink-muted">
-              n8n, Make, and Zapier builds complete — GoHighLevel in progress.
+              n8n, Make, and Zapier builds complete. GoHighLevel has one build complete and more in progress.
             </span>
           </div>
 

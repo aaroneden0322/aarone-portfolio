@@ -18,7 +18,7 @@ const ALL_PLATFORMS = [
   { slug: "n8n", label: "n8n" },
   { slug: "make", label: "Make" },
   { slug: "zapier", label: "Zapier" },
-  { slug: "gohighlevel", label: "GoHighLevel", comingSoon: true },
+  { slug: "gohighlevel", label: "GoHighLevel" },
 ];
 
 export default function PlatformBuildPage({ data }: { data: PlatformPageData }) {
