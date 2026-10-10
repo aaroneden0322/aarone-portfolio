@@ -6,6 +6,7 @@ import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
 import CtaBand from "./CtaBand";
 import ProofGrid from "./ProofGrid";
+import BuildVideo from "./BuildVideo";
 import type { BuildStatus, PlatformPageData } from "@/data/laneframe/types";
 
 const STATUS_COLOR: Record<BuildStatus, string> = {
@@ -84,6 +85,8 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
                 </div>
 
                 <p className="mt-4 max-w-3xl text-ink-muted">{build.summary}</p>
+
+                <BuildVideo buildId={build.id} />
 
                 <div className="mt-6">
                   <p className="text-xs font-semibold tracking-[0.1em] text-ink-muted">
