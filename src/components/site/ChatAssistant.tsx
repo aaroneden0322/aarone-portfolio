@@ -348,12 +348,12 @@ export default function ChatAssistant() {
         }`}
         tabIndex={showLauncher ? 0 : -1}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <svg className="bot" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 3v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <circle cx="12" cy="2.8" r="1" fill="currentColor" />
+          <circle className="bot-ant" cx="12" cy="2.8" r="1.2" fill="currentColor" />
           <rect x="4" y="6.5" width="16" height="12" rx="3.5" stroke="currentColor" strokeWidth="1.8" />
-          <circle cx="9" cy="12.5" r="1.4" fill="currentColor" />
-          <circle cx="15" cy="12.5" r="1.4" fill="currentColor" />
+          <circle className="bot-eye" cx="9" cy="12.5" r="1.4" fill="currentColor" />
+          <circle className="bot-eye" cx="15" cy="12.5" r="1.4" fill="currentColor" />
           <path d="M9.5 16h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
           <path d="M2 11.5v2M22 11.5v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
