@@ -31,6 +31,8 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
       <ul className="list-disc space-y-2 pl-5">
         <li>
           An AI service (Anthropic) reads your messages to write the replies.
+          Under its business terms it doesn&rsquo;t use them to train its
+          models, and it normally deletes them within 30 days.
         </li>
         <li>
           A bot check from Cloudflare runs when you send your first message,
