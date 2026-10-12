@@ -20,7 +20,8 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         <li>
           If you choose to share your name and email and agree to it, those
           details are sent to me so I can reply. The assistant asks first, and
-          only then.
+          only then. They are stored in Airtable and I&rsquo;m notified
+          through Slack.
         </li>
       </ul>
     ),
@@ -67,7 +68,16 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
   },
   {
     heading: "How long I keep it",
-    body: <p>Chat messages are deleted after 30 days.</p>,
+    body: (
+      <>
+        <p>Chat messages are deleted after 30 days.</p>
+        <p className="mt-3">
+          If you chose to share your name and email, they are kept in my
+          contact records for up to 12 months after we last spoke, then
+          deleted.
+        </p>
+      </>
+    ),
   },
   {
     heading: "Your choices",
