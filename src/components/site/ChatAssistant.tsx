@@ -85,7 +85,7 @@ function readStore(): { sessionId: string; token: string; msgs: Msg[]; ended: bo
 
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
+  const [seen, setSeen] = useState(false);
   const [nearContact, setNearContact] = useState(false);
   // Dim (never hide) the launcher while the page is scrolling.
   const [scrolling, setScrolling] = useState(false);
@@ -108,7 +108,6 @@ export default function ChatAssistant() {
   useEffect(() => {
     let idle: ReturnType<typeof setTimeout> | undefined;
     function onScroll() {
-      setPastHero(window.scrollY > 480);
       setScrolling(true);
       clearTimeout(idle);
       idle = setTimeout(() => setScrolling(false), 250);
@@ -324,18 +323,23 @@ export default function ChatAssistant() {
     }
   }
 
-  const showLauncher = !open && (pastHero && !nearContact);
+  const showLauncher = !open && !nearContact;
 
   return (
     <>
       <button
         ref={launcherRef}
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setSeen(true);
+          setOpen(true);
+        }}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label="Chat with Aarone's assistant"
         className={`btn-glow fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-6 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-circuit text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 sm:h-auto sm:w-auto sm:px-5 sm:py-3 ${
+          seen ? "" : "chat-nudge"
+        } ${
           showLauncher
             ? scrolling
               ? "translate-y-0 opacity-40"

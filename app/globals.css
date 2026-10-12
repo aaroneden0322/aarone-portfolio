@@ -171,3 +171,23 @@ body {
     0 0 0 1px rgb(var(--color-circuit) / 0.45),
     0 0 26px 2px rgb(var(--color-circuit) / 0.35);
 }
+
+/* Chat launcher: a soft ring that pulses briefly every few seconds until the
+   visitor opens the chat. Off for reduced-motion users. */
+.chat-nudge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 0 rgb(var(--color-circuit) / 0.45);
+  pointer-events: none;
+  animation: chat-nudge 7s ease-out 4s infinite;
+}
+@keyframes chat-nudge {
+  0% { box-shadow: 0 0 0 0 rgb(var(--color-circuit) / 0.45); }
+  12% { box-shadow: 0 0 0 14px rgb(var(--color-circuit) / 0); }
+  100% { box-shadow: 0 0 0 14px rgb(var(--color-circuit) / 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-nudge::after { animation: none; }
+}
