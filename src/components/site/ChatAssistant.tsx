@@ -223,6 +223,7 @@ export default function ChatAssistant() {
 
     let finalMsgs = next;
     let finalEnded = false;
+    let blocked = false;
     try {
       const payload: Record<string, unknown> = {
         message: text,
@@ -249,6 +250,7 @@ export default function ChatAssistant() {
         sessionRef.current = { id: data.sessionId, token: data.sessionToken };
       }
       finalEnded = data.ended === true;
+      blocked = data.type === "blocked";
       finalMsgs = [
         ...next,
         {
@@ -263,7 +265,20 @@ export default function ChatAssistant() {
     setMsgs(finalMsgs);
     setEnded(finalEnded);
     setBusy(false);
-    persist(finalMsgs, finalEnded);
+    // A "blocked" reply (paused, daily cap, turn limit) is shown for this view
+    // but not remembered, so a visitor who comes back after the assistant is
+    // switched on again is not stuck on an ended chat. The limits themselves
+    // are enforced server side, so forgetting the chat cannot dodge them.
+    if (blocked) {
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* ignore */
+      }
+      sessionRef.current = { id: "", token: "" };
+    } else {
+      persist(finalMsgs, finalEnded);
+    }
     requestAnimationFrame(() => inputRef.current?.focus());
   }
 
