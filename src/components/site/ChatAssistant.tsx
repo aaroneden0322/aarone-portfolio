@@ -87,6 +87,9 @@ export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [nearContact, setNearContact] = useState(false);
+  // Phones only: tuck the launcher away while reading downward, bring it back
+  // on any upward scroll so it never sits on top of the copy.
+  const [scrollHidden, setScrollHidden] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "assistant", text: OPENING }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -104,8 +107,15 @@ export default function ChatAssistant() {
   // Show the launcher after the hero; hide it near the Contact section, which
   // has its own form. Native scroll only, same as the pill it replaces.
   useEffect(() => {
+    let lastY = window.scrollY;
     function onScroll() {
-      setPastHero(window.scrollY > 480);
+      const y = window.scrollY;
+      setPastHero(y > 480);
+      const dy = y - lastY;
+      if (Math.abs(dy) > 8) {
+        setScrollHidden(dy > 0);
+        lastY = y;
+      }
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -300,14 +310,18 @@ export default function ChatAssistant() {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className={`btn-glow fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-circuit px-5 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 ${
+        aria-label="Chat with Aarone's assistant"
+        onFocus={() => setScrollHidden(false)}
+        className={`btn-glow fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-6 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-circuit text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 sm:h-auto sm:w-auto sm:px-5 sm:py-3 ${
           showLauncher
-            ? "translate-y-0 opacity-100"
+            ? scrollHidden
+              ? "translate-y-0 opacity-100 max-sm:pointer-events-none max-sm:translate-y-24 max-sm:opacity-0"
+              : "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"
         }`}
         tabIndex={showLauncher ? 0 : -1}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.5a.5.5 0 0 1-.8-.4V16.2A2.5 2.5 0 0 1 4 13.5v-8Z"
             stroke="currentColor"
@@ -315,7 +329,7 @@ export default function ChatAssistant() {
             strokeLinejoin="round"
           />
         </svg>
-        Chat with Aarone&apos;s assistant
+        <span className="hidden sm:inline">Chat with Aarone&apos;s assistant</span>
       </button>
 
       {open && (
