@@ -191,8 +191,14 @@ export default function ChatAssistant() {
       widgetId.current = window.turnstile.render(tsHost.current, {
         sitekey: SITE_KEY,
         appearance: "interaction-only",
+        // Show the box only while a visible challenge is actually needed, and
+        // hide it again the moment it succeeds (the token keeps working).
+        "before-interactive-callback": () => {
+          if (tsHost.current) tsHost.current.style.display = "";
+        },
         callback: (t: string) => {
           tokenRef.current = t;
+          if (tsHost.current) tsHost.current.style.display = "none";
           tokenWaiters.current.splice(0).forEach((w) => w(t));
         },
         "expired-callback": () => {
