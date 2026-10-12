@@ -87,6 +87,8 @@ export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [nearContact, setNearContact] = useState(false);
+  // Dim (never hide) the launcher while the page is scrolling.
+  const [scrolling, setScrolling] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "assistant", text: OPENING }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -104,8 +106,12 @@ export default function ChatAssistant() {
   // Show the launcher after the hero; hide it near the Contact section, which
   // has its own form. Native scroll only, same as the pill it replaces.
   useEffect(() => {
+    let idle: ReturnType<typeof setTimeout> | undefined;
     function onScroll() {
       setPastHero(window.scrollY > 480);
+      setScrolling(true);
+      clearTimeout(idle);
+      idle = setTimeout(() => setScrolling(false), 250);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -120,6 +126,7 @@ export default function ChatAssistant() {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(idle);
       observer?.disconnect();
     };
   }, []);
@@ -330,18 +337,21 @@ export default function ChatAssistant() {
         aria-label="Chat with Aarone's assistant"
         className={`btn-glow fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-6 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-circuit text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 sm:h-auto sm:w-auto sm:px-5 sm:py-3 ${
           showLauncher
-            ? "translate-y-0 opacity-100"
+            ? scrolling
+              ? "translate-y-0 opacity-40"
+              : "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"
         }`}
         tabIndex={showLauncher ? 0 : -1}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.5a.5.5 0 0 1-.8-.4V16.2A2.5 2.5 0 0 1 4 13.5v-8Z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-          />
+          <path d="M12 3v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <circle cx="12" cy="2.8" r="1" fill="currentColor" />
+          <rect x="4" y="6.5" width="16" height="12" rx="3.5" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="9" cy="12.5" r="1.4" fill="currentColor" />
+          <circle cx="15" cy="12.5" r="1.4" fill="currentColor" />
+          <path d="M9.5 16h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <path d="M2 11.5v2M22 11.5v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
         <span className="hidden sm:inline">Chat with Aarone&apos;s assistant</span>
       </button>
