@@ -9,7 +9,7 @@ import Skills from "@/components/site/Skills";
 import Process from "@/components/site/Process";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
-import FloatingCta from "@/components/site/FloatingCta";
+import FloatingAction from "@/components/site/FloatingAction";
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <FloatingCta />
+      <FloatingAction />
     </>
   );
 }

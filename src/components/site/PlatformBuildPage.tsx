@@ -1,6 +1,6 @@
 import Nav from "./Nav";
 import Footer from "./Footer";
-import FloatingCta from "./FloatingCta";
+import FloatingAction from "./FloatingAction";
 import BackToTop from "./BackToTop";
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
@@ -188,7 +188,7 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
         </section>
       </main>
       <Footer />
-      <FloatingCta />
+      <FloatingAction />
       <BackToTop />
     </>
   );
