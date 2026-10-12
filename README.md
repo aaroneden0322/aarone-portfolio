@@ -47,7 +47,7 @@ Environment variables (see `.env.example`; set in Vercel, never commit values):
 | `ASSISTANT_WEBHOOK_URL` | server, optional | Defaults to the production webhook |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | public | Turnstile site key (hostname `www.adautoteam.top`) |
 | `NEXT_PUBLIC_ASSISTANT_ENABLED` | public | `true` swaps the "Fix My Bottleneck" pill for the chat widget. Public vars are inlined at build, so redeploy after changing |
-| `NEXT_PUBLIC_ASSISTANT_PRIVACY_URL` | public, optional | Adds a Privacy link under the chat box |
+| `NEXT_PUBLIC_ASSISTANT_PRIVACY_URL` | public, optional | Overrides the Privacy link under the chat box (defaults to /privacy) |
 
 Turning it off, fastest first: set `kill_switch` to `on` in the n8n `assistant_config` table (visitors see the paused message, no deploy needed); unpublish the n8n workflow (route shows the same paused message); set `NEXT_PUBLIC_ASSISTANT_ENABLED` to `false` and redeploy (brings the old pill back).
 

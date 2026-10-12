@@ -37,7 +37,8 @@ declare global {
 }
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
-const PRIVACY_URL = process.env.NEXT_PUBLIC_ASSISTANT_PRIVACY_URL || "";
+const PRIVACY_URL =
+  process.env.NEXT_PUBLIC_ASSISTANT_PRIVACY_URL || "/privacy";
 const STORAGE_KEY = "assistant-chat-v1";
 const MAX_CHARS = 500;
 
@@ -424,12 +425,13 @@ export default function ChatAssistant() {
               </div>
               <div className="mt-1.5 flex items-center justify-between text-[11px] text-ink-muted">
                 <span>
-                  AI assistant. Don&apos;t share passwords or customer data.
+                  AI assistant. Don&apos;t share passwords or customer data. Messages are
+                  deleted after 30 days.
                   {PRIVACY_URL && (
                     <>
                       {" "}
                       <a href={PRIVACY_URL} className="underline underline-offset-2">
-                        Privacy
+                        Privacy note
                       </a>
                     </>
                   )}
