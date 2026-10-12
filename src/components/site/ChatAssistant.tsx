@@ -87,9 +87,6 @@ export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [nearContact, setNearContact] = useState(false);
-  // Phones only: tuck the launcher away while reading downward, bring it back
-  // on any upward scroll so it never sits on top of the copy.
-  const [scrollHidden, setScrollHidden] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "assistant", text: OPENING }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -107,20 +104,8 @@ export default function ChatAssistant() {
   // Show the launcher after the hero; hide it near the Contact section, which
   // has its own form. Native scroll only, same as the pill it replaces.
   useEffect(() => {
-    let lastY = window.scrollY;
-    let idle: ReturnType<typeof setTimeout> | undefined;
     function onScroll() {
-      const y = window.scrollY;
-      setPastHero(y > 480);
-      const dy = y - lastY;
-      if (Math.abs(dy) > 8) {
-        setScrollHidden(dy > 0);
-        lastY = y;
-      }
-      // Always bring it back once scrolling pauses, so it is never missing
-      // for someone who just scrolls down and stops.
-      clearTimeout(idle);
-      idle = setTimeout(() => setScrollHidden(false), 700);
+      setPastHero(window.scrollY > 480);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -135,7 +120,6 @@ export default function ChatAssistant() {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
-      clearTimeout(idle);
       observer?.disconnect();
     };
   }, []);
@@ -344,12 +328,9 @@ export default function ChatAssistant() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label="Chat with Aarone's assistant"
-        onFocus={() => setScrollHidden(false)}
         className={`btn-glow fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-6 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-circuit text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 sm:h-auto sm:w-auto sm:px-5 sm:py-3 ${
           showLauncher
-            ? scrollHidden
-              ? "translate-y-0 opacity-100 max-sm:pointer-events-none max-sm:translate-y-24 max-sm:opacity-0"
-              : "translate-y-0 opacity-100"
+            ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"
         }`}
         tabIndex={showLauncher ? 0 : -1}
