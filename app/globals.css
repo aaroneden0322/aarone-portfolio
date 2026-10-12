@@ -174,6 +174,7 @@ body {
 
 /* Chat launcher: a soft ring that pulses briefly every few seconds until the
    visitor opens the chat. Off for reduced-motion users. */
+.chat-nudge::before,
 .chat-nudge::after {
   content: "";
   position: absolute;
@@ -182,6 +183,10 @@ body {
   box-shadow: 0 0 0 0 rgb(var(--color-circuit) / 0.55);
   pointer-events: none;
   animation: chat-nudge 7s ease-out 4s infinite;
+}
+/* Second ring trails the first for a double ripple. */
+.chat-nudge::before {
+  animation-delay: 4.35s;
 }
 @keyframes chat-nudge {
   0% { box-shadow: 0 0 0 0 rgb(var(--color-circuit) / 0.55); }
@@ -216,6 +221,7 @@ body {
   5%, 12% { transform: scale(1.9); }
 }
 @media (prefers-reduced-motion: reduce) {
+  .chat-nudge::before,
   .chat-nudge::after,
   .chat-nudge .bot,
   .chat-nudge .bot-eye,
