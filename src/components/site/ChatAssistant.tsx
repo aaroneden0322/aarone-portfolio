@@ -108,6 +108,7 @@ export default function ChatAssistant() {
   // has its own form. Native scroll only, same as the pill it replaces.
   useEffect(() => {
     let lastY = window.scrollY;
+    let idle: ReturnType<typeof setTimeout> | undefined;
     function onScroll() {
       const y = window.scrollY;
       setPastHero(y > 480);
@@ -116,6 +117,10 @@ export default function ChatAssistant() {
         setScrollHidden(dy > 0);
         lastY = y;
       }
+      // Always bring it back once scrolling pauses, so it is never missing
+      // for someone who just scrolls down and stops.
+      clearTimeout(idle);
+      idle = setTimeout(() => setScrollHidden(false), 700);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -130,9 +135,37 @@ export default function ChatAssistant() {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(idle);
       observer?.disconnect();
     };
   }, []);
+
+  // Phones: keep the panel inside the visible area when the on-screen
+  // keyboard opens (the layout viewport does not shrink on iOS).
+  const [vv, setVv] = useState<{ h: number; bottom: number } | null>(null);
+  useEffect(() => {
+    if (!open) return;
+    const v = window.visualViewport;
+    if (!v) return;
+    function update() {
+      if (!v || window.innerWidth >= 768) {
+        setVv(null);
+        return;
+      }
+      setVv({
+        h: v.height,
+        bottom: Math.max(0, window.innerHeight - v.height - v.offsetTop),
+      });
+    }
+    update();
+    v.addEventListener("resize", update);
+    v.addEventListener("scroll", update);
+    return () => {
+      v.removeEventListener("resize", update);
+      v.removeEventListener("scroll", update);
+      setVv(null);
+    };
+  }, [open]);
 
   // Restore an in-progress chat after a refresh in the same tab.
   useEffect(() => {
@@ -340,7 +373,8 @@ export default function ChatAssistant() {
           onKeyDown={(e) => {
             if (e.key === "Escape") close();
           }}
-          className="fixed inset-x-3 bottom-3 z-50 flex h-[min(80vh,600px)] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-2xl shadow-black/40 md:inset-x-auto md:bottom-6 md:right-6 md:w-[390px]"
+          style={vv ? { bottom: vv.bottom + 12, maxHeight: vv.h - 24 } : undefined}
+          className="fixed inset-x-3 bottom-3 z-50 flex h-[min(80dvh,600px)] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-2xl shadow-black/40 md:inset-x-auto md:bottom-6 md:right-6 md:w-[390px]"
         >
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
             <div className="flex items-center gap-2">
@@ -427,7 +461,7 @@ export default function ChatAssistant() {
                   rows={2}
                   maxLength={MAX_CHARS}
                   placeholder="Ask about Aarone's work, or describe a task"
-                  className="min-h-[44px] flex-1 resize-none rounded-xl border border-border bg-transparent px-3 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-circuit focus:outline-none"
+                  className="min-h-[44px] flex-1 resize-none rounded-xl border border-border bg-transparent px-3 py-2 text-base text-ink placeholder:text-ink-muted focus:border-circuit focus:outline-none sm:text-sm"
                 />
                 <button
                   type="submit"
