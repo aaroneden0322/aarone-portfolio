@@ -85,8 +85,10 @@ function readStore(): { sessionId: string; token: string; msgs: Msg[]; ended: bo
 
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
+  const [seen, setSeen] = useState(false);
   const [nearContact, setNearContact] = useState(false);
+  // Dim (never hide) the launcher while the page is scrolling.
+  const [scrolling, setScrolling] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "assistant", text: OPENING }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -104,8 +106,11 @@ export default function ChatAssistant() {
   // Show the launcher after the hero; hide it near the Contact section, which
   // has its own form. Native scroll only, same as the pill it replaces.
   useEffect(() => {
+    let idle: ReturnType<typeof setTimeout> | undefined;
     function onScroll() {
-      setPastHero(window.scrollY > 480);
+      setScrolling(true);
+      clearTimeout(idle);
+      idle = setTimeout(() => setScrolling(false), 250);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -120,9 +125,37 @@ export default function ChatAssistant() {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(idle);
       observer?.disconnect();
     };
   }, []);
+
+  // Phones: keep the panel inside the visible area when the on-screen
+  // keyboard opens (the layout viewport does not shrink on iOS).
+  const [vv, setVv] = useState<{ h: number; bottom: number } | null>(null);
+  useEffect(() => {
+    if (!open) return;
+    const v = window.visualViewport;
+    if (!v) return;
+    function update() {
+      if (!v || window.innerWidth >= 768) {
+        setVv(null);
+        return;
+      }
+      setVv({
+        h: v.height,
+        bottom: Math.max(0, window.innerHeight - v.height - v.offsetTop),
+      });
+    }
+    update();
+    v.addEventListener("resize", update);
+    v.addEventListener("scroll", update);
+    return () => {
+      v.removeEventListener("resize", update);
+      v.removeEventListener("scroll", update);
+      setVv(null);
+    };
+  }, [open]);
 
   // Restore an in-progress chat after a refresh in the same tab.
   useEffect(() => {
@@ -290,32 +323,41 @@ export default function ChatAssistant() {
     }
   }
 
-  const showLauncher = !open && (pastHero && !nearContact);
+  const showLauncher = !open && !nearContact;
 
   return (
     <>
       <button
         ref={launcherRef}
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setSeen(true);
+          setOpen(true);
+        }}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className={`btn-glow fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-circuit px-5 py-3 text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 ${
+        aria-label="Chat with Aarone's assistant"
+        className={`btn-glow fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-6 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-circuit text-sm font-semibold text-accent-ink shadow-lg shadow-circuit/20 transition-[opacity,transform] duration-500 sm:h-auto sm:w-auto sm:px-5 sm:py-3 ${
+          seen ? "" : "chat-nudge"
+        } ${
           showLauncher
-            ? "translate-y-0 opacity-100"
+            ? scrolling
+              ? "translate-y-0 opacity-40"
+              : "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"
         }`}
         tabIndex={showLauncher ? 0 : -1}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.5a.5.5 0 0 1-.8-.4V16.2A2.5 2.5 0 0 1 4 13.5v-8Z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-          />
+        <svg className="bot" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <circle className="bot-ant" cx="12" cy="2.8" r="1.2" fill="currentColor" />
+          <rect x="4" y="6.5" width="16" height="12" rx="3.5" stroke="currentColor" strokeWidth="1.8" />
+          <circle className="bot-eye" cx="9" cy="12.5" r="1.4" fill="currentColor" />
+          <circle className="bot-eye" cx="15" cy="12.5" r="1.4" fill="currentColor" />
+          <path d="M9.5 16h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <path d="M2 11.5v2M22 11.5v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
-        Chat with Aarone&apos;s assistant
+        <span className="hidden sm:inline">Chat with Aarone&apos;s assistant</span>
       </button>
 
       {open && (
@@ -326,7 +368,8 @@ export default function ChatAssistant() {
           onKeyDown={(e) => {
             if (e.key === "Escape") close();
           }}
-          className="fixed inset-x-3 bottom-3 z-50 flex h-[min(80vh,600px)] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-2xl shadow-black/40 md:inset-x-auto md:bottom-6 md:right-6 md:w-[390px]"
+          style={vv ? { bottom: vv.bottom + 12, maxHeight: vv.h - 24 } : undefined}
+          className="fixed inset-x-3 bottom-3 z-50 flex h-[min(80dvh,600px)] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-2xl shadow-black/40 md:inset-x-auto md:bottom-6 md:right-6 md:w-[390px]"
         >
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
             <div className="flex items-center gap-2">
@@ -413,7 +456,7 @@ export default function ChatAssistant() {
                   rows={2}
                   maxLength={MAX_CHARS}
                   placeholder="Ask about Aarone's work, or describe a task"
-                  className="min-h-[44px] flex-1 resize-none rounded-xl border border-border bg-transparent px-3 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-circuit focus:outline-none"
+                  className="min-h-[44px] flex-1 resize-none rounded-xl border border-border bg-transparent px-3 py-2 text-base text-ink placeholder:text-ink-muted focus:border-circuit focus:outline-none sm:text-sm"
                 />
                 <button
                   type="submit"
