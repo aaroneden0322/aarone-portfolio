@@ -3,7 +3,7 @@ import type { PlatformPageData } from "./types";
 const gohighlevel: PlatformPageData = {
   slug: "gohighlevel",
   name: "GoHighLevel",
-  status: "1 build complete, more in progress",
+  status: "1 build complete",
   tagline:
     "GoHighLevel plus an AI helper that qualifies leads by email, with hard limits on what the AI is allowed to do.",
   whyThisPlatform: [

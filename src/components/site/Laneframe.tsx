@@ -26,8 +26,8 @@ const PLATFORMS = [
   },
   {
     name: "GoHighLevel",
-    status: "In Progress",
-    statusColor: "text-flow",
+    status: "Complete",
+    statusColor: "text-circuit",
     body: "The demo-booking workflows are built and checked. The finished build on the page is an AI helper that qualifies leads by email, with hard limits on what it is allowed to do. I tested it by switching the AI off and by trying to make it book too early.",
     href: "/laneframe/gohighlevel",
   },
@@ -64,12 +64,19 @@ export default function Laneframe() {
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="rounded-full border border-circuit/40 px-4 py-1.5 text-xs font-semibold text-circuit">
-              Active build
+              All four built
             </span>
             <span className="text-sm text-ink-muted">
-              n8n, Make, and Zapier builds complete. GoHighLevel has one build complete and more in progress.
+              All four tool builds are finished. GoHighLevel has one build on its page, the AI qualifier.
             </span>
           </div>
+
+          <a
+            href="/laneframe/capstone"
+            className="mt-4 inline-block text-sm font-medium text-circuit hover:underline"
+          >
+            Read the four-way comparison →
+          </a>
 
           <p className="mt-4 max-w-3xl text-xs text-ink-muted/80">
             How I count: every number here was measured in a real test or
