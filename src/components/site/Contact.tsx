@@ -4,7 +4,7 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 
 const CONTACT_EMAIL = "automate@aarone.adautoteam.top";
-const WEBHOOK_URL = "https://n8n.adautoteam.top/webhook/portfolio-contact-form";
+const WEBHOOK_URL = "https://assistant.adautoteam.top/webhook/portfolio-contact";
 
 const WEBMAIL_LINKS = [
   {
