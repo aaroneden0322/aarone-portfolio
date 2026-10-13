@@ -125,7 +125,8 @@ export default function Contact() {
             </button>
             {status === "sent" && (
               <p className="text-sm text-circuit">
-                Thanks, I&rsquo;ll get back to you within 24 hours.
+                Thanks, I&rsquo;ll get back to you within 24 hours. Please also
+                check your spam folder for the confirmation email and my reply.
               </p>
             )}
             {status === "error" && (
