@@ -16,8 +16,8 @@
   <div class="rule">
     <h4 style="margin-top:0">The rule that governs this page</h4>
     <p style="margin:0;font-size:16px;color:var(--ink)"><b>Every number here is either measured during a build, or it is a formula with its inputs named. There is no third category.</b></p>
-    <p class="body" style="margin:12px 0 0">This matters more here than anywhere else, because a comparison page is exactly where invented numbers are conventional and expected. The genre is dominated by affiliate listicles with confident tables, so a comparison built from first-hand builds is hard to fake and worth publishing. That advantage evaporates the moment one cell is estimated and rendered as though it were observed.</p>
-    <p class="body" style="margin:10px 0 0">So: <b>placeholders render as placeholders.</b> Where a build hasn't run, the cell shows an em-dash and the page says so. And <b>prices are quoted with a date, or not at all</b>: third-party sources agree closely on billing <i>models</i> and contradict each other on <i>prices</i>. The models are stable enough to build an argument on; the prices are not. The primary currency on this page is therefore meter units, with dollars derived at publication time from each vendor's own pricing page.</p>
+    <p class="body" style="margin:12px 0 0">Comparison pages are where invented numbers are conventional. The genre is dominated by affiliate listicles with confident tables, so a comparison built from first-hand builds is hard to fake and worth publishing. That advantage disappears once one cell is estimated and shown as though it were observed.</p>
+    <p class="body" style="margin:10px 0 0"><b>Placeholders render as placeholders.</b> Where a build hasn't run, the cell shows an em-dash and the page says so. And <b>prices are quoted with a date, or not at all</b>: third-party sources agree closely on billing <i>models</i> and contradict each other on <i>prices</i>. The models are stable enough to build an argument on; the prices are not. The primary currency on this page is therefore meter units, with dollars derived at publication time from each vendor's own pricing page.</p>
   </div>
 
   <div class="callout">
@@ -31,7 +31,7 @@
 </div>
 
 <div class="req">
-    <b>Status (published 13 October 2026).</b> All four builds have run and been captured. Cells show a <b>measured</b> value, a <b>derived</b> value with its inputs named, or an em-dash <span class="ph"><b>not measured</b></span> where nothing was measured. Where a probe or field did not apply to the build as built, it says <b>n/a</b>. <b>No spine is claimed to satisfy all eight requirements</b>: SMS and enrichment are absent from Zapier and GoHighLevel, the GoHighLevel build ran on a trial account, and the Zapier parent never ran live. Those deviations are listed in §2 and §10, not buried.
+    <b>Status (published 13 October 2026).</b> All four builds have run and been captured. Cells show a <b>measured</b> value, a <b>derived</b> value with its inputs named, or an em-dash <span class="ph"><b>not measured</b></span> where nothing was measured. Where a probe or field did not apply to the build as built, it says <b>n/a</b>. <b>No spine is claimed to satisfy all eight requirements</b>: SMS and enrichment are absent from Zapier and GoHighLevel, the GoHighLevel build ran on a trial account, and the Zapier parent never ran live. Those deviations are listed in §2 and §10.
   </div>
 
   <!-- ============ 1 · THE SCENARIO ============ -->
@@ -80,7 +80,7 @@
       <tr><td><b>Enrichment unavailable</b></td><td>Point the enrichment step at a dead endpoint</td></tr>
       <tr><td><b>Out-of-hours arrival</b></td><td>Fire a founder-tier lead at 02:00 client time</td></tr>
     </table>
-    <p class="body"><b>The third probe is the discriminating one.</b> It is where the four platforms diverge most sharply, and where the honest answer is least flattering to one of them.</p>
+    <p class="body"><b>The third probe is the discriminating one.</b> The platforms diverge most sharply there, and the result is least flattering to one of them.</p>
   </div>
 
     <!-- ============ 2 · THE FOUR IMPLEMENTATIONS ============ -->
@@ -134,7 +134,7 @@
     <h3>2.1 · Zapier (Z1)</h3>
     <p class="body"><b>Architecture.</b> Three Zaps, not two: a parent of 31 steps and two Sub-Zap children (4 and 5 steps), 40 steps in all. The split was forced by Zapier's 32-step ceiling per Zap. Formatter for normalisation, Filter as the input guard, Code by Zapier for scoring, HubSpot lookups for dedupe.</p>
     <div class="req">
-      <b>Finding.</b> The step ceiling changed the finished shape of the build. Twilio SMS never delivered (caller-ID and carrier filtering) and was dropped. The enrichment step errored with "Invalid API key" and was deleted to stay inside the step budget. That reflects the ceiling, not how easy the integrations were. Zapier surfaced no retry or backoff setting in any step editor and none was built; <b>retry was never probed</b>, because probe 3 had nothing left to fail.
+      <b>Finding.</b> The step ceiling changed the finished shape of the build. Twilio SMS never delivered (caller-ID and carrier filtering) and was dropped. The enrichment step errored with "Invalid API key" and was deleted to stay inside the step budget. Zapier surfaced no retry or backoff setting in any step editor and none was built; <b>retry was never probed</b>, because probe 3 had nothing left to fail.
     </div>
     <p class="body"><b>Also measured.</b> A Sub-Zap run billed +1 task against a documented 2; unresolved. HubSpot's dedupe is read-then-branch, and the race was not tested. The parent Zap never ran live, so the success-path meter and time to first touch are not measured and appear as em-dashes below.</p>
   </div>
@@ -144,7 +144,7 @@
     <p class="body"><b>Architecture.</b> One scenario of 47 modules. Webhook, Parse JSON, Set Variables for normalisation, Data Store lookups then a write for dedupe, a filter before any paid step, a Router, and per-module error handlers that raise a Slack alert and then Resume.</p>
     <p class="body"><b>What was observed.</b> The error handlers work: probes 3a and 3b were caught and alerted, and the top-level status still read SUCCESS. <b>No retry or backoff was exercised or observed</b>; the SMS module fired once and the run billed 19 operations. Repeat exists on the platform and was not tried, so "genuine exponential backoff" is a platform capability this page does not claim to have seen. Make also rejects a bad connection at save time, which is why probe 3c could not be induced.</p>
     <div class="req">
-      <b>And it cuts the other way.</b> An unhandled error silently deactivated the scenario and queued incoming webhooks behind it. Build friction recorded: a wrong Gmail connection, a Data Store <span class="inline">.data.</span> prefix, and the auto-deactivate and queue drain. The free plan caps the account at 1,000 operations a month and two active scenarios. On a per-module meter, <b>every module of failure handling is a module you pay for</b>; see §4.4.
+      <b>The downside.</b> An unhandled error silently deactivated the scenario and queued incoming webhooks behind it. Build friction recorded: a wrong Gmail connection, a Data Store <span class="inline">.data.</span> prefix, and the auto-deactivate and queue drain. The free plan caps the account at 1,000 operations a month and two active scenarios. On a per-module meter, <b>every module of failure handling is a module you pay for</b>; see §4.4.
     </div>
   </div>
 
@@ -153,7 +153,7 @@
     <p class="body"><b>Architecture.</b> One workflow of 37 nodes, self-hosted and live. Webhook with an immediate Respond node, a JavaScript Code node for normalisation, a Postgres <span class="inline">ON CONFLICT</span> claim for dedupe (a single statement, atomic by construction), a Switch for routing, a Merge to write one log row, and a global Error Trigger workflow behind it.</p>
     <p class="body"><b>What was measured.</b> Every run, whichever route, was <b>one execution</b>; the guard-halt (4 of 37 nodes) and the full founder route cost the same. The workflow export is 59,260 bytes. The VPS is a real invoice: <b>$5.35 a month including VAT, backup included</b> (period 2026-08-02 to 2026-09-01), attributed 100% to N1 so far. Tool-active build time was about 28 h 44 m over 5 calendar days, by the gap-sum method.</p>
     <div class="req">
-      <b>Failure behaviour, before and after.</b> Probe 3a was a <b>silent success</b> before a fix: the run Succeeded, no alert fired, and the lead was logged as routed. After the added assert it throws and alerts. 3b hung for 2 min 20.5 s; 3c failed in 1.91 s with a 401. Retry On Fail was off on every node tested, so <b>no retry was observed</b>. The native setting is fixed-interval with a maximum of 5 tries (a configuration fact, not exercised), so true backoff would be hand-built. And the cost of the licence is not $0: it is the invoice above plus the attention.
+      <b>Failure behaviour, before and after.</b> Probe 3a was a <b>silent success</b> before a fix: the run Succeeded, no alert fired, and the lead was logged as routed. After the added assert it throws and alerts. 3b hung for 2 min 20.5 s; 3c failed in 1.91 s with a 401. Retry On Fail was off on every node tested, so <b>no retry was observed</b>. The native setting is fixed-interval with a maximum of 5 tries (a configuration fact, not exercised), so true backoff would be hand-built. The cost of running it is the invoice above plus the attention.
     </div>
   </div>
 
@@ -200,7 +200,7 @@
     <p class="body" style="font-size:13.4px;margin-top:6px"><span class="verify">VERIFIED 2026-10-05, RE-READ 2026-10-13</span> Free tiers, plan prices and the Zapier overage behaviour were read from the vendors' pricing pages on 2026-10-05 and re-read on 2026-10-13 with no change. Cells shown as em-dashes were not re-read and are therefore not asserted.</p>
   </div>
 
-  <h3>The two observations to draw out explicitly</h3>
+  <h3>Two observations</h3>
 
   <div class="card">
     <p class="body"><b>Unit counts across platforms are meaningless.</b> The same guard-halted lead was 1 task on Zapier's Sub-Zap (3 if two Formatter steps bill), 4 credits on Make, 1 execution on n8n and 2 premium items on GoHighLevel. Any table that puts those four numbers in a column and invites comparison is misleading. Only cost per thousand leads is comparable, and only when computed on the day.</p>
@@ -268,7 +268,7 @@
     <h3>4.3 · The short-circuit finding</h3>
     <p class="body"><b>Make:</b> the guard sits before the expensive branches, so a guard-halted lead costs 4 credits against 19 for a founder lead (measured). <b>n8n:</b> guard-halt and the full route are both 1 execution (measured). <b>GoHighLevel:</b> the short-circuit runs about 9 actions against about 15, but both bill 2 premium items, because the inbound trigger bills before the guard (derived). The same guard that saves 15 credits per lead on Make saves nothing on the meter here.</p>
     <div class="callout">
-      On a per-execution meter you order your steps for clarity; on a per-step meter you order them for cost. Those are not always the same order.
+      On a per-execution meter you order your steps for clarity; on a per-step meter you order them for cost.
     </div>
   </div>
 
@@ -276,8 +276,8 @@
   <div class="keystone">
     <h3>4.4 · Resilience is the part of the build that has a meter on it</h3>
     <p>On a per-step meter, each guard, error handler and alert module is billed on every run it executes. Make's measured numbers show it: a founder run with a live SMS attempt billed 19 operations, with the trigger and error-handler modules counted, against 1 execution for the whole of N1's route.</p>
-    <p>The same arithmetic explains, without being uncharitable about anyone, <b>why published automation work tends to be happy-path</b>: resilience is the part of the build that adds recurring line items and produces nothing visible when it works. That is the honest answer to a client who asks why the quote includes work they can't see.</p>
-    <p style="margin-bottom:0">It also reframes the n8n case. The better argument for self-hosting is not cost at volume but that <b>per-execution metering removes the financial disincentive to build properly</b>. That argument is measured for n8n and for Make's cost of guards; it is not a claim that the other platforms cannot be built resiliently.</p>
+    <p>The same arithmetic explains <b>why published automation work tends to be happy-path</b>: resilience is the part of the build that adds recurring line items and produces nothing visible when it works. It also answers a client who asks why the quote includes work they can't see.</p>
+    <p style="margin-bottom:0">It also reframes the n8n case. The better argument for self-hosting is that <b>per-execution metering removes the financial disincentive to build properly</b>, whatever the cost at volume. The measurement covers n8n and Make's cost of guards. It says nothing about whether the other platforms can be built resiliently.</p>
   </div>
 
   <div class="card">
@@ -317,10 +317,10 @@
     </div>
   </div>
 
-  <h3>The two trade-offs to state plainly</h3>
+  <h3>Two trade-offs</h3>
   <div class="card">
     <p class="body"><b>Zapier's export gap is measured on the plan used, and it is worse than its retry gap.</b> On the Free and Professional plans a Zap exists only inside Zapier and the migration path is a person rebuilding it by reading it; Zapier lists JSON export of Zaps on Team and Enterprise plans, which were not tested. For a client whose operations depend on it, that is a more consequential property than any per-task price.</p>
-    <p class="body"><b>n8n's ownership advantage is also its liability.</b> The same sentence, <i>you own the server</i>, is the reason to choose it and the reason not to. The recommendation against n8n for a client with nobody to run it is <b>argued, not tested</b>, but the $5.35 invoice and the 59,260-byte export show what the ownership side of the trade looks like.</p>
+    <p class="body"><b>n8n's ownership advantage is also its liability.</b> The same sentence, <i>you own the server</i>, is the reason to choose it and the reason not to. The recommendation against n8n for a client with nobody to run it is <b>argued, not tested</b>; the $5.35 invoice and the 59,260-byte export show what the ownership side of the trade looks like.</p>
   </div>
 
   <!-- ============ 6 · FINDINGS ============ -->
@@ -385,7 +385,7 @@
         <td><b style="color:var(--n8nt)">n8n self-hosted</b></td>
         <td>The only option that keeps data on infrastructure the client controls. Everything else is a vendor's cloud, and no amount of contract language changes that.</td>
         <td>Vendor-managed uptime, and the certification paperwork a managed vendor would have provided</td>
-        <td><b>Never, on this criterion.</b> It's the constraint, not a preference</td>
+        <td><b>Never, on this criterion.</b> It's a constraint, so the answer doesn't depend on preference</td>
       </tr>
       <tr>
         <td><b>High-volume, heavily-branching operations</b><br><span style="font-size:12.4px;color:var(--muted)">10k+ runs/month</span></td>
@@ -413,17 +413,17 @@
   <h2>8 · The finding that only an ecosystem produces</h2>
 
   <div class="card">
-    <p class="body">The client these four builds were written for sells software to a second kind of business: freight brokerages and 3PLs. They are in the same industry, adjacent in the same supply chain, and <b>they need different automation stacks, and the reason is structural.</b></p>
+    <p class="body">The client these four builds were written for sells software to a second kind of business: freight brokerages and 3PLs. They are in the same industry, adjacent in the same supply chain, and <b>they need different automation stacks for structural reasons.</b></p>
 
     <p class="body"><b>The software vendor's leads are digital-first and its automation's centre of gravity is data.</b> A trial signup is a database row before it is a person. The work is enrichment, scoring, deduplication against an existing account table, provisioning into a product tenant, and keeping entitlements aligned with billing. Volume is high, per-lead urgency is moderate, and almost every system involved is one the company already owns and wants to keep owning. <b>That points at Make or n8n.</b></p>
 
     <p class="body"><b>The brokerage's leads are conversation-first and its automation's centre of gravity is the channel.</b> A quote request is a phone call from a dispatcher who will call the next broker in ninety seconds if nobody picks up. The work is answering, capturing, routing to whoever covers that lane, and escalating when the SLA burns down. Volume is lower, per-lead urgency is extreme, and the systems involved are the phone, the text message and the calendar. <b>That points at GoHighLevel.</b></p>
 
     <div class="thesis">
-      The software vendor and its own customer needed different systems because <b>one company's automation lives in its database and the other's lives in its phone.</b> Everything else, including the cost comparison above, follows from that.
+      The software vendor and its own customer needed different systems because <b>one company's automation lives in its database and the other's lives in its phone.</b>
     </div>
 
-    <p class="body" style="font-size:13.8px"><b>Status of this section:</b> the argument currently rests on the four spine builds plus the specification for the second client type. It is an argued conclusion, not a demonstrated one. If the optional second-client build lands (a quote-request router with an SLA timer), this section carries a demonstrated comparison instead. <b>Saying which of the two it is, is part of the argument.</b></p>
+    <p class="body" style="font-size:13.8px"><b>Status of this section:</b> the argument currently rests on the four spine builds plus the specification for the second client type. It is an argued conclusion, not a demonstrated one. If the optional second-client build lands (a quote-request router with an SLA timer), this section carries a demonstrated comparison instead.</p>
   </div>
 
   <!-- ============ 9 · WHAT WOULD CHANGE THIS ============ -->
@@ -432,7 +432,7 @@
   <div class="card">
     <ul class="reqs">
       <li><b>Zapier ships native retry with backoff</b> (re-check on the day). Finding 11 weakens and the solo-operator recommendation gets stronger.</li>
-      <li><b>Make's free-tier scenario ceiling moves.</b> Changes how it's evaluated, not how it performs.</li>
+      <li><b>Make's free-tier scenario ceiling moves.</b> It changes how the platform is evaluated and leaves its performance as it is.</li>
       <li><b>GoHighLevel ships a per-workflow export path</b> (none was found in this build). The lock-in objection largely dissolves and three rows of the matrix get easier to recommend.</li>
       <li><b>n8n Cloud pricing moves.</b> Cloud Starter listed at €20/month for 2,500 executions on 2026-10-05; a cheaper or free tier would weaken the maintenance objection.</li>
       
@@ -440,7 +440,7 @@
     </ul>
 
     <div class="req">
-      <b>One limitation, stated plainly and not buried.</b> This compares four implementations built by one person over four weeks, learning three of the four platforms at production depth for the first time in that period. <b>Build times reflect that.</b> A Make specialist would build the Make version faster. What this comparison does have that vendor-neutral listicles don't is that <b>the same person built all four, to the same specification, and broke all four the same way.</b>
+      <b>One limitation.</b> This compares four implementations built by one person over four weeks, learning three of the four platforms at production depth for the first time in that period. <b>Build times reflect that.</b> A Make specialist would build the Make version faster. What this comparison does have that vendor-neutral listicles don't is that <b>the same person built all four, to the same specification, and broke all four the same way.</b>
     </div>
   </div>
 
