@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import NodeGraphBackground from "@/components/site/NodeGraphBackground";
 import "./globals.css";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
         </Script>
         <NodeGraphBackground />
         {children}
+        <Analytics />
       </body>
     </html>
   );
