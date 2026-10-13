@@ -8,6 +8,8 @@ import {
   GoHighLevelIcon,
 } from "./SkillIcons";
 
+const BOOKING_URL = "https://cal.com/aarone-den-patayan-zyaccx/30min";
+
 const PLATFORMS = [
   { label: "n8n", Icon: N8nIcon },
   { label: "Make", Icon: MakeIcon },
@@ -98,6 +100,14 @@ export default function Hero() {
                 className="hero-glow pointer-events-none absolute -inset-2 -z-10 rounded-full bg-circuit/20 blur-lg"
               />
               Fix My Bottleneck
+            </a>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glow order-3 rounded-full border border-border px-6 py-3 text-center text-sm font-semibold text-ink transition-colors hover:border-circuit/60 sm:w-auto"
+            >
+              Book a 30 min call
             </a>
           </div>
         </Reveal>

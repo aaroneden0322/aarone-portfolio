@@ -4,6 +4,7 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 
 const CONTACT_EMAIL = "aarone@adautoteam.top";
+const BOOKING_URL = "https://cal.com/aarone-den-patayan-zyaccx/30min";
 const WEBHOOK_URL = "https://assistant.adautoteam.top/webhook/portfolio-contact";
 
 const WEBMAIL_LINKS = [
@@ -141,6 +142,19 @@ export default function Contact() {
         <Reveal delay={100}>
           <div className="h-full rounded-2xl border border-border p-6">
             <p className="text-sm text-ink-muted">
+              Would you rather talk it through? Pick a time for a 30 minute
+              intro call.
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glow mt-3 inline-block rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
+            >
+              Book a call
+            </a>
+
+            <p className="mt-6 text-sm text-ink-muted">
               Prefer email? Reach me directly and skip the form.
             </p>
             <a
