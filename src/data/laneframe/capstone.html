@@ -1,0 +1,480 @@
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">Capstone · Four platforms · One specification</span>
+    <h1>Four Platforms, <span>One Specification</span></h1>
+    <p class="sub">The same lead-intake system, built four times, on Zapier, Make, n8n and GoHighLevel, for the same client by the same person, instrumented identically, and put through the same five failure probes as far as each platform allowed. This page reports what came out. Its argument is that <b style="color:var(--ink)">the meter matters more than the price, and the right platform depends on where the work happens.</b></p>
+    <div class="meta">
+      <span class="chip">Zapier · Z1</span>
+      <span class="chip">Make · M1</span>
+      <span class="chip">n8n · N1</span>
+      <span class="chip">GoHighLevel · G1</span>
+      <span class="chip">16 capture fields · 5 failure probes</span>
+    </div>
+  </header>
+
+  <div class="rule">
+    <h4 style="margin-top:0">The rule that governs this page</h4>
+    <p style="margin:0;font-size:16px;color:var(--ink)"><b>Every number here is either measured during a build, or it is a formula with its inputs named. There is no third category.</b></p>
+    <p class="body" style="margin:12px 0 0">This matters more here than anywhere else, because a comparison page is exactly where invented numbers are conventional and expected. The genre is dominated by affiliate listicles with confident tables, so a comparison built from first-hand builds is hard to fake and worth publishing. That advantage evaporates the moment one cell is estimated and rendered as though it were observed.</p>
+    <p class="body" style="margin:10px 0 0">So: <b>placeholders render as placeholders.</b> Where a build hasn't run, the cell shows an em-dash and the page says so. And <b>prices are quoted with a date, or not at all</b>: third-party sources agree closely on billing <i>models</i> and contradict each other on <i>prices</i>. The models are stable enough to build an argument on; the prices are not. The primary currency on this page is therefore meter units, with dollars derived at publication time from each vendor's own pricing page.</p>
+  </div>
+
+  <div class="callout">
+<b>The short version, in my words.</b>
+<ul class="reqs">
+<li>I built the same lead-routing job on four platforms and broke each one on purpose, so you can see how they bill, how they fail and how hard they are to leave. The client is fictional and the data is synthetic.</li>
+<li>The same guard-halted lead cost 1 Zapier task, 4 Make credits, 1 n8n execution or 2 GoHighLevel premium items, so plan prices alone don't compare the platforms.</li>
+<li>Where the downstream-failure test ran, a failed step did not show as a failed run unless an alert or check had been added.</li>
+<li>On the plans I used, only n8n and Make gave me an exportable file of the build: a 59,260-byte workflow JSON and a 28,052-byte blueprint. Zapier offers JSON export only on Team and Enterprise plans, and GoHighLevel moves automations as snapshots and share links, not files.</li>
+</ul>
+</div>
+
+<div class="req">
+    <b>Status (published 13 October 2026).</b> All four builds have run and been captured. Cells show a <b>measured</b> value, a <b>derived</b> value with its inputs named, or an em-dash <span class="ph"><b>not measured</b></span> where nothing was measured. Where a probe or field did not apply to the build as built, it says <b>n/a</b>. <b>No spine is claimed to satisfy all eight requirements</b>: SMS and enrichment are absent from Zapier and GoHighLevel, the GoHighLevel build ran on a trial account, and the Zapier parent never ran live. Those deviations are listed in §2 and §10, not buried.
+  </div>
+
+  <!-- ============ 1 · THE SCENARIO ============ -->
+  <h2>1 · The scenario, specified once<em>Before any platform is named, so a reader can check that four implementations were held to one specification.</em></h2>
+
+  <div class="card">
+    <h3>The client</h3>
+    <p class="body"><b>Laneframe</b> is a transport management platform for small freight brokerages and asset-light 3PLs. Thirty-one people. Three self-serve tiers at $149, $279 and $449 a month, so a won deal is worth roughly $3,300 a year. The motion is self-serve trial plus inbound demo request: about <b>40 trial signups and 25 demo requests a week</b>, handled by two SDRs and one account executive, with the founder taking anything above 40 trucks. The average deal closes in 19 days or dies.</p>
+    <p class="body" style="font-size:14px"><b>Laneframe is a composite client, not a real one</b>: a specification written to a real sales motion so the system could be built against something with actual constraints. The builds are real and the failure conditions were induced deliberately. The company is the fiction; nothing else is.</p>
+
+    <h3>The problem, in the client's words</h3>
+    <div class="thesis">Leads arrive from five places in four shapes and get worked by three people with different jobs. The founder should see the 40-truck brokerage whose owner filled in the demo form. The SDRs should see everything else worth a phone call, quickly. Nobody should see the student researching a dissertation, and nobody should call the same person twice because they started a trial on Tuesday and asked for a demo on Thursday.</div>
+
+    <h3>The input contract</h3>
+    <p class="body"><i>This section is the specification as written before the builds; §2 reports where each build departed from it.</i> All four implementations accept the same five sources in the same four shapes. <b>Any platform that needs the payload pre-normalised before it arrives has failed part of the test</b>, and that fact is recorded rather than worked around.</p>
+    <table>
+      <tr><th>Source</th><th>Shape</th></tr>
+      <tr><td>Website demo form</td><td>JSON, <span class="inline">full_name</span> single field</td></tr>
+      <tr><td>In-product trial signup</td><td>JSON, <span class="inline">first_name</span> / <span class="inline">last_name</span>, plus product-usage fields</td></tr>
+      <tr><td>Paid-search landing page</td><td>JSON, nested: answers inside an array of question objects</td></tr>
+      <tr><td>Call-tracking tool</td><td>JSON, phone-primary, often no email</td></tr>
+      <tr><td>Forwarded referral email</td><td>Unstructured prose, human-written, no schema at all</td></tr>
+    </table>
+
+    <h3>Required behaviour</h3>
+    <ol class="reqs">
+      <li><b>Normalise</b> all five shapes to one contact record: name, email, phone in E.164, company, company domain, fleet size, role, source.</li>
+      <li><b>Guard the input.</b> Missing usable email or missing company halts and routes to human review. Nothing falls through to a default score.</li>
+      <li><b>Enrich</b> on company domain. Free-mail domains are flagged, not enriched.</li>
+      <li><b>Score for fit</b> on fleet size, role, industry, and whether the lead is product-qualified (already in the trial) or marketing-qualified (filled in a form).</li>
+      <li><b>Deduplicate</b> against existing contacts on normalised email and company domain. A returning lead routes to re-engagement, not to the bin.</li>
+      <li><b>Route three ways</b>: founder (deal, instant SMS, Slack alert), SDR (deal, round-robin, task due within the hour, acknowledgement email), self-serve (nurture tag, no human alerted).</li>
+      <li><b>Log every lead</b>, including rejects and duplicates.</li>
+      <li><b>Respond inside 60 seconds</b> on the founder and SDR paths.</li>
+    </ol>
+    <div class="callout">
+      <b>Definition of done.</b> A build counts as complete when it satisfies all eight requirements, survives all five failure probes, and has all sixteen capture fields recorded. <b>A build that satisfies seven of eight is reported as satisfying seven of eight.</b>
+    </div>
+
+    <h3>The five failure probes, run identically on all four</h3>
+    <table>
+      <tr><th>Probe</th><th>How it's induced</th></tr>
+      <tr><td><b>Malformed payload</b></td><td>Submit the nested paid-search shape with the answer array empty</td></tr>
+      <tr><td><b>Duplicate arrival</b></td><td>Submit the same email twice, then a third time with the existing record backdated 40 days</td></tr>
+      <tr><td><b>Downstream timeout</b></td><td>Revoke the SMS provider credential and fire a founder-tier lead</td></tr>
+      <tr><td><b>Enrichment unavailable</b></td><td>Point the enrichment step at a dead endpoint</td></tr>
+      <tr><td><b>Out-of-hours arrival</b></td><td>Fire a founder-tier lead at 02:00 client time</td></tr>
+    </table>
+    <p class="body"><b>The third probe is the discriminating one.</b> It is where the four platforms diverge most sharply, and where the honest answer is least flattering to one of them.</p>
+  </div>
+
+    <!-- ============ 2 · THE FOUR IMPLEMENTATIONS ============ -->
+  <h2>2 · The four implementations<em>Same shape each time: what was built, what was measured, what was not. Every spine was built and captured; none is claimed to satisfy all eight requirements.</em></h2>
+
+  <div class="spinebar">
+    <div class="spinelink z"><b>Zapier · Z1</b>Three Zaps (parent 31 steps + two Sub-Zaps of 4 and 5). Parent still Draft. <span class="badge spine">Spine</span></div>
+    <div class="spinelink m"><b>Make · M1</b>One scenario, 47 modules, Data Store dedupe, Router. <span class="badge spine">Spine</span></div>
+    <div class="spinelink n"><b>n8n · N1</b>One workflow, 37 nodes, self-hosted, live. <span class="badge spine">Spine</span></div>
+    <div class="spinelink g"><b>GoHighLevel · G1</b>About 61 actions over 4 workflows, on a trial account. <span class="badge spine">Spine</span></div>
+  </div>
+
+  <h3>Evidence status per spine</h3>
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr><th style="width:110px">Spine</th><th>Build</th><th>Probes run</th><th>Disclosed gaps</th></tr>
+      <tr><td class="k">Zapier Z1</td><td>40 steps over 3 Zaps; parent still Draft; no export on the plan used</td><td>2 of 5 (probes 1, 2); 3, 4, 5 not applicable (SMS and enrichment removed)</td><td>No live parent run, so success-path meter and first touch are not measured</td></tr>
+      <tr><td class="k">Make M1</td><td>47 modules; blueprint on disk</td><td>5 of 5</td><td>Probe 3c could not be induced (Make rejects a bad connection at save); probe 5 send-time bug was open at capture; build time and per-module timing not recorded</td></tr>
+      <tr><td class="k">n8n N1</td><td>37 nodes, live self-hosted; export JSON on disk</td><td>5 of 5</td><td>Real lead mix not tallied; 3b and 3c execution ids not pinned</td></tr>
+      <tr><td class="k">GoHighLevel G1</td><td>About 61 actions (±3) over 4 workflows; trial account; no per-workflow file export found</td><td>4 of 5 run (1, 2, 3 variant, 5); probe 4 not applicable</td><td>SMS removed; flat payloads only; no enrichment; probe 3 email variant not run; 40-day duplicate not run; G1·02 and G1·03 never enrolled anyone; the G1·01 canvases predate two later additions</td></tr>
+    </table>
+    </div>
+    <p class="body" style="font-size:13.4px">Step counts are not a like-for-like unit (nodes, modules, steps, actions); they are shown for scale only.</p>
+  </div>
+
+  <h3>The five probes, as run rather than as specified</h3>
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr>
+        <th style="width:150px">Probe</th>
+        <th class="p z"><i></i>Zapier</th>
+        <th class="p m"><i></i>Make</th>
+        <th class="p n"><i></i>n8n</th>
+        <th class="p g"><i></i>GoHighLevel</th>
+      </tr>
+      <tr><td class="k">1 · Malformed</td><td>Pass; Sub-Zap logged, +1 task</td><td>Pass; 4 ops, no enrichment billed</td><td>Pass; 4 of 37 nodes</td><td>Pass; guard halt, raw payload kept, routed to human review</td></tr>
+      <tr><td class="k">2 · Duplicate, then 40-day backdate</td><td>Pass in two halves; HubSpot <span class="inline">createdate</span> is read-only, so no single dormant run</td><td>Pass including the 40-day backdate (after a real bug fix)</td><td>Pass including the 40-day backdate (cosmetic bug fixed)</td><td><b class="no">Failed first</b> (no stamp, repeat re-processed, Assign errored); passes after fix; 40-day run <b>not run</b> (cannot backdate on trial)</td></tr>
+      <tr><td class="k">3 · Downstream failure</td><td class="em">n/a</td><td>3a and 3b caught by the error handler and a Slack alert; 3c not inducible</td><td>3a silent success until fixed; 3b 2 min 20.5 s hang; 3c 1.91 s 401; no retry</td><td>HTTP-send variant against the telemetry webhook only; email variant not run; no retry, no alert</td></tr>
+      <tr><td class="k">4 · Enrichment down</td><td class="em">n/a</td><td>Pass; 11 ops, native degrade</td><td>Pass; hand-built <span class="inline">not_enriched</span> flag</td><td class="em">n/a</td></tr>
+      <tr><td class="k">5 · Out of hours</td><td class="em">n/a</td><td>Hold confirmed; logged send time wrong by 9 h (bug, open at capture)</td><td>Hold confirmed; log bug fixed; Wait later resumed exactly on target</td><td>Pass: held 6 h, released 4 min 26 s late, email sent 08:04:28 CDT</td></tr>
+    </table>
+    </div>
+    <div class="req" style="margin-bottom:0">
+      <b>Two like-for-like caveats.</b> Probe 3 hit a different kind of target on each platform (an SMS provider over HTTP on n8n and Make, the telemetry webhook on GoHighLevel, nothing on Zapier). Probe 5 on GoHighLevel tests an <i>email</i> hold, while n8n and Make tested an <i>SMS</i> hold.
+    </div>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--line)">
+    <h3>2.1 · Zapier (Z1)</h3>
+    <p class="body"><b>Architecture.</b> Three Zaps, not two: a parent of 31 steps and two Sub-Zap children (4 and 5 steps), 40 steps in all. The split was forced by Zapier's 32-step ceiling per Zap. Formatter for normalisation, Filter as the input guard, Code by Zapier for scoring, HubSpot lookups for dedupe.</p>
+    <div class="req">
+      <b>Finding.</b> The step ceiling changed the finished shape of the build. Twilio SMS never delivered (caller-ID and carrier filtering) and was dropped. The enrichment step errored with "Invalid API key" and was deleted to stay inside the step budget. That reflects the ceiling, not how easy the integrations were. Zapier surfaced no retry or backoff setting in any step editor and none was built; <b>retry was never probed</b>, because probe 3 had nothing left to fail.
+    </div>
+    <p class="body"><b>Also measured.</b> A Sub-Zap run billed +1 task against a documented 2; unresolved. HubSpot's dedupe is read-then-branch, and the race was not tested. The parent Zap never ran live, so the success-path meter and time to first touch are not measured and appear as em-dashes below.</p>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--line)">
+    <h3>2.2 · Make (M1)</h3>
+    <p class="body"><b>Architecture.</b> One scenario of 47 modules. Webhook, Parse JSON, Set Variables for normalisation, Data Store lookups then a write for dedupe, a filter before any paid step, a Router, and per-module error handlers that raise a Slack alert and then Resume.</p>
+    <p class="body"><b>What was observed.</b> The error handlers work: probes 3a and 3b were caught and alerted, and the top-level status still read SUCCESS. <b>No retry or backoff was exercised or observed</b>; the SMS module fired once and the run billed 19 operations. Repeat exists on the platform and was not tried, so "genuine exponential backoff" is a platform capability this page does not claim to have seen. Make also rejects a bad connection at save time, which is why probe 3c could not be induced.</p>
+    <div class="req">
+      <b>And it cuts the other way.</b> An unhandled error silently deactivated the scenario and queued incoming webhooks behind it. Build friction recorded: a wrong Gmail connection, a Data Store <span class="inline">.data.</span> prefix, and the auto-deactivate and queue drain. The free plan caps the account at 1,000 operations a month and two active scenarios. On a per-module meter, <b>every module of failure handling is a module you pay for</b>; see §4.4.
+    </div>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--line)">
+    <h3>2.3 · n8n (N1)</h3>
+    <p class="body"><b>Architecture.</b> One workflow of 37 nodes, self-hosted and live. Webhook with an immediate Respond node, a JavaScript Code node for normalisation, a Postgres <span class="inline">ON CONFLICT</span> claim for dedupe (a single statement, atomic by construction), a Switch for routing, a Merge to write one log row, and a global Error Trigger workflow behind it.</p>
+    <p class="body"><b>What was measured.</b> Every run, whichever route, was <b>one execution</b>; the guard-halt (4 of 37 nodes) and the full founder route cost the same. The workflow export is 59,260 bytes. The VPS is a real invoice: <b>$5.35 a month including VAT, backup included</b> (period 2026-08-02 to 2026-09-01), attributed 100% to N1 so far. Tool-active build time was about 28 h 44 m over 5 calendar days, by the gap-sum method.</p>
+    <div class="req">
+      <b>Failure behaviour, before and after.</b> Probe 3a was a <b>silent success</b> before a fix: the run Succeeded, no alert fired, and the lead was logged as routed. After the added assert it throws and alerts. 3b hung for 2 min 20.5 s; 3c failed in 1.91 s with a 401. Retry On Fail was off on every node tested, so <b>no retry was observed</b>. The native setting is fixed-interval with a maximum of 5 tries (a configuration fact, not exercised), so true backoff would be hand-built. And the cost of the licence is not $0: it is the invoice above plus the attention.
+    </div>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--line)">
+    <h3>2.4 · GoHighLevel (G1)</h3>
+    <p class="body"><b>Architecture.</b> About 61 actions over four workflows on a trial account. Native triggers, If/Else bands for scoring, a stamped custom field as the dedupe guard, round-robin assignment, and an email hold for out-of-hours leads. <b>SMS was removed</b> (A2P 10DLC unregistered, and the cost). G1·03 is therefore an <i>email</i> missed-call follow-up with <b>zero enrollments</b>; it was never run.</p>
+    <div class="req">
+      <b>Where the platform did not meet the specification.</b> The nested paid-search <span class="inline">answers[]</span> array was not unwrapped, so flat payloads were used: the input contract was not met for the nested shape, and that is recorded here as a failed part of the test. Runs were <b>contactless</b> until an explicit Create/Update Contact action was added. The dedupe failed until a stamp step was added. There is no code step and no text-parsing primitive, so a forwarded prose referral cannot become a contact record inside the platform. A prose referral payload (from, subject, body; no email key) was sent on 5 Oct 2026: the Create/Update Contact step errored (no value for any mapped field), the input guard's no-email branch executed, the review-inbox notification fired, and the tag and telemetry steps were skipped for lack of a contact. <b>Measured:</b> it halted for human review and did not reach scoring.
+    </div>
+    <p class="body"><b>Failure behaviour.</b> In probe 3 a failed Webhook action ran once and ended: no retry, no alert, and no backfill in 16 minutes. The failure stayed in the child workflow while the parent reported the handoff as executed.</p>
+    <p class="body"><b>What the comparison cannot say.</b> The claims that GoHighLevel is the fastest to first touch, has the fewest moving parts, or has a missed-call text-back with no equivalent elsewhere are <b>argued, not demonstrated</b>: the text-back was never run, and the only first-touch measurement is an after-hours email (§6, finding 9). The data model is the platform's, and there is no per-workflow export.</p>
+    <div class="callout">
+      <b>Why this client size:</b> sub-$500-a-month product, self-serve trial plus inbound demos, about thirty people. Without it a technical reader correctly asks why not HubSpot. Laneframe is also the client in §7's first row, and the matrix there says plainly what the data does and does not support.
+    </div>
+  </div>
+
+  <!-- ============ 3 · FOUR METERS ============ -->
+  <h2>3 · Four platforms, four meters<em>Measured where the captures reached it, billing models from each vendor's own pages.</em></h2>
+
+  <div class="thesis">
+    These four platforms <b>do not bill for the same thing</b>, so their unit counts are not comparable and their headline prices are not either. Comparing meters is more useful than comparing prices, and the same input produced four different meters.
+  </div>
+
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr>
+        <th style="width:150px"></th>
+        <th class="p z"><i></i>Zapier</th>
+        <th class="p m"><i></i>Make</th>
+        <th class="p n"><i></i>n8n</th>
+        <th class="p g"><i></i>GoHighLevel</th>
+      </tr>
+      <tr><td class="k">Unit</td><td><b>Task</b></td><td><b>Operation (credit)</b></td><td><b>Execution</b></td><td><b>Premium execution plus email, each billed per use</b></td></tr>
+      <tr><td class="k">What one unit is</td><td>One successful action; trigger, filtered and errored steps are 0 (vendor rule, plus one observed delta)</td><td>One module call, <b>including the trigger and error-handler modules</b> (1:1 merge confirmed from account data)</td><td>One complete workflow run, <b>any number of nodes</b></td><td>The premium items are the inbound webhook trigger and the Webhook action, not messages; no per-run meter appears in the UI</td></tr>
+      <tr><td class="k">Scales with</td><td>Action steps × runs</td><td>Modules × runs</td><td><b>Runs only</b></td><td>Premium items and emails, on top of a $297 monthly plan</td></tr>
+      <tr><td class="k">Adding a step costs</td><td>More</td><td>More</td><td><b class="yes">Nothing</b> (measured: guard-halt and full route are both 1)</td><td>Nothing for standard actions; a usage charge for each premium one</td></tr>
+      <tr><td class="k">Free tier</td><td>100 tasks/mo, two-step Zaps only</td><td>1,000 credits/mo, 2 active scenarios</td><td>Community Edition, self-hosted. Cloud tiers are paid, with a trial</td><td><b class="no">None.</b> 14-day trial</td></tr>
+      <tr><td class="k">At the limit</td><td>Switches to pay-per-task billing at a higher per-task rate</td><td class="em">—</td><td class="em">—</td><td>Usage bills as incurred</td></tr>
+      <tr><td class="k">Can it charge you by accident?</td><td><span class="mid">Yes</span>, through the overage rate</td><td class="em">—</td><td class="em">—</td><td><b class="no">Yes.</b> No free tier; the trial converts to a $297 charge at expiry unless cancelled (this build's trial was cancelled before it converted)</td></tr>
+      <tr><td class="k">Agent metering</td><td colspan="4" style="text-align:center"><span class="ph"><b>not measured</b>Agent add-on pricing was not measured or re-verified for this page, and no agent-meter claim is made.</span></td></tr>
+    </table>
+    </div>
+    <p class="body" style="font-size:13.4px;margin-top:6px"><span class="verify">VERIFIED 2026-10-05, RE-READ 2026-10-13</span> Free tiers, plan prices and the Zapier overage behaviour were read from the vendors' pricing pages on 2026-10-05 and re-read on 2026-10-13 with no change. Cells shown as em-dashes were not re-read and are therefore not asserted.</p>
+  </div>
+
+  <h3>The two observations to draw out explicitly</h3>
+
+  <div class="card">
+    <p class="body"><b>Unit counts across platforms are meaningless.</b> The same guard-halted lead was 1 task on Zapier's Sub-Zap (3 if two Formatter steps bill), 4 credits on Make, 1 execution on n8n and 2 premium items on GoHighLevel. Any table that puts those four numbers in a column and invites comparison is misleading. Only cost per thousand leads is comparable, and only when computed on the day.</p>
+
+    <p class="body"><b>Two of the four can charge money you didn't plan to spend.</b> Zapier moves you to a higher per-task rate when the plan's tasks run out. GoHighLevel has no free tier, and a trial converts to the full plan price unless it is cancelled. That is a real selection criterion for a client who will forget.</p>
+  </div>
+
+  <!-- ============ 4 · COST ============ -->
+  <h2>4 · Cost accounting<em>Publishing the method is what makes this section falsifiable.</em></h2>
+
+  <div class="card">
+    <h3>4.1 · Method, stated before any number</h3>
+    <ol class="reqs">
+      <li><b>Fix a lead mix</b>, measured from real traffic, and state it. <b>No lead mix was measured on any platform</b>; all traffic so far is probe and test traffic. So this page shows per-outcome figures and all-one-outcome bounds, and publishes <b>no blended per-1,000 figure</b>.</li>
+      <li><b>Measure meter consumption per run for each routing outcome separately</b>, because averaging hides the most interesting effect on this page.</li>
+      <li>Cost per 1,000 = the sum over outcomes of (meter units per run × count of that outcome in 1,000) × price per unit, at the tier the build requires, on the publication date.</li>
+      <li>Convert to dollars from the vendor's own pricing page. State the date.</li>
+      <li><b>Name what is excluded</b> (§4.5).</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>4.2 · The arithmetic</h3>
+
+    <h4>Lead mix at 1,000 inbound leads a month</h4>
+    <table>
+      <tr><th>Founder-tier</th><th>SDR</th><th>Self-serve</th><th>Duplicate or spam</th></tr>
+      <tr><td class="em">—</td><td class="em">—</td><td class="em">—</td><td class="em">—</td></tr>
+    </table>
+    <p class="ph" style="margin:4px 0 0"><b>not measured</b> No real traffic mix exists. Every blended figure would be a function of it.</p>
+
+    <h4>Meter units per run, by routing outcome</h4>
+    <div class="scroll">
+    <table>
+      <tr>
+        <th style="width:190px">Per run</th>
+        <th class="p z"><i></i>Zapier · tasks</th>
+        <th class="p m"><i></i>Make · credits</th>
+        <th class="p n"><i></i>n8n · executions</th>
+        <th class="p g"><i></i>GoHighLevel · premium items</th>
+      </tr>
+      <tr><td class="k">Guard-halted</td><td>1 measured (Sub-Zap); 3 if the Formatter steps bill (vendor rule)</td><td>4 measured</td><td>1 measured</td><td>2, derived (about 9 actions executed)</td></tr>
+      <tr><td class="k">Self-serve</td><td class="em">—</td><td>11 measured</td><td>1 measured</td><td class="em">—</td></tr>
+      <tr><td class="k">SDR</td><td class="em">—</td><td>13 measured</td><td>1 measured</td><td>2, derived (about 15 actions, free-mail path)</td></tr>
+      <tr><td class="k">Founder, first touch attempted</td><td class="em">—</td><td>19 measured (17 if out of hours and queued)</td><td>1 measured</td><td>2, derived, plus 1 to 2 emails on the non-free-mail path</td></tr>
+      <tr><td class="k">Duplicate / re-engagement</td><td class="em">—</td><td>13 measured</td><td>1 measured</td><td>2, derived, plus 1 email (about 12 actions)</td></tr>
+    </table>
+    </div>
+    <p class="body" style="font-size:13.6px"><b>On the GoHighLevel premium items.</b> One of the two is the Webhook action in G1·04, which exists only to send telemetry to the n8n sink. A deployment without the benchmark instrumentation would carry 1 premium item for webhook-sourced leads and 0 for form-sourced leads. That reading is derived from the in-account price list and was not measured: trial usage read $0.00. This page shows the as-built figure and this sentence, never the production-equivalent alone.</p>
+
+    <h4>Per 1,000 leads, all-one-outcome bounds</h4>
+    <div class="scroll">
+    <table>
+      <tr><th style="width:120px"></th><th>Meter units per 1,000</th><th>Dollars per 1,000</th><th>Basis</th></tr>
+      <tr><td class="k"><b style="color:var(--zapt)">Zapier</b></td><td>1,000 to 3,000 tasks, guard-halted only; others —</td><td class="em">—</td><td>Cost not computed: the vendor page does not tie a plan price to a task allowance, so no per-task figure is given</td></tr>
+      <tr><td class="k"><b style="color:var(--makt)">Make</b></td><td>4,000 (all guard-halted) to 19,000 (all founder with SMS attempt) credits</td><td>$4.80 to $22.80</td><td>Derived at $12 per 10,000 credits (Core, monthly billing; listed 2026-10-05, re-read 2026-10-13). 19,000 credits needs more than one Core allotment</td></tr>
+      <tr><td class="k"><b style="color:var(--n8nt)">n8n</b></td><td>1,000 executions, whatever the mix</td><td>$5.35 ÷ monthly volume × 1,000: $53.50 at 100 a month, $10.70 at 500, $5.35 at 1,000, $1.07 at 5,000, $0.535 at 10,000</td><td>Derived. The VPS invoice is measured; <b>volume is the assumed input and must be stated beside any cell</b>. For reference, n8n Cloud Pro lists €50/month billed annually for 10,000 executions (read 2026-10-05, re-read 2026-10-13)</td></tr>
+      <tr><td class="k"><b style="color:var(--ghlt)">GoHighLevel</b></td><td>2,000 premium items; 0 to 2,000 emails</td><td class="em">—</td><td>Usage rates were read only from the in-account list on 2026-10-02 and not confirmed on a vendor page, so no usage dollar figure is given, and none was ever incurred on the trial. <b>Plus the $297/month Unlimited plan</b> (confirmed on the vendor page 2026-10-05 and re-read 2026-10-13)</td></tr>
+    </table>
+    </div>
+    <p class="body" style="font-size:13.6px">Reading the plan floors and usage together at 1,000 leads a month: GoHighLevel is the $297 plan plus usage (not computed); n8n $5.35, flat; Make $4.80 to $22.80 (subject to the allotment); Zapier not computed.</p>
+  </div>
+
+  <div class="card">
+    <h3>4.3 · The short-circuit finding</h3>
+    <p class="body"><b>Make:</b> the guard sits before the expensive branches, so a guard-halted lead costs 4 credits against 19 for a founder lead (measured). <b>n8n:</b> guard-halt and the full route are both 1 execution (measured). <b>GoHighLevel:</b> the short-circuit runs about 9 actions against about 15, but both bill 2 premium items, because the inbound trigger bills before the guard (derived). The same guard that saves 15 credits per lead on Make saves nothing on the meter here.</p>
+    <div class="callout">
+      On a per-execution meter you order your steps for clarity; on a per-step meter you order them for cost. Those are not always the same order.
+    </div>
+  </div>
+
+  <!-- §4.4 — the keystone -->
+  <div class="keystone">
+    <h3>4.4 · Resilience is the part of the build that has a meter on it</h3>
+    <p>On a per-step meter, each guard, error handler and alert module is billed on every run it executes. Make's measured numbers show it: a founder run with a live SMS attempt billed 19 operations, with the trigger and error-handler modules counted, against 1 execution for the whole of N1's route.</p>
+    <p>The same arithmetic explains, without being uncharitable about anyone, <b>why published automation work tends to be happy-path</b>: resilience is the part of the build that adds recurring line items and produces nothing visible when it works. That is the honest answer to a client who asks why the quote includes work they can't see.</p>
+    <p style="margin-bottom:0">It also reframes the n8n case. The better argument for self-hosting is not cost at volume but that <b>per-execution metering removes the financial disincentive to build properly</b>. That argument is measured for n8n and for Make's cost of guards; it is not a claim that the other platforms cannot be built resiliently.</p>
+  </div>
+
+  <div class="card">
+    <h3>4.5 · What is not in any of these numbers</h3>
+    <ul class="reqs">
+      <li><b>Model tokens.</b> Billed by the provider and not included.</li>
+      <li><b>Enrichment API calls.</b> The free tier used on n8n returned 429 on roughly 1 in 3 calls.</li>
+      <li><b>SMS.</b> A paid SMS provider was used on n8n and Make; none exists on Zapier and GoHighLevel as built (A2P 10DLC unregistered).</li>
+      <li><b>The VPS split and the operator's attention.</b> 100% of the VPS is attributed to N1 until other builds run on it, and the GoHighLevel telemetry sink is hosted on that same VPS.</li>
+      <li><b>Build time</b>, which is in §5 and which dominates the above for the first year.</li>
+      <li><b>The cost of being wrong.</b> Migration between these platforms is manual. GoHighLevel documents snapshots shared by link or invite and no per-workflow file export (found 2026-10-10), and Zapier's JSON export is limited to Team and Enterprise plans, which this build did not use.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 5 · COMPLEXITY ============ -->
+  <h2>5 · Complexity accounting<em>Cost is the easy half. Measured rows are marked; the rest are the builder's assessment and are labelled argued.</em></h2>
+
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr>
+        <th style="width:170px"></th>
+        <th class="p z"><i></i>Zapier</th>
+        <th class="p m"><i></i>Make</th>
+        <th class="p n"><i></i>n8n</th>
+        <th class="p g"><i></i>GoHighLevel</th>
+      </tr>
+      <tr><td class="k">Build time</td><td>— (7 to 8 calendar days)</td><td>— (4 to 5 calendar days)</td><td><b>About 28 h 44 m</b> tool-active (5 calendar days)</td><td>—</td></tr>
+      <tr><td class="k">Machine-readable export <i>(measured)</i></td><td><b class="no">None on the plan used</b> (export menu checked); JSON export is listed for Team and Enterprise plans</td><td>Blueprint JSON, 28,052 bytes</td><td>Workflow JSON, 59,260 bytes</td><td><b class="no">No per-workflow file export found</b> (snapshots and share links only); a hand-written manifest stands in</td></tr>
+      <tr><td class="k">Retry observed <i>(measured)</i></td><td>None built or surfaced</td><td>None observed (error handler then Resume; Repeat not used)</td><td>None observed (Retry On Fail off)</td><td>None observed</td></tr>
+      <tr><td class="k">Failure visibility <i>(measured)</i></td><td>Probes 1 and 2 only</td><td>Alert and Sheets row; top-level status SUCCESS</td><td>Silent before the fix; throws and alerts after it</td><td>Contained in the child workflow; parent shows executed; no alert</td></tr>
+      <tr><td class="k">Dedupe mechanism <i>(measured)</i></td><td>Two HubSpot lookups + Filter; race untested</td><td>Data Store search ×2 then write; race untested</td><td>Postgres <span class="inline">ON CONFLICT</span>, single statement</td><td>Stamped field tested by a branch; not atomic; failed until a stamp step was added</td></tr>
+      <tr><td class="k">Build friction <i>(recorded)</i></td><td>Step cap (32; UI says 30), Sub-Zap billing mismatch, CSP on the hooks host</td><td>Wrong Gmail connection, Data Store <span class="inline">.data.</span> prefix, auto-deactivate and queue drain</td><td>Publish state of the error workflow, Postgres parameter array, On-Error replacing <span class="inline">$json</span></td><td>Contactless runs, mapping from last sample only, non-idempotent Assign, branches never merge, re-entry off by default</td></tr>
+      <tr><td class="k">Maintenance surface <i>(recorded)</i></td><td>3-Zap topology, step budget, no version history</td><td>Connection brittleness, 1,000-op cap, silent deactivation</td><td>VPS, Docker, TLS, a single encryption key</td><td>4 workflows, 3 custom fields, usage billing with no meter, non-atomic guard, dependency on the n8n sink</td></tr>
+      <tr><td class="k">Skill floor, debuggability, lock-in, who can take it over <i>(argued)</i></td><td colspan="4" style="text-align:center"><span class="ph"><b>argued, not measured</b>These rows were judgements by the builder and were not tested; they are left off the table rather than presented as findings.</span></td></tr>
+    </table>
+    </div>
+  </div>
+
+  <h3>The two trade-offs to state plainly</h3>
+  <div class="card">
+    <p class="body"><b>Zapier's export gap is measured on the plan used, and it is worse than its retry gap.</b> On the Free and Professional plans a Zap exists only inside Zapier and the migration path is a person rebuilding it by reading it; Zapier lists JSON export of Zaps on Team and Enterprise plans, which were not tested. For a client whose operations depend on it, that is a more consequential property than any per-task price.</p>
+    <p class="body"><b>n8n's ownership advantage is also its liability.</b> The same sentence, <i>you own the server</i>, is the reason to choose it and the reason not to. The recommendation against n8n for a client with nobody to run it is <b>argued, not tested</b>, but the $5.35 invoice and the 59,260-byte export show what the ownership side of the trade looks like.</p>
+  </div>
+
+  <!-- ============ 6 · FINDINGS ============ -->
+  <h2>6 · Findings<em>Each is tagged: measured, derived, or reworded from the original specification because the captures narrowed it. If only three survive, they are 1, 3 and 4.</em></h2>
+
+  <div class="card">
+    <ol class="findings">
+      <li><b>The meter matters more than the price.</b> <i>Measured.</i> The same guard-halted input was 1 task, 4 credits, 1 execution and 2 premium items. A client comparing headline prices is comparing four different products.</li>
+      <li><b>Per-execution metering removes the cost of building properly.</b> <i>Measured.</i> On n8n the guard-halt and the full route are both one execution (#168 against #186); on Make the same guard measures 4 against 19 credits.</li>
+      <li><b>A downstream failure did not surface as a failed top-level run on any platform where probe 3 ran.</b> <i>Measured.</i> n8n before its fix: Succeeded, no alert, logged as routed. Make: status SUCCESS, with an alert only because an error handler was hand-built. GoHighLevel: the parent reports the handoff executed, the child shows Failed, no alert. Only n8n after the added assert, and Make because someone built the alert, produce a visible signal.</li>
+      <li><b>Step ceilings and plan limits changed the finished shape of two builds.</b> <i>Measured.</i> Zapier's 32-step cap removed SMS and enrichment and forced three Zaps. GoHighLevel's SMS was removed for A2P cost. Only n8n and Make shipped an SMS path to probe.</li>
+      <li><b>GoHighLevel's short-circuit saves actions but no meter cost.</b> <i>Derived.</i> About 9 against about 15 executed actions, 2 premium items on both: the inbound trigger bills before the guard.</li>
+      <li><b>GoHighLevel did not accept the nested input contract.</b> <i>Measured.</i> Nested <span class="inline">answers[]</span> was not unwrapped, runs were contactless until Create/Update Contact was added, and the spec rule applies: this is a failed part of the test.</li>
+      <li><b>Hold precision differs.</b> <i>Measured, one run each.</i> n8n's Wait resumed at 09:00:00.000 exactly; GoHighLevel released 4 min 26 s after its 08:00:00 schedule; Make queued a send time 9 h wrong (a bug).</li>
+      <li><b>The platform's own documentation can disagree with its meter.</b> <i>Measured.</i> A Zapier Sub-Zap billed +1 task against a documented 2 (unresolved). GoHighLevel's wallet ledger logged 45 premium items between 1 and 6 Oct 2026 (39 inbound webhook, 5 custom webhook, 1 Slack message), every one at $0 under a "Free Tier" label on the trial; the free tier's size is not shown.</li>
+      <li><b>The measured first-touch evidence does not rank GoHighLevel first.</b> <i>Measured.</i> n8n about 10.4 s excluding the hold; Make 2.3 to 2.6 s for the whole run; Zapier not measured; GoHighLevel measured only after hours (6 h designed hold plus about 4 min 28 s scheduler lag). No two of the four are comparable, so the original "fastest first touch" claim is dropped.</li>
+      <li><b>Instrumentation cost leaks into the benchmark.</b> G1's second premium item is the telemetry webhook, and first touch has to be read from the execution log rather than the telemetry row.</li>
+      <li><b>Zapier buys breadth, and pays in exit and, as far as it was probed, resilience.</b> <i>Reworded.</i> The export gap is measured on the plan used. The resilience claim rests on no retry being surfaced, with three of five probes not applicable. Speed was not measured and is dropped.</li>
+      <li><b>Make's failure handling is the best <i>observed</i> of the hosted three, with limits.</b> <i>Reworded.</i> Observed: per-module error handlers, Resume, Slack alerts, and a save-time guard on connections. Not observed: any retry or backoff. Also observed: an unhandled error silently deactivated the scenario.</li>
+      <li><b>Owning the platform is a different decision from owning the maintenance.</b> <i>Argued, with a measured $5.35 and export.</i> "Cheapest" depends on stated volume: at 100 executions a month n8n is $53.50 per 1,000.</li>
+      <li><b>GoHighLevel can charge you by accident, and that is the part of the original finding the evidence keeps.</b> <i>Reworded.</i> Supported by the no-free-tier plan and the trial conversion; "fewest moving parts" is not supported by the captures.</li>
+    </ol>
+  </div>
+
+<!-- ============ 7 · RECOMMENDATIONS ============ -->
+  <h2>7 · Recommendation matrix by client type<em>Each row commits to one platform, names what is given up, and names the condition that would change the answer. <b>The matrix is argued, not demonstrated</b>: it rests on the four spine builds above, and the GoHighLevel rows rest on SMS and missed-call text-back that were neither built nor run.</em></h2>
+
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr><th style="width:150px">Client type</th><th style="width:110px">Recommend</th><th>Why</th><th>What they give up</th><th>Revisit when</th></tr>
+      <tr>
+        <td><b>SMB-motion B2B SaaS vendor</b><br><span style="font-size:12.4px;color:var(--muted)">~30 staff, sub-$500 ACV, self-serve + inbound demos</span></td>
+        <td><b style="color:var(--makt)">Make</b><span style="font-size:12.3px;color:var(--muted)">, with n8n if there's an engineer to spare</span></td>
+        <td>The work is data integration between systems the company already owns: product DB, Stripe, CRM. Needs real failure handling because billing and provisioning are involved, and per-module error handlers at credit prices are the affordable way to get it (backoff was not exercised). GoHighLevel would mean moving the customer record out of the product's own database, which is backwards for a software company.</td>
+        <td>Expression-heavy logic gets harder to hand over than code would</td>
+        <td>An engineer has capacity to own a server, or credit consumption crosses the point where self-hosting pays for the attention</td>
+      </tr>
+      <tr>
+        <td><b>Freight brokerage or 3PL</b><br><span style="font-size:12.4px;color:var(--muted)">25–60 staff, dispatch-led, phone and SMS heavy</span></td>
+        <td><b style="color:var(--ghlt)">GoHighLevel</b></td>
+        <td>The work happens in the conversation, not in the data. Speed-to-quote is the competitive edge, missed calls are the leak, and SMS is the channel. On the other three, all of that would be an SMS-provider integration bolted to a CRM integration; here it is the platform.</td>
+        <td>Data model ownership, and a genuinely difficult exit</td>
+        <td>Quote logic outgrows workflow builders, or they hire someone technical</td>
+      </tr>
+      <tr>
+        <td><b>Non-technical solo operator or micro-business</b></td>
+        <td><b style="color:var(--zapt)">Zapier</b><span style="font-size:12.3px;color:var(--muted)">, deliberately</span></td>
+        <td>Lowest skill floor, largest app catalogue, most forgiving failure surface for someone who will be reading the error email themselves. The resilience gap is real and mostly doesn't matter at this scale.</td>
+        <td>Backoff, and any export path</td>
+        <td>Volume makes the per-task bill visible, or an automation becomes load-bearing</td>
+      </tr>
+      <tr>
+        <td><b>Agency reselling automation under its own brand</b></td>
+        <td><b style="color:var(--ghlt)">GoHighLevel</b><span style="font-size:12.3px;color:var(--muted)">, with eyes open</span></td>
+        <td>Sub-accounts, white-label and rebilling are the actual product requirement, and no other platform in the set has them.</td>
+        <td>AI add-on pricing per sub-account (not measured or re-verified for this page). Model it before pricing client packages</td>
+        <td>The add-on economics stop clearing at the intended markup</td>
+      </tr>
+      <tr>
+        <td><b>Technical team with data-residency or compliance constraints</b></td>
+        <td><b style="color:var(--n8nt)">n8n self-hosted</b></td>
+        <td>The only option that keeps data on infrastructure the client controls. Everything else is a vendor's cloud, and no amount of contract language changes that.</td>
+        <td>Vendor-managed uptime, and the certification paperwork a managed vendor would have provided</td>
+        <td><b>Never, on this criterion.</b> It's the constraint, not a preference</td>
+      </tr>
+      <tr>
+        <td><b>High-volume, heavily-branching operations</b><br><span style="font-size:12.4px;color:var(--muted)">10k+ runs/month</span></td>
+        <td><b style="color:var(--n8nt)">n8n self-hosted</b><span style="font-size:12.3px;color:var(--muted)">, otherwise Make</span></td>
+        <td>Per-execution metering means complexity is free; on a per-step meter, both volume and branching multiply. <b>On the measured meters the gap shows up as 1 execution against 4 to 19 credits per lead.</b></td>
+        <td>The maintenance burden, which grows with how load-bearing the system becomes</td>
+        <td>Volume drops, or the team loses the person who runs it</td>
+      </tr>
+      <tr>
+        <td><b>Comms-heavy local services</b><br><span style="font-size:12.4px;color:var(--muted)">bookings, missed calls, reminders</span></td>
+        <td><b style="color:var(--ghlt)">GoHighLevel</b></td>
+        <td>Missed-call text-back, reminder ladders and two-way SMS with an owned contact record, natively (argued: G1·03 had zero enrollments and SMS was removed from the build). Assembling this from parts on the other three costs more and works less well.</td>
+        <td>Exportability, and per-sub-account AI pricing</td>
+        <td>The business's centre of gravity moves from conversations to systems integration</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="thesis">
+    <b>Choose by where the work happens.</b> If it happens in the conversation, buy the platform that owns the conversation. If it happens in the data, buy the platform that gets out of the way, then decide separately whether anyone is there to run it.
+  </div>
+
+  <!-- ============ 8 · ECOSYSTEM ============ -->
+  <h2>8 · The finding that only an ecosystem produces</h2>
+
+  <div class="card">
+    <p class="body">The client these four builds were written for sells software to a second kind of business: freight brokerages and 3PLs. They are in the same industry, adjacent in the same supply chain, and <b>they need different automation stacks, and the reason is structural.</b></p>
+
+    <p class="body"><b>The software vendor's leads are digital-first and its automation's centre of gravity is data.</b> A trial signup is a database row before it is a person. The work is enrichment, scoring, deduplication against an existing account table, provisioning into a product tenant, and keeping entitlements aligned with billing. Volume is high, per-lead urgency is moderate, and almost every system involved is one the company already owns and wants to keep owning. <b>That points at Make or n8n.</b></p>
+
+    <p class="body"><b>The brokerage's leads are conversation-first and its automation's centre of gravity is the channel.</b> A quote request is a phone call from a dispatcher who will call the next broker in ninety seconds if nobody picks up. The work is answering, capturing, routing to whoever covers that lane, and escalating when the SLA burns down. Volume is lower, per-lead urgency is extreme, and the systems involved are the phone, the text message and the calendar. <b>That points at GoHighLevel.</b></p>
+
+    <div class="thesis">
+      The software vendor and its own customer needed different systems because <b>one company's automation lives in its database and the other's lives in its phone.</b> Everything else, including the cost comparison above, follows from that.
+    </div>
+
+    <p class="body" style="font-size:13.8px"><b>Status of this section:</b> the argument currently rests on the four spine builds plus the specification for the second client type. It is an argued conclusion, not a demonstrated one. If the optional second-client build lands (a quote-request router with an SLA timer), this section carries a demonstrated comparison instead. <b>Saying which of the two it is, is part of the argument.</b></p>
+  </div>
+
+  <!-- ============ 9 · WHAT WOULD CHANGE THIS ============ -->
+  <h2>9 · What would change these recommendations<em>Each of these, if it moved, would change a recommendation.</em></h2>
+
+  <div class="card">
+    <ul class="reqs">
+      <li><b>Zapier ships native retry with backoff</b> (re-check on the day). Finding 11 weakens and the solo-operator recommendation gets stronger.</li>
+      <li><b>Make's free-tier scenario ceiling moves.</b> Changes how it's evaluated, not how it performs.</li>
+      <li><b>GoHighLevel ships a per-workflow export path</b> (none was found in this build). The lock-in objection largely dissolves and three rows of the matrix get easier to recommend.</li>
+      <li><b>n8n Cloud pricing moves.</b> Cloud Starter listed at €20/month for 2,500 executions on 2026-10-05; a cheaper or free tier would weaken the maintenance objection.</li>
+      
+      <li><b>Volume assumptions change.</b> Every blended number would be a function of a lead mix, and none was measured. The formula in §4.1 lets a client re-run it with their own mix.</li>
+    </ul>
+
+    <div class="req">
+      <b>One limitation, stated plainly and not buried.</b> This compares four implementations built by one person over four weeks, learning three of the four platforms at production depth for the first time in that period. <b>Build times reflect that.</b> A Make specialist would build the Make version faster. What this comparison does have that vendor-neutral listicles don't is that <b>the same person built all four, to the same specification, and broke all four the same way.</b>
+    </div>
+  </div>
+
+  <!-- ============ 10 · EVIDENCE ============ -->
+  <h2>10 · Evidence index<em>Every claim in §2 and §5 resolves to an artefact, or is marked as not on disk.</em></h2>
+
+  <div class="card" style="padding:22px 24px">
+    <div class="scroll">
+    <table>
+      <tr><th>Claim on this page</th><th>Artefact</th><th>Status</th></tr>
+      <tr><td>Four implementations, one specification</td><td>N1 canvas, M1 blueprint export, Z1 canvas, G1 canvas set</td><td>Captured; G1·01 canvases predate two later additions</td></tr>
+      <tr><td>Malformed payload caught</td><td>Run screenshots and logs on all four</td><td>Captured</td></tr>
+      <tr><td>Duplicate caught</td><td>N1 and Z1 run screenshots; M1 verified in capture text and Data Store snapshot; G1 logs</td><td>M1 screenshot absent; G1 Dup One, Dup Three and Fail One execution-log screenshots captured 2026-10-06</td></tr>
+      <tr><td>Timeout behaviour differs</td><td>N1 3a run; M1 3a/3b described; G1 404 log</td><td>Partial; M1 has no screenshot on disk</td></tr>
+      <tr><td>Meter per outcome</td><td>The four capture files</td><td>Captured; gaps shown as em-dashes</td></tr>
+      <tr><td>Time to first touch</td><td>N1 #219 text, M1 duration text, G1 probe-5 hold-and-release logs</td><td>Captured; Zapier not measured</td></tr>
+      <tr><td>Export gap is real, on the plans used</td><td>N1 and M1 export files, the G1 export manifest, and the Zapier absence on the plan used (Zapier lists JSON export on Team and Enterprise plans, read 2026-10-10)</td><td>Captured</td></tr>
+      <tr><td>GoHighLevel business-hours rule</td><td>Four B5 configuration screenshots</td><td>Captured</td></tr>
+    </table>
+    </div>
+    <div class="callout">
+      <b>The absent Zapier export on the plan used is itself evidence</b>, and so is the GoHighLevel absence of a per-workflow file export. On the plans used, two platforms produce a machine-readable file; two do not.
+    </div>
+  </div>
+
+  <div class="req">
+    <b>Disclosed deviations, in one place.</b> Zapier: parent never run live; probes 3 to 5 not applicable; SMS and enrichment removed. GoHighLevel: SMS removed; flat payloads; no enrichment; probe 3 email variant and the 40-day duplicate not run; trial account, so no wallet figure; prose referral: one run captured 5 Oct 2026 (halt for review; contact step errored because no mapped field had a value). Make: probe 3c not inducible. All four: probe 3 hit a different target on each platform, and no lead mix was measured. All builds are demonstration systems; N1 is the live self-hosted exception.
+  </div>
+
+  <div class="foot">
+    <b>Four platform build sets feed this page:</b> Scenario &amp; Build Guide for <b>Zapier</b>, <b>Make</b>, <b>n8n</b> and <b>GoHighLevel</b>. Each contains the full spine build (Z1, M1, N1, G1) with its sixteen capture fields.
+    <p style="margin:12px 0 0"><b>Published:</b> 13 October 2026, from measured captures taken up to 5 October 2026. <b>Vendor facts verified 5 October 2026</b> against each vendor's pricing page: Zapier Free and Professional plans and overage behaviour, Make Free and Core, n8n Cloud tiers, and GoHighLevel plans and the 14-day trial. Re-read 13 October 2026 with no price changes (Zapier Free and Professional, Make Free and Core at $12 for 10,000 credits, n8n Starter €20 and Pro €50 billed annually, GoHighLevel Unlimited $297 and the 14-day trial). Not re-verified: Make and n8n limit behaviour and agent add-on pricing.</p>
+    <p style="margin:10px 0 0"><span class="verify">VERIFY-DAY-OF</span> <b>Pricing on this page has a shelf life measured in weeks.</b> Every dollar figure carries the date it was read; where a vendor's terms have moved since, the meter row still holds and the price row does not.</p>
+    <p style="margin:10px 0 0">Laneframe is a composite client. The builds are real demonstration systems, not client engagements, with one exception: the n8n spine build is a live self-hosted system and carries observed rather than staged numbers.</p>
+  </div>
+
+</div>
