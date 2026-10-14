@@ -13,15 +13,6 @@ const CASES = [
   },
   {
     n: "02",
-    title: "AI-Written Marketing Automation Plans",
-    body: "A process that turns a recorded discovery call into a complete GoHighLevel marketing plan and carries the work through to delivery, with the same labels every time and the client’s own brand colours. Tested end to end on one test client. No live client results yet.",
-    tags: ["GoHighLevel", "AI Content Pipeline"],
-    status: "Process write-up · One test client",
-    href: "/case-studies/ai-strategy-pipeline",
-    linkLabel: "Read how it works →",
-  },
-  {
-    n: "03",
     title: "AI Lead Research and First Emails That Never Send Themselves",
     body: "A new lead comes in, the workflow looks up the company, scores it and writes a short first email. Nothing is sent. Each draft waits in HubSpot as a task for a person to review. Built and tested on fictional property-management leads: 112 drafts, no invented facts found.",
     tags: ["n8n", "HubSpot", "AI Drafting"],
@@ -41,11 +32,11 @@ export default function CaseStudies() {
           Additional Case Studies
         </h2>
         <p className="mt-4 text-ink-muted">
-          A closer look at three recent builds, with more on the way.
+          A closer look at two recent builds, with more on the way.
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
         {CASES.map((c, i) => (
           <Reveal key={c.n} delay={i * 100}>
             <GlowCard className="flex h-full flex-col p-6">
