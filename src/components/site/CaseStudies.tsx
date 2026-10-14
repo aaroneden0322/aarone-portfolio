@@ -5,9 +5,11 @@ const CASES = [
   {
     n: "01",
     title: "AI Customer-Service Assistant That Checks With a Person First",
-    body: "An AI assistant that answers only from your own help documents and says “I don’t know, let me get someone” when it isn’t sure. A person approves every reply before a customer sees it. I tested it with 12 tricky questions, some designed to tempt it into a confident wrong answer.",
-    tags: ["AI Agents", "Human-in-the-Loop"],
-    status: "Write-up coming",
+    body: "An AI assistant that answers from a real knowledge base and passes anything it isn’t sure about to a person. A person approves every reply before a customer sees it. I tested it with 12 test questions and by deliberately breaking one of its connections. Built for a sample business.",
+    tags: ["AI Agents", "Human-in-the-Loop", "Make"],
+    status: "Complete · Sample business",
+    href: "/laneframe/make#m3",
+    linkLabel: "See the build →",
   },
   {
     n: "02",
@@ -71,7 +73,7 @@ export default function CaseStudies() {
                 href={"href" in c && c.href ? c.href : "#contact"}
                 className="mt-3 text-sm font-medium text-circuit hover:underline"
               >
-                View case study →
+                {"linkLabel" in c && c.linkLabel ? c.linkLabel : "View case study →"}
               </a>
             </GlowCard>
           </Reveal>
