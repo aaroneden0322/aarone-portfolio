@@ -65,7 +65,11 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
         </section>
 
         {data.builds.map((build, i) => (
-          <section key={build.id} className="mx-auto max-w-5xl px-6 py-8">
+          <section
+            key={build.id}
+            id={build.id.toLowerCase()}
+            className="mx-auto max-w-5xl scroll-mt-24 px-6 py-8"
+          >
             <Reveal delay={i * 60}>
               <GlowCard className="p-6 md:p-10">
                 <div className="flex flex-wrap items-center justify-between gap-3">
