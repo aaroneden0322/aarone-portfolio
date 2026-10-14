@@ -18,10 +18,11 @@ const CASES = [
   },
   {
     n: "03",
-    title: "More Case Studies Coming Soon",
-    body: "This spot is reserved for the next build. Get in touch if you'd like to be the one who fills it.",
-    tags: [] as string[],
-    status: null,
+    title: "AI Lead Research and First Emails That Never Send Themselves",
+    body: "A new lead comes in, the workflow looks up the company, scores it and writes a short first email. Nothing is sent. Each draft waits in HubSpot as a task for a person to review. Built and tested on fictional property-management leads: 112 drafts, no invented facts found.",
+    tags: ["n8n", "HubSpot", "AI Drafting"],
+    status: "MOCK DATA · Demo build",
+    href: "/case-studies/lead-enrichment",
   },
 ];
 
@@ -36,7 +37,7 @@ export default function CaseStudies() {
           Additional Case Studies
         </h2>
         <p className="mt-4 text-ink-muted">
-          A closer look at two recent builds, with more on the way.
+          A closer look at three recent builds, with more on the way.
         </p>
       </Reveal>
 
@@ -67,7 +68,7 @@ export default function CaseStudies() {
                 </p>
               )}
               <a
-                href="#contact"
+                href={"href" in c && c.href ? c.href : "#contact"}
                 className="mt-3 text-sm font-medium text-circuit hover:underline"
               >
                 View case study →
