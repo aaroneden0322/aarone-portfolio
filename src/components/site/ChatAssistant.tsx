@@ -44,25 +44,38 @@ const MAX_CHARS = 500;
 
 const OPENING =
   "I'm an AI assistant on Aarone Den Patayan's site. Tell me about a task and I'll give you an honest read on whether it's worth automating, or ask me what he has built. Please keep passwords and customer data out of the chat.";
+const STARTERS = [
+  "Is my task worth automating?",
+  "What has Aarone built?",
+  "How do I get in touch?",
+];
 const ERROR_TEXT =
   "Something went wrong on my side. Please try again, or use the contact form and Aarone will reply within 24 hours.";
 
 function linkify(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
-  const re = /https:\/\/www\.adautoteam\.top[^\s)]*/g;
+  const re = /https:\/\/(?:www\.adautoteam\.top|cal\.com\/aarone-den-patayan-zyaccx)[^\s)]*/g;
   let last = 0;
   let m: RegExpExecArray | null;
   let i = 0;
   while ((m = re.exec(text))) {
     const url = m[0].replace(/[.,;:!?]+$/, "");
     if (m.index > last) parts.push(text.slice(last, m.index));
+    const booking = url.startsWith("https://cal.com/");
+    const path = url.replace("https://www.adautoteam.top", "");
+    const label = booking
+      ? "book a call"
+      : path === "/#contact"
+        ? "contact form"
+        : path || "adautoteam.top";
     parts.push(
       <a
         key={`l${i++}`}
         href={url}
+        {...(booking ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         className="font-medium text-circuit underline underline-offset-2 hover:opacity-80"
       >
-        {url.replace("https://www.adautoteam.top", "") || "adautoteam.top"}
+        {label}
       </a>
     );
     last = m.index + url.length;
@@ -253,13 +266,13 @@ export default function ChatAssistant() {
     });
   }
 
-  async function send(e?: FormEvent) {
+  async function send(e?: FormEvent, override?: string) {
     e?.preventDefault();
-    const text = input.trim();
+    const text = (override ?? input).trim();
     if (!text || busy || ended) return;
     const next: Msg[] = [...msgs, { role: "user", text }];
     setMsgs(next);
-    setInput("");
+    if (override === undefined) setInput("");
     setBusy(true);
 
     let finalMsgs = next;
@@ -320,6 +333,19 @@ export default function ChatAssistant() {
     } else {
       persist(finalMsgs, finalEnded);
     }
+    requestAnimationFrame(() => inputRef.current?.focus());
+  }
+
+  function startNewChat() {
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+    sessionRef.current = { id: "", token: "" };
+    setMsgs([{ role: "assistant", text: OPENING }]);
+    setEnded(false);
+    setInput("");
     requestAnimationFrame(() => inputRef.current?.focus());
   }
 
@@ -425,6 +451,20 @@ export default function ChatAssistant() {
                 </div>
               </div>
             ))}
+            {msgs.length === 1 && !busy && !ended && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {STARTERS.map((q) => (
+                  <button
+                    key={q}
+                    type="button"
+                    onClick={() => void send(undefined, q)}
+                    className="rounded-full border border-border px-3 py-1.5 text-xs font-medium text-ink hover:border-circuit hover:text-circuit focus-visible:outline focus-visible:outline-2 focus-visible:outline-circuit"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
             {busy && (
               <div className="flex justify-start" role="status" aria-label="The assistant is typing">
                 <div className="rounded-2xl border border-border bg-surface/5 px-3.5 py-2.5 text-ink-muted">
@@ -446,7 +486,15 @@ export default function ChatAssistant() {
               >
                 contact form
               </a>{" "}
-              is the best next step.
+              is the best next step. Or{" "}
+              <button
+                type="button"
+                onClick={startNewChat}
+                className="font-medium text-circuit underline underline-offset-2"
+              >
+                start a new chat
+              </button>
+              .
             </div>
           ) : (
             <form onSubmit={send} className="border-t border-border px-3 py-3">
@@ -486,7 +534,17 @@ export default function ChatAssistant() {
                     </>
                   )}
                 </span>
-                {input.length > 400 && <span>{input.length}/{MAX_CHARS}</span>}
+                {input.length >= MAX_CHARS ? (
+                  <span className="font-medium text-ink" role="status">
+                    Limit reached ({MAX_CHARS}). Shorten it or send in parts.
+                  </span>
+                ) : (
+                  input.length > 400 && (
+                    <span>
+                      {input.length}/{MAX_CHARS}
+                    </span>
+                  )
+                )}
               </div>
             </form>
           )}
