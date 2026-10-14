@@ -54,32 +54,9 @@ export default function StrategyPipelinePage() {
           <Reveal>
             <GlowCard className="p-6 md:p-10">
               <h2 className="font-display text-2xl font-bold text-ink md:text-3xl">
-                The chain of prompts
-              </h2>
-              <p className="mt-3 max-w-3xl text-sm text-ink-muted">
-                {D.stagesIntro}
-              </p>
-              <ol className="mt-6 grid gap-4 md:grid-cols-3">
-                {D.stages.map((s) => (
-                  <li
-                    key={s.id}
-                    className="rounded-xl border border-circuit/25 bg-circuit/[0.04] p-5"
-                  >
-                    <p className="text-xs font-semibold tracking-[0.15em] text-ink-muted">
-                      PROMPT {s.id}
-                    </p>
-                    <p className="mt-1 font-display text-sm font-semibold text-ink">
-                      {s.title}
-                    </p>
-                    <p className="mt-2 text-sm text-ink-muted">{s.body}</p>
-                  </li>
-                ))}
-              </ol>
-
-              <h3 className="mt-10 font-display text-lg font-semibold text-ink">
                 What stays the same every time
-              </h3>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
+              </h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {D.rules.map((r) => (
                   <div
                     key={r.headline}
@@ -92,10 +69,6 @@ export default function StrategyPipelinePage() {
                   </div>
                 ))}
               </div>
-
-              <p className="mt-6 max-w-3xl text-sm text-ink-muted">
-                {D.afterPlan}
-              </p>
             </GlowCard>
           </Reveal>
         </section>

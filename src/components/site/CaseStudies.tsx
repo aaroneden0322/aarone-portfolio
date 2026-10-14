@@ -14,7 +14,7 @@ const CASES = [
   {
     n: "02",
     title: "AI-Written Marketing Automation Plans",
-    body: "A chain of prompts that turns a discovery call into a complete GoHighLevel marketing plan, with the same labels every time and the client’s own brand colours. Tested end to end on one test client. No live client results yet.",
+    body: "A process that turns a recorded discovery call into a complete GoHighLevel marketing plan and carries the work through to delivery, with the same labels every time and the client’s own brand colours. Tested end to end on one test client. No live client results yet.",
     tags: ["GoHighLevel", "AI Content Pipeline"],
     status: "Process write-up · One test client",
     href: "/case-studies/ai-strategy-pipeline",

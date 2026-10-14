@@ -5,7 +5,7 @@ export const PIPELINE = {
   eyebrow: "CASE STUDY · PROCESS WRITE-UP",
   title: "AI-written marketing automation plans, built in stages",
   tagline:
-    "A set of prompts that turns a discovery call into a complete GoHighLevel strategy document, with the same labels every time and the client's own brand colours.",
+    "A process that turns the recording of a discovery call into a complete GoHighLevel strategy document, then carries the work through to delivery. The labels are the same every time and the styling uses the client's own brand colours.",
   why: [
     {
       label: "The problem",
@@ -20,23 +20,13 @@ export const PIPELINE = {
     {
       label: "The fix",
       detail:
-        "Split the work into a chain of prompts, cut by how data flows between sections instead of by section number, so each prompt gets what it depends on.",
+        "Split the work into smaller steps, organised by how data flows between the sections instead of by section number, so each step gets what it depends on.",
     },
-  ],
-  stagesIntro:
-    "The strategy document has ten sections. Several depend on earlier ones, so I mapped those dependencies first and grouped the sections around them.",
-  stages: [
-    { id: "A", title: "Classify the business", body: "Phase 0 classification, done before any section is written." },
-    { id: "B", title: "Sections 2 to 4", body: "The first block of the document." },
-    { id: "C", title: "Sections 5 and 6", body: "The next block of the document." },
-    { id: "D", title: "Sections 7 to 9", body: "Includes scope, budget, phasing and the measurable goals." },
-    { id: "E", title: "Sections 1 and 10, plus the bridge", body: "The opening and closing sections, and the handoff into the build." },
-    { id: "F", title: "Assembly and validation", body: "Puts the pieces together and checks the result." },
   ],
   rules: [
     {
       headline: "Locked data moves in a structured handoff",
-      body: "Decisions made early are passed to later prompts as structured data, so a later prompt reads them instead of working them out again. Every prompt in the chain uses the same schema version.",
+      body: "Decisions made early are passed forward as structured data, so later steps read them instead of working them out again.",
     },
     {
       headline: "Client colours on every document",
@@ -44,15 +34,13 @@ export const PIPELINE = {
     },
     {
       headline: "Tags follow a locked rule",
-      body: "The GoHighLevel tagging convention is written into the build-stage prompt as a locked rule. It is applied the same way on every client instead of being invented fresh each time, which keeps labels consistent.",
+      body: "The GoHighLevel tagging convention is written into the build step as a locked rule. It is applied the same way on every client instead of being invented fresh each time, which keeps labels consistent.",
     },
     {
       headline: "Every version can be traced",
-      body: "Each prompt has a version number and its own changelog, and the current files are checked by checksum. I can say exactly which version produced a document.",
+      body: "Each part of the process has a version number and its own changelog, and the current files are checked by checksum. I can say exactly which version produced a document.",
     },
   ],
-  afterPlan:
-    "After the plan, four playbook prompts take over: one extracts the key details, one writes the copy assets, one plans the build and its analytics, and one assembles the result.",
   testing: [
     "The system has been through about 76 working sessions of testing and revision.",
     "End-to-end runs used one test client, and a validation pass was added after those runs.",
@@ -62,6 +50,6 @@ export const PIPELINE = {
     "Only one test client so far, so I do not yet know how well it handles a very different kind of business. A second test client is on my list.",
     "There are no live client results yet.",
     "I have not measured how often a generated plan needs editing before it is ready.",
-    "It is a long chain. Running it takes several steps, and it is built for me or a trained operator, not for a client to run alone.",
+    "It has several steps and is built for me to run, not for a client to run alone.",
   ],
 };
