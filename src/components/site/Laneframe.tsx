@@ -33,11 +33,29 @@ const PLATFORMS = [
   },
 ];
 
+const RESULTS = [
+  {
+    value: "About 10 seconds",
+    label: "From a new lead to the first text message",
+    body: "Measured on the n8n build. The whole run on Make took under 3 seconds.",
+  },
+  {
+    value: "12 of 12",
+    label: "Trick questions handled correctly",
+    body: "The AI helper on Make got all 12, with a second try on two of them. The Zapier version got 8 of 12: it answered four questions it should have passed to a person.",
+  },
+  {
+    value: "$5.35 a month",
+    label: "To run the n8n version",
+    body: "That is the cost of its own server, backup included. It stays flat as volume grows.",
+  },
+];
+
 const STATS = [
-  { value: "4", label: "TOOLS, SAME JOB" },
-  { value: "5", label: "BREAK TESTS, RUN THE SAME WAY ON EACH" },
-  { value: "8", label: "REQUIREMENTS EVERY BUILD MUST MEET" },
-  { value: "16", label: "DETAILS RECORDED FOR EVERY BUILD" },
+  { value: "4", label: "TOOLS COMPARED" },
+  { value: "5", label: "BREAK TESTS ON EACH" },
+  { value: "8", label: "REQUIREMENTS PER BUILD" },
+  { value: "16", label: "DETAILS RECORDED PER BUILD" },
 ];
 
 export default function Laneframe() {
@@ -50,35 +68,68 @@ export default function Laneframe() {
       <div className="relative">
         <Reveal>
           <p className="font-display text-sm font-semibold tracking-[0.15em] text-circuit">
-            FEATURED CASE STUDY
+            FEATURED BUILD · SAMPLE BUSINESS, NOT A REAL CLIENT
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
-            Laneframe: One Job, Built Four Ways
+          <h2 className="mt-3 max-w-4xl font-display text-3xl font-bold text-ink md:text-4xl">
+            Leads answered in seconds. Failed payments chased. An AI that asks a
+            person when it isn&rsquo;t sure.
           </h2>
           <p className="mt-4 max-w-3xl text-ink-muted">
-            I built the same lead-handling system on four popular automation
-            tools for a realistic sample business (not a real client), then
-            tested each one the same way. You can see what each tool does
-            well and where it struggles.
+            I built three systems for a sample software company. The first
+            sorts new leads and books demos, the second follows up failed card
+            payments, and the third is an AI helper that answers customer
+            questions from the help docs and hands anything else to a person. I
+            then built the whole set on four automation tools and tried to
+            break every version the same way.
           </p>
+        </Reveal>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="rounded-full border border-circuit/40 px-4 py-1.5 text-xs font-semibold text-circuit">
-              All four built
-            </span>
-            <span className="text-sm text-ink-muted">
-              All four tool builds are finished. GoHighLevel has one build on its page, the AI qualifier.
-            </span>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {RESULTS.map((r, i) => (
+            <Reveal key={r.value} delay={i * 80}>
+              <GlowCard className="h-full p-6">
+                <p className="font-display text-3xl font-bold text-ink">
+                  {r.value}
+                </p>
+                <p className="mt-1 text-sm font-semibold text-circuit">
+                  {r.label}
+                </p>
+                <p className="mt-3 text-sm text-ink-muted">{r.body}</p>
+              </GlowCard>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a
+              href="/laneframe/n8n"
+              className="btn-glow rounded-full bg-circuit px-5 py-2 text-sm font-semibold text-accent-ink hover:opacity-90"
+            >
+              See the n8n build
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full border border-circuit/40 px-5 py-2 text-sm font-semibold text-circuit hover:bg-circuit/10"
+            >
+              Fix My Bottleneck
+            </a>
+            <a
+              href="/laneframe/capstone"
+              className="text-sm font-medium text-circuit hover:underline"
+            >
+              What building it four times taught me →
+            </a>
           </div>
 
-          <a
-            href="/laneframe/capstone"
-            className="mt-4 inline-block text-sm font-medium text-circuit hover:underline"
-          >
-            Read the four-way comparison →
-          </a>
-
-          <p className="mt-4 max-w-3xl text-xs text-ink-muted/80">
+          <h3 className="mt-14 font-display text-xl font-semibold text-ink">
+            The proof underneath: one job, four tools
+          </h3>
+          <p className="mt-2 max-w-3xl text-ink-muted">
+            Building it four times shows what each tool does well and where it
+            struggles, so you can pick the right one for your business.
+          </p>
+          <p className="mt-3 max-w-3xl text-xs text-ink-muted/80">
             How I count: every number here was measured in a real test or
             comes with the formula that produced it. If I didn&rsquo;t
             measure something, I say so.
