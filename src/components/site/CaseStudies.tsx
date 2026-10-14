@@ -19,6 +19,15 @@ const CASES = [
     status: "MOCK DATA · Demo build",
     href: "/case-studies/lead-enrichment",
   },
+  {
+    n: "03",
+    title: "More Case Studies Coming Soon",
+    body: "This spot is reserved for the next build. Get in touch if you’d like to be the one who fills it.",
+    tags: [] as string[],
+    status: null as string | null,
+    href: "#contact",
+    linkLabel: "Get in touch →",
+  },
 ];
 
 export default function CaseStudies() {
@@ -36,7 +45,7 @@ export default function CaseStudies() {
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
         {CASES.map((c, i) => (
           <Reveal key={c.n} delay={i * 100}>
             <GlowCard className="flex h-full flex-col p-6">
