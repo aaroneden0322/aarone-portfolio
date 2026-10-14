@@ -43,8 +43,9 @@ const STORAGE_KEY = "assistant-chat-v1";
 const MAX_CHARS = 500;
 
 const OPENING =
-  "I'm an AI assistant on Aarone Den Patayan's site. I can tell you what he has built and help you work out whether a task is worth automating. I can't give prices or promise anything on his behalf. Please don't share passwords or customer data.";
-const ERROR_TEXT = "Something went wrong on my side. Try again, or use the contact form.";
+  "I'm an AI assistant on Aarone Den Patayan's site. Tell me about a task and I'll give you an honest read on whether it's worth automating, or ask me what he has built. Please keep passwords and customer data out of the chat.";
+const ERROR_TEXT =
+  "Something went wrong on my side. Please try again, or use the contact form and Aarone will reply within 24 hours.";
 
 function linkify(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
@@ -437,15 +438,15 @@ export default function ChatAssistant() {
 
           {ended ? (
             <div className="border-t border-border px-4 py-3 text-sm text-ink-muted">
-              This chat has ended.{" "}
+              We&apos;ve reached the end of this chat. Aarone would still like to hear from you, so the{" "}
               <a
                 href="/#contact"
                 onClick={() => setOpen(false)}
                 className="font-medium text-circuit underline underline-offset-2"
               >
-                Use the contact form
+                contact form
               </a>{" "}
-              to reach Aarone.
+              is the best next step.
             </div>
           ) : (
             <form onSubmit={send} className="border-t border-border px-3 py-3">
