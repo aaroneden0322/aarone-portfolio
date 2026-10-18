@@ -1,6 +1,7 @@
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
 import WorkflowBackground from "./WorkflowBackground";
+import LaneframeLoop from "./LaneframeLoop";
 
 const PLATFORMS = [
   {
@@ -82,6 +83,10 @@ export default function Laneframe() {
             then built the whole set on four automation tools and tried to
             break every version the same way.
           </p>
+        </Reveal>
+
+        <Reveal>
+          <LaneframeLoop />
         </Reveal>
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
