@@ -227,3 +227,8 @@ body {
   .chat-nudge .bot-eye,
   .chat-nudge .bot-ant { animation: none; }
 }
+
+/* Laneframe loop video: show the MP4 that matches the active theme. */
+.lf-loop-light { display: none; }
+:root[data-theme="light"] .lf-loop-dark { display: none; }
+:root[data-theme="light"] .lf-loop-light { display: block; }
