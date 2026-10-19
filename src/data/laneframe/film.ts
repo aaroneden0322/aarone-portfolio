@@ -5,7 +5,7 @@ export const FILM_CHAPTERS: FilmChapter[] = [
   { name: "The job", start: 18.7, proof: [{ label: "The scenario", href: "#s1" }] },
   { name: "Four tools", start: 44.4, proof: [{ label: "The four builds", href: "#s2" }] },
   { name: "Break tests", start: 71.1, proof: [{ label: "The break test results", href: "#probes" }] },
-  { name: "Results", start: 104.5, proof: [{ label: "The measured findings", href: "#s6" }, { label: "The cost figures", href: "#s4" }] },
+  { name: "Results", start: 104.5, proof: [{ label: "The measured findings", href: "#s6" }, { label: "The cost figures", href: "#s4" }, { label: "The 12 trick questions (Make page)", href: "/laneframe/make#m3" }] },
   { name: "Recap", start: 147.3, proof: [{ label: "The recommendations", href: "#s7" }] },
 ];
 export const FILM_LINES = [
