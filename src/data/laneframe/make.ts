@@ -142,10 +142,10 @@ const make: PlatformPageData = {
             "Deleting one of the agent's three tool connections blocked the entire module for every incoming message, including ones that never needed that tool — confirmed by sending both a calendar-relevant and a calendar-irrelevant question and watching both get identically refused before the model ever ran.",
         },
         {
-          headline: "12 of 12 test questions handled correctly, 2 on a second try",
-          plain: "Of the 12 test questions, 10 were handled correctly the first time and 2 needed a second try. The score is best of two on those 2, not first try clean. A person approves every reply, so a wrong first answer never reaches a customer.",
+          headline: "12 of 12 test questions handled correctly, 1 on a second try",
+          plain: "Of the 12 test questions, 11 were handled correctly the first time and 1 needed a second try. A separate check, that it looks up the calendar when asked about open demo slots, also needed a second try. A person approves every reply, so a wrong first answer never reaches a customer.",
           detail:
-            "The twelve-probe set (4 covered, 4 uncovered, 4 near-miss) ended 12 of 12 passed. That score is best of two on 2 of the 12 probes, not first-attempt clean: both failed attempts were corrected by an immediate retry of the identical prompt. The Human Gate between every agent output and a real customer is what catches this in production.",
+            "The twelve-probe set (4 covered, 4 uncovered, 4 near-miss) ended 12 of 12 passed. Probe 10, the fuel-card near-miss, failed its first attempt (a placeholder reply and the wrong route) and passed on an immediate retry of the identical prompt in a fresh chat; the other 11 passed on their first run. The separate tool-call test, which is not one of the 12, also failed its first attempt (it never called the calendar tool) and passed on retry. The Human Gate between every agent output and a real customer is what catches this in production.",
         },
         {
           headline: "The AI itself sometimes gets it wrong",

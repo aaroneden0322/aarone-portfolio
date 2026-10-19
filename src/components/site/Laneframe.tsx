@@ -43,7 +43,7 @@ const RESULTS = [
   {
     value: "12 of 12",
     label: "Trick questions handled correctly",
-    body: "The AI helper on Make got all 12, with a second try on two of them. The Zapier version got 8 of 12: it answered four questions it should have passed to a person.",
+    body: "The AI helper on Make got all 12, with a second try on one of them. The Zapier version got 8 of 12: it answered four questions it should have passed to a person.",
   },
   {
     value: "$5.35 a month",
