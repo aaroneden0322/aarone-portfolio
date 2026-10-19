@@ -117,7 +117,7 @@ export default function Laneframe() {
               href="/laneframe/capstone#film"
               className="rounded-full border border-circuit/40 px-5 py-2 text-sm font-semibold text-circuit hover:bg-circuit/10"
             >
-              Watch the film
+              Watch the walkthrough
             </a>
             <a
               href="#contact"
