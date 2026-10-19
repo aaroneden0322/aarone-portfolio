@@ -114,6 +114,12 @@ export default function Laneframe() {
               See the n8n build
             </a>
             <a
+              href="/laneframe/capstone#film"
+              className="rounded-full border border-circuit/40 px-5 py-2 text-sm font-semibold text-circuit hover:bg-circuit/10"
+            >
+              Watch the film
+            </a>
+            <a
               href="#contact"
               className="rounded-full border border-circuit/40 px-5 py-2 text-sm font-semibold text-circuit hover:bg-circuit/10"
             >
