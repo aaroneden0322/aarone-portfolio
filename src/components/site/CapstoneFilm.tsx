@@ -94,7 +94,7 @@ export default function CapstoneFilm() {
         The whole build in under three minutes
       </p>
       <p className="film-sub">
-        A sample business, not a real client. The film covers the job, the four
+        A sample business, not a real client. The walkthrough covers the job, the four
         builds, the break tests and the results. The proof it comes from is
         further down this page.
       </p>
@@ -114,7 +114,7 @@ export default function CapstoneFilm() {
             onTimeUpdate={onTime}
             onEnded={() => setEnded(true)}
             onPlay={() => setEnded(false)}
-            aria-label="Film: one job built on four automation tools, then five break tests run on each. A sample business, not a real client."
+            aria-label="Video walkthrough: one job built on four automation tools, then five break tests run on each. A sample business, not a real client."
           >
             <source src={`${BASE}/film-${theme}.mp4`} type="video/mp4" />
             <track
@@ -129,7 +129,7 @@ export default function CapstoneFilm() {
             type="button"
             className="film-poster"
             onClick={() => play()}
-            aria-label={`Play the film, ${mins}`}
+            aria-label={`Play the walkthrough, ${mins}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -154,7 +154,7 @@ export default function CapstoneFilm() {
                 <path d="M7 4l13 8-13 8z" />
               </svg>
               <span>
-                Play the film <b>{mins}</b>
+                Play the walkthrough <b>{mins}</b>
               </span>
             </span>
           </button>

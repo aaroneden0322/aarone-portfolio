@@ -5,7 +5,7 @@ export const FILM_CHAPTERS: FilmChapter[] = [
   { name: "The job", start: 18.7, proof: [{ label: "The scenario", href: "#s1" }] },
   { name: "Four tools", start: 44.4, proof: [{ label: "The four builds", href: "#s2" }] },
   { name: "Break tests", start: 71.1, proof: [{ label: "The break test results", href: "#probes" }] },
-  { name: "Results", start: 104.5, proof: [{ label: "The measured findings", href: "#s6" }, { label: "The cost figures", href: "#s4" }] },
+  { name: "Results", start: 104.5, proof: [{ label: "The measured findings", href: "#s6" }, { label: "The cost figures", href: "#s4" }, { label: "The 12 trick questions (Make page)", href: "/laneframe/make#m3" }] },
   { name: "Recap", start: 147.3, proof: [{ label: "The recommendations", href: "#s7" }] },
 ];
 export const FILM_LINES = [
@@ -29,7 +29,7 @@ export const FILM_LINES = [
   { start: 148.5, who: "Circuit", text: "Let's recap what happened." },
 ];
 export const FILM_BLOCKS = [
-  { start: 0.1, heading: "The results first", items: ["About 10 seconds. From a new lead to the first text message. Measured on the n8n build. The whole run on Make took under 3 seconds.", "12 of 12. Trick questions handled correctly. The AI helper on Make got all 12, with a second try on two of them. The Zapier version got 8 of 12: it answered four questions it should have passed to a person.", "$5.35 a month. To run the n8n version. That is the cost of its own server, backup included. It stays flat as volume grows."] },
+  { start: 0.1, heading: "The results first", items: ["About 10 seconds. From a new lead to the first text message. Measured on the n8n build. The whole run on Make took under 3 seconds.", "12 of 12. Trick questions handled correctly. The AI helper on Make got all 12, with a second try on one of them. The Zapier version got 8 of 12: it answered four questions it should have passed to a person.", "$5.35 a month. To run the n8n version. That is the cost of its own server, backup included. It stays flat as volume grows."] },
   { start: 5.4, heading: "What this film shows", items: ["the choice: I built three systems for a sample software company, on four automation tools.", "the catch: A build that works once proves little, so I tried to break every version.", "watch for: What each tool does well, and where it struggles."] },
   { start: 152.0, heading: "What happened", items: ["The job: Three systems for a sample software company: lead sorting and demo booking, failed-payment follow-up, and an AI helper that hands the rest to a person.", "The tests: Four tools, five break tests on each, eight requirements and sixteen details recorded per build.", "What showed up: About 10 seconds to a first text on n8n. 12 of 12 trick questions on Make, 8 of 12 on Zapier. $5.35 a month to run n8n.", "Key takeaway: Building it four times shows what each tool does well and where it struggles, so you can pick the right one for your business."] },
   { start: 173.4, heading: "The full build", items: ["Aarone Den Patayan. www.adautoteam.top. Sample business, not a real client."] },
