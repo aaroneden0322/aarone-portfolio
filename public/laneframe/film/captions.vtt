@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:21.600 --> 00:00:26.800
+<v Circuit>I built three systems for a sample software company.
+
+2
+00:00:26.800 --> 00:00:32.200
+<v Circuit>One sorts new leads and books demos.
+
+3
+00:00:32.200 --> 00:00:37.600
+<v Circuit>One follows up failed card payments.
+
+4
+00:00:37.600 --> 00:00:45.600
+<v Circuit>One is an AI helper that hands the rest to a person.
+
+5
+00:00:45.600 --> 00:00:51.700
+<v Circuit>Then I built the whole set on four tools.
+
+6
+00:00:51.700 --> 00:00:59.900
+<v Circuit>Four complete builds of the same job.
+
+7
+00:00:59.900 --> 00:01:08.900
+<v Circuit>They all did the job. Next question: how do they hold up?
+
+8
+00:01:12.300 --> 00:01:18.200
+<v Flow>Now I try to break every one of them.
+
+9
+00:01:18.200 --> 00:01:27.200
+<v Flow>Same break tests, run on every build.
+
+10
+00:01:30.000 --> 00:01:39.000
+<v Flow>Eight requirements and sixteen details per build.
+
+11
+00:01:41.000 --> 00:01:45.700
+<v Circuit>Here is what the testing showed.
+
+12
+00:01:45.700 --> 00:01:54.500
+<v Circuit>A new lead gets a first text in about 10 seconds on n8n.
+
+13
+00:01:54.500 --> 00:02:01.800
+<v Circuit>On Make, the whole run took under 3 seconds.
+
+14
+00:02:01.800 --> 00:02:09.500
+<v Flow>On trick questions, Make got 12 of 12.
+
+15
+00:02:09.500 --> 00:02:16.600
+<v Flow>Zapier got 8 of 12, answering four it should have passed.
+
+16
+00:02:16.600 --> 00:02:22.800
+<v Circuit>n8n runs on its own server for $5.35 a month.
+
+17
+00:02:22.800 --> 00:02:28.500
+<v Circuit>Testing found a real problem on Make, and I fixed it.
+
+18
+00:02:28.500 --> 00:02:32.000
+<v Circuit>Let's recap what happened.
