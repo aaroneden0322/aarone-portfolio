@@ -250,6 +250,17 @@ export default function ChatAssistant() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
+  // Lets a link elsewhere on the page open the panel (see AskAssistantLink).
+  useEffect(() => {
+    function onOpen(e: Event) {
+      (e as CustomEvent<{ handled?: boolean }>).detail.handled = true;
+      setSeen(true);
+      setOpen(true);
+    }
+    window.addEventListener("open-assistant", onOpen);
+    return () => window.removeEventListener("open-assistant", onOpen);
+  }, []);
+
   function close() {
     setOpen(false);
     requestAnimationFrame(() => launcherRef.current?.focus());
