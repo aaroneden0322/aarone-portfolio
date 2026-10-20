@@ -1,5 +1,6 @@
 import Nav from "@/components/site/Nav";
 import Hero from "@/components/site/Hero";
+import PickYourProblem from "@/components/site/PickYourProblem";
 import About from "@/components/site/About";
 import Laneframe from "@/components/site/Laneframe";
 import CtaBand from "@/components/site/CtaBand";
@@ -17,6 +18,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <PickYourProblem />
         <About />
         <Laneframe />
         <CtaBand text="Want your next automation tested like this before your customers touch it?" />
