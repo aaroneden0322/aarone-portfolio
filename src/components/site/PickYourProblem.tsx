@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
+import AskAssistantLink from "./AskAssistantLink";
 
 /**
  * "Pick your problem": a short strip under the Hero. Each tile names a problem
@@ -77,12 +78,9 @@ export default function PickYourProblem() {
 
       <p className="mt-6 text-sm text-ink-muted">
         Not sure which tool fits?{" "}
-        <a
-          href="/laneframe/capstone"
-          className="font-medium text-circuit hover:underline"
-        >
-          See all four compared →
-        </a>
+        <AskAssistantLink className="font-medium text-circuit hover:underline">
+          Ask the assistant →
+        </AskAssistantLink>
       </p>
     </section>
   );
