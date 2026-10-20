@@ -9,7 +9,7 @@ const NAV_COL_2 = [
   { href: "/#contact", label: "Contact" },
 ];
 const SOCIALS = [
-  { href: "https://linkedin.com/in/aarone-den-patayan-688974341", label: "LinkedIn" },
+  { href: "https://www.linkedin.com/in/aarone-den-patayan/", label: "LinkedIn" },
   { href: "https://x.com/aarone_den", label: "X / Twitter" },
   { href: "https://github.com/aaroneden0322", label: "GitHub" },
 ];
