@@ -14,7 +14,7 @@ const CASES = [
   {
     n: "02",
     title: "AI Lead Research and First Emails That Never Send Themselves",
-    body: "A new lead comes in, the workflow looks up the company, scores it and writes a short first email. Nothing is sent. Each draft waits in HubSpot as a task for a person to review. Built and tested on fictional property-management leads: 112 drafts, no invented facts found.",
+    body: "A new lead comes in, the workflow looks up the company, scores it and writes a short first email. Nothing is sent. Each draft waits in HubSpot as a task for a person to review. Built and tested on fictional property-management leads: 112 drafts, 110 passed every check, with no invented facts.",
     tags: ["n8n", "HubSpot", "AI Drafting"],
     status: "MOCK DATA · Demo build",
     href: "/case-studies/lead-enrichment",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
+import { CONTACT_EMAIL } from "@/data/contact";
 
 export const metadata: Metadata = {
   title: "Privacy note | Aarone Den Patayan",
@@ -61,6 +62,10 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
           the contact form run on a server I operate.
         </li>
         <li>
+          Vercel Web Analytics counts page visits without cookies, and the
+          counts can&rsquo;t be tied back to you.
+        </li>
+        <li>
           Some of these services are based in the United States, so your
           messages may be handled outside Australia.
         </li>
@@ -104,10 +109,10 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
       <p>
         You can ask me to see, correct or delete what I kept about you. Email{" "}
         <a
-          href="mailto:aarone@adautoteam.top"
+          href={`mailto:${CONTACT_EMAIL}`}
           className="text-circuit underline underline-offset-2"
         >
-          aarone@adautoteam.top
+          {CONTACT_EMAIL}
         </a>{" "}
         and, if you can, include roughly when you got in touch so I can find
         it.

@@ -7,6 +7,7 @@ const NAV_COL_2 = [
   { href: "/#laneframe", label: "Laneframe" },
   { href: "/#skills", label: "Skills" },
   { href: "/#contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" },
 ];
 const SOCIALS = [
   { href: "https://www.linkedin.com/in/aarone-den-patayan/", label: "LinkedIn" },

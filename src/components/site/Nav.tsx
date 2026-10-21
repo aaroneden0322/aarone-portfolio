@@ -21,7 +21,7 @@ export default function Nav() {
         <a href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/nav-avatar.png"
+            src="/nav-avatar.webp"
             alt="Aarone Den Patayan"
             className="h-9 w-9 rounded-lg border border-border object-cover"
           />
@@ -57,6 +57,8 @@ export default function Nav() {
           <button
             type="button"
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             className="text-ink"
             onClick={() => setOpen((v) => !v)}
           >
@@ -72,7 +74,7 @@ export default function Nav() {
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden">
+        <nav id="mobile-menu" className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden">
           {LINKS.map((l) => (
             <a
               key={l.href}

@@ -20,7 +20,7 @@ const n8n: PlatformPageData = {
     {
       label: "You own it",
       detail:
-        "It runs on a server we control, so there are no outside usage limits or plan tiers to work around.",
+        "It runs on a server I control, so there are no outside usage limits or plan tiers to work around.",
     },
   ],
   builds: [
@@ -98,7 +98,7 @@ const n8n: PlatformPageData = {
       caveatPlain:
         "Both problems were found by deliberately breaking things that already worked. They’re fixed and re-checked on real runs.",
       caveat:
-        "Both findings above were caught because we deliberately broke things that were already working. That's the point of testing this way — the bugs were real, and they're fixed and re-verified against live execution logs, not just reasoned about on paper.",
+        "Both findings above were caught because I deliberately broke things that were already working. That's the point of testing this way. The bugs were real, and they're fixed and re-verified against live execution logs, not just reasoned about on paper.",
       proof: [
         {
           src: "/laneframe/n8n/n2-break3-fix.webp",
@@ -137,7 +137,7 @@ const n8n: PlatformPageData = {
           headline: "Fails safely when something breaks",
           plain: "I cut its access to the help docs, then asked it a real question. It didn’t crash or guess. It told the customer what happened, opened a support ticket and alerted the team.",
           detail:
-            "We deliberately broke the database credential the agent uses to retrieve documentation, then sent it a real question. It didn't crash, and it didn't guess — it refused cleanly, filed a support ticket, and alerted the team, exactly as designed.",
+            "I deliberately broke the database credential the agent uses to retrieve documentation, then sent it a real question. It didn't crash, and it didn't guess. It refused cleanly, filed a support ticket, and alerted the team, exactly as designed.",
         },
         {
           headline: "Two off-topic questions still got an answer",
