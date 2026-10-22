@@ -22,52 +22,52 @@ WEBVTT
 
 6
 00:00:51.700 --> 00:00:59.900
-<v Circuit>Four complete builds of the same job.
+<v Circuit>Four builds of the same job.
 
 7
 00:00:59.900 --> 00:01:08.900
-<v Circuit>They all did the job. Next question: how do they hold up?
+<v Circuit>Next question: how do they hold up?
 
 8
-00:01:12.300 --> 00:01:18.200
+00:01:11.700 --> 00:01:17.600
 <v Flow>Now I try to break every one of them.
 
 9
-00:01:18.200 --> 00:01:27.200
-<v Flow>Same break tests, run on every build.
+00:01:17.600 --> 00:01:26.600
+<v Flow>Five break tests planned for each tool. 16 of the 20 were run.
 
 10
-00:01:30.000 --> 00:01:39.000
+00:01:30.200 --> 00:01:39.200
 <v Flow>Eight requirements and sixteen details per build.
 
 11
-00:01:41.000 --> 00:01:45.700
+00:01:41.200 --> 00:01:45.900
 <v Circuit>Here is what the testing showed.
 
 12
-00:01:45.700 --> 00:01:54.500
+00:01:45.900 --> 00:01:54.700
 <v Circuit>A new lead gets a first text in about 10 seconds on n8n.
 
 13
-00:01:54.500 --> 00:02:01.800
-<v Circuit>On Make, the whole run took under 3 seconds.
+00:01:54.700 --> 00:02:02.600
+<v Circuit>On Make, the whole run took under 3 seconds, timed to a different end point.
 
 14
-00:02:01.800 --> 00:02:09.500
+00:02:02.600 --> 00:02:10.300
 <v Flow>On trick questions, Make got 12 of 12.
 
 15
-00:02:09.500 --> 00:02:16.600
+00:02:10.300 --> 00:02:17.400
 <v Flow>Zapier got 8 of 12, answering four it should have passed.
 
 16
-00:02:16.600 --> 00:02:22.800
+00:02:17.400 --> 00:02:23.600
 <v Circuit>n8n runs on its own server for $5.35 a month.
 
 17
-00:02:22.800 --> 00:02:28.500
-<v Circuit>Testing found a real problem on Make, and I fixed it.
+00:02:23.600 --> 00:02:29.200
+<v Circuit>Make: one real problem fixed, two small ones open.
 
 18
-00:02:28.500 --> 00:02:32.000
+00:02:29.200 --> 00:02:32.700
 <v Circuit>Let's recap what happened.

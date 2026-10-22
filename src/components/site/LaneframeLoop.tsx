@@ -64,7 +64,7 @@ export default function LaneframeLoop() {
     width: 1280,
     height: 720,
     "aria-label":
-      "Animated summary: one job built on four automation tools, then five break tests run on each, with every number measured or shown with its formula.",
+      "Animated summary: one job built on four automation tools, then five break tests planned for each tool, with every number measured or shown with its formula.",
   };
 
   return (
