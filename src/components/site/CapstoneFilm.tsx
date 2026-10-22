@@ -114,7 +114,7 @@ export default function CapstoneFilm() {
             onTimeUpdate={onTime}
             onEnded={() => setEnded(true)}
             onPlay={() => setEnded(false)}
-            aria-label="Video walkthrough: one job built on four automation tools, then five break tests run on each. A sample business, not a real client."
+            aria-label="Video walkthrough: one job built on four automation tools, then five break tests planned for each tool. A sample business, not a real client."
           >
             <source src={`${BASE}/film-${theme}.mp4`} type="video/mp4" />
             <track
