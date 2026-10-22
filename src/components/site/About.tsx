@@ -34,9 +34,9 @@ export default function About() {
         </p>
         <p className="mt-4 max-w-3xl text-ink-muted">
           Training: I completed Libre Academy&rsquo;s Marketing Automation
-          Specialist certification, plus courses in Make and Zapier (Tara AI
-          Community+) and prompt engineering (Technical Virtual Assistants
-          PH).
+          Specialist certification, plus full trainings from Tara AI
+          Community+ in n8n, Make, Zapier, HighLevel CRM and prompt
+          engineering.
         </p>
       </Reveal>
 
