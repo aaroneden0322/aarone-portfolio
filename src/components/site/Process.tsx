@@ -40,8 +40,8 @@ export default function Process() {
           How I Test Before I Trust
         </h2>
         <p className="mt-4 max-w-3xl text-ink-muted">
-          The delivery process, from scoping to launch, built around finding
-          what breaks before a customer does.
+          How I test every build, so problems reach me before they reach your
+          customers.
         </p>
       </Reveal>
 

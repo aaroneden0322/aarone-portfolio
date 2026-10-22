@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import GlowCard from "./GlowCard";
+import AskAssistantLink from "./AskAssistantLink";
 
 const CASES = [
   {
@@ -7,7 +8,7 @@ const CASES = [
     title: "AI Customer-Service Assistant That Checks With a Person First",
     body: "An AI assistant that answers from a real knowledge base and passes anything it isn’t sure about to a person. A person approves every reply before a customer sees it. I tested it with 12 test questions and by deliberately breaking one of its connections. Built for a sample business.",
     tags: ["AI Agents", "Human-in-the-Loop", "Make"],
-    status: "Complete · Sample business",
+    status: "Tested · Sample business",
     href: "/laneframe/make#m3",
     linkLabel: "See the build →",
   },
@@ -21,12 +22,13 @@ const CASES = [
   },
   {
     n: "03",
-    title: "More Case Studies Coming Soon",
-    body: "This spot is reserved for the next build. Get in touch if you’d like to be the one who fills it.",
-    tags: [] as string[],
-    status: null as string | null,
+    title: "The AI Assistant on This Site",
+    body: "I built an AI assistant for my own portfolio site. It answers only from a written knowledge base and passes real enquiries to me to review. It is designed and tested not to quote prices, promise timelines or commit me to anything. Live since 13 October 2026.",
+    tags: ["n8n", "Claude", "Guardrails"],
+    status: "Live · Portfolio proof of work",
     href: "#contact",
-    linkLabel: "Get in touch →",
+    linkLabel: "Try it →",
+    assistant: true,
   },
 ];
 
@@ -41,7 +43,7 @@ export default function CaseStudies() {
           Additional Case Studies
         </h2>
         <p className="mt-4 text-ink-muted">
-          A closer look at two recent builds, with more on the way.
+          A closer look at three builds.
         </p>
       </Reveal>
 
@@ -71,12 +73,18 @@ export default function CaseStudies() {
                   {c.status}
                 </p>
               )}
-              <a
-                href={"href" in c && c.href ? c.href : "#contact"}
-                className="mt-3 text-sm font-medium text-circuit hover:underline"
-              >
-                {"linkLabel" in c && c.linkLabel ? c.linkLabel : "View case study →"}
-              </a>
+              {"assistant" in c && c.assistant ? (
+                <AskAssistantLink className="mt-3 text-sm font-medium text-circuit hover:underline">
+                  {c.linkLabel}
+                </AskAssistantLink>
+              ) : (
+                <a
+                  href={"href" in c && c.href ? c.href : "#contact"}
+                  className="mt-3 text-sm font-medium text-circuit hover:underline"
+                >
+                  {"linkLabel" in c && c.linkLabel ? c.linkLabel : "View case study →"}
+                </a>
+              )}
             </GlowCard>
           </Reveal>
         ))}

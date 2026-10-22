@@ -3,7 +3,7 @@ import type { PlatformPageData } from "./types";
 const zapier: PlatformPageData = {
   slug: "zapier",
   name: "Zapier",
-  status: "3 of 3 builds complete",
+  status: "3 builds: 1 tested, 2 partly tested",
   tagline:
     "You pay per completed step, and each automation has a hard size limit. It forced the hardest trade-offs of the four.",
   whyThisPlatform: [
@@ -27,7 +27,7 @@ const zapier: PlatformPageData = {
     {
       id: "Z1",
       title: "Lead Sorter & Demo Booker",
-      status: "Complete",
+      status: "Partly tested",
       summary:
         "Takes in leads, removes duplicates, scores them and sends each one to the right next step. It’s the same job as the n8n and Make versions, split into three linked parts to fit under Zapier’s size limit.",
       whatItDoes:
@@ -73,7 +73,7 @@ const zapier: PlatformPageData = {
     {
       id: "Z2",
       title: "Lead Sorter: Email Version",
-      status: "Complete",
+      status: "Partly tested",
       summary:
         "The same lead sorter, but taking leads from incoming emails instead of a web form, because on Zapier each way in needs its own build.",
       whatItDoes:
@@ -119,7 +119,7 @@ const zapier: PlatformPageData = {
     {
       id: "Z3",
       title: "AI Support-Ticket Assistant",
-      status: "Complete",
+      status: "Tested",
       summary:
         "An AI assistant that sorts and answers support tickets from real documents and passes anything it can’t back up with a quote to a person. It’s the same job as the n8n and Make versions, but Zapier has no built-in approval step or confidence score.",
       whatItDoes:

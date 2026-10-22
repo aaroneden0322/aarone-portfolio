@@ -6,28 +6,28 @@ import LaneframeLoop from "./LaneframeLoop";
 const PLATFORMS = [
   {
     name: "n8n",
-    status: "Complete",
+    status: "Tested",
     statusColor: "text-circuit",
     body: "Three systems: one that sorts new leads and books demos, one that chases failed subscription payments, and an AI helper that answers questions from your help docs. I broke each one the same way and checked it live, not from a screenshot.",
     href: "/laneframe/n8n",
   },
   {
     name: "Make",
-    status: "Complete",
-    statusColor: "text-circuit",
-    body: "The same three jobs on Make: capturing leads without duplicates, chasing failed payments, and an AI helper whose replies a person approves before they go out. Testing turned up a real problem (messages piling up while the system was switched off) and I found and fixed it.",
+    status: "Tested · 2 open issues listed",
+    statusColor: "text-flow-soft",
+    body: "The same three jobs on Make: capturing leads without duplicates, chasing failed payments, and an AI helper whose replies a person approves before they go out. Testing turned up a real problem (messages piling up while the system was switched off) and I found and fixed it. Two smaller issues are still open, and the build page lists them.",
     href: "/laneframe/make",
   },
   {
     name: "Zapier",
-    status: "Complete",
-    statusColor: "text-circuit",
+    status: "Partly tested",
+    statusColor: "text-flow",
     body: "Three systems: lead sorting from a web form, lead sorting from email, and an AI support helper. On Zapier, the AI helper was more likely than the n8n version to answer questions it should have passed to a person. I measured that.",
     href: "/laneframe/zapier",
   },
   {
     name: "GoHighLevel",
-    status: "Complete",
+    status: "Tested",
     statusColor: "text-circuit",
     body: "The demo-booking workflows are built and checked. The finished build on the page is an AI helper that qualifies leads by email, with hard limits on what it is allowed to do. I tested it by switching the AI off and by trying to make it book too early.",
     href: "/laneframe/gohighlevel",
@@ -38,7 +38,7 @@ const RESULTS = [
   {
     value: "About 10 seconds",
     label: "From a new lead to the first text message",
-    body: "Measured on the n8n build. The whole run on Make took under 3 seconds.",
+    body: "Measured on the n8n build. The whole run on Make took under 3 seconds. The two were timed to different end points, so this is not a speed ranking.",
   },
   {
     value: "12 of 12",
@@ -48,13 +48,13 @@ const RESULTS = [
   {
     value: "$5.35 a month",
     label: "To run the n8n version",
-    body: "That is the cost of its own server, backup included. It stays flat as volume grows.",
+    body: "That is the cost of its own server, backup included.",
   },
 ];
 
 const STATS = [
   { value: "4", label: "TOOLS COMPARED" },
-  { value: "5", label: "BREAK TESTS ON EACH" },
+  { value: "5", label: "BREAK TESTS PLANNED PER TOOL" },
   { value: "8", label: "REQUIREMENTS PER BUILD" },
   { value: "16", label: "DETAILS RECORDED PER BUILD" },
 ];
@@ -178,7 +178,12 @@ export default function Laneframe() {
         </div>
 
         <Reveal>
-          <div className="mt-12 grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
+          <div className="mt-12 border-t border-border pt-10">
+            <p className="text-xs font-semibold tracking-[0.15em] text-circuit">
+              THE TEST PLAN
+            </p>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-4">
             {STATS.map((s) => (
               <div key={s.label}>
                 <p className="font-display text-3xl font-bold text-ink">
@@ -190,6 +195,11 @@ export default function Laneframe() {
               </div>
             ))}
           </div>
+          <p className="mt-6 max-w-3xl text-xs text-ink-muted/80">
+            16 of the 20 planned break tests were run. The other 4 tested
+            features a build didn&rsquo;t have (3 on Zapier, 1 on
+            GoHighLevel).
+          </p>
         </Reveal>
       </div>
     </section>
