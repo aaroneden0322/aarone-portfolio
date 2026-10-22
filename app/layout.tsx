@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import NodeGraphBackground from "@/components/site/NodeGraphBackground";
+import { SITE_URL, pageMeta } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,9 +20,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Aarone Den Patayan — Marketing & AI Automation Specialist",
-  description:
-    "I set up automations that follow up with your leads, chase failed payments, and keep customers in the loop — and I try hard to break every one before your customers ever use it.",
+  metadataBase: new URL(SITE_URL),
+  ...pageMeta({
+    title: "Aarone Den Patayan | Marketing & AI Automation Specialist",
+    description:
+      "I set up automations that follow up with your leads, chase failed payments and keep customers in the loop. I also try hard to break every one before your customers use it.",
+    path: "/",
+  }),
 };
 
 export default function RootLayout({

@@ -9,6 +9,7 @@ import FloatingAction from "@/components/site/FloatingAction";
 import CapstoneFilm from "@/components/site/CapstoneFilm";
 import CapstoneMeters from "@/components/site/CapstoneMeters";
 import { FILM_DURATION } from "@/data/laneframe/film";
+import { SITE_URL, pageMeta } from "@/lib/seo";
 import "./capstone.css";
 
 const TITLE =
@@ -16,7 +17,11 @@ const TITLE =
 const DESC =
   "The same lead-handling system built on n8n, Make, Zapier and GoHighLevel, compared against one specification, with measured results and what was not measured.";
 
-export const metadata: Metadata = { title: TITLE, description: DESC };
+export const metadata: Metadata = pageMeta({
+  title: TITLE,
+  description: DESC,
+  path: "/laneframe/capstone",
+});
 
 /**
  * The capstone body is one authored HTML string. It is cut in three so the
@@ -53,8 +58,8 @@ export default function Page() {
     name: "One job, four automation tools: the Laneframe capstone in under three minutes",
     description:
       "A short animated film of the Laneframe capstone: one sample-business job built on n8n, Make, Zapier and GoHighLevel, then five break tests on each. A sample business, not a real client.",
-    thumbnailUrl: "/laneframe/film/poster-dark.webp",
-    contentUrl: "/laneframe/film/film-dark.mp4",
+    thumbnailUrl: `${SITE_URL}/laneframe/film/poster-dark.webp`,
+    contentUrl: `${SITE_URL}/laneframe/film/film-dark.mp4`,
     duration: iso,
     uploadDate: "2026-10-19",
     inLanguage: "en",
