@@ -44,6 +44,13 @@ export default function PlatformBuildPage({ data }: { data: PlatformPageData }) 
               {data.name} build detail
             </h1>
             <p className="mt-3 text-sm font-semibold text-circuit">{data.status}</p>
+            <p className="mt-3 max-w-2xl text-sm text-ink-muted">
+              <a href="/#laneframe" className="text-circuit hover:underline">
+                Laneframe
+              </a>{" "}
+              is a fictional software company I built these systems for. The
+              data is synthetic, and there is no real client.
+            </p>
             <p className="mt-4 max-w-2xl text-ink-muted">{data.tagline}</p>
           </Reveal>
 

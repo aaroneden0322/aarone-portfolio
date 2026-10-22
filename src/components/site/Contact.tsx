@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { CONTACT_EMAIL, BOOKING_URL } from "@/data/contact";
 
-const CONTACT_EMAIL = "aarone@adautoteam.top";
-const BOOKING_URL = "https://cal.com/aarone-den-patayan-zyaccx/30min";
 const WEBHOOK_URL = "https://assistant.adautoteam.top/webhook/portfolio-contact";
 
 const WEBMAIL_LINKS = [
@@ -124,6 +123,13 @@ export default function Contact() {
             >
               {status === "sending" ? "Sending…" : "Send My Message"}
             </button>
+            <p className="text-xs text-ink-muted">
+              I keep contact details for up to 12 months after we last speak.{" "}
+              <a href="/privacy" className="text-circuit underline underline-offset-2">
+                Read the privacy note
+              </a>
+              .
+            </p>
             {status === "sent" && (
               <p className="text-sm text-circuit">
                 Thanks, I&rsquo;ll get back to you within 24 hours. Please also

@@ -4,7 +4,7 @@ const STATS = [
   {
     value: "12/12",
     label: "Trick questions handled correctly",
-    body: "My latest AI assistant was asked questions it could answer, questions it couldn’t, and near-misses designed to catch it out. It got all 12 right.",
+    body: "The AI help desk I built on Make was asked questions it could answer, questions it couldn’t, and near-misses designed to catch it out. It handled all 12 correctly, one of them on a second try.",
   },
   {
     value: "4",
@@ -20,7 +20,7 @@ const STATS = [
 
 export default function Proof() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-8">
+    <section id="proof" className="mx-auto max-w-6xl px-6 py-8">
       <Reveal>
         <p className="font-display text-sm font-semibold tracking-[0.15em] text-circuit">
           PROOF

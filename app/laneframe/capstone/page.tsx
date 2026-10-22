@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import BackToTop from "@/components/site/BackToTop";
+import CtaBand from "@/components/site/CtaBand";
+import FloatingAction from "@/components/site/FloatingAction";
 import CapstoneFilm from "@/components/site/CapstoneFilm";
 import CapstoneMeters from "@/components/site/CapstoneMeters";
 import { FILM_DURATION } from "@/data/laneframe/film";
@@ -75,12 +77,14 @@ export default function Page() {
             <div dangerouslySetInnerHTML={{ __html: tail }} />
           </div>
         </div>
+        <CtaBand text="Want your next automation tested like this before your customers touch it?" />
       </main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
       />
       <Footer />
+      <FloatingAction />
       <BackToTop />
     </>
   );
