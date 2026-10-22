@@ -1,4 +1,7 @@
-export type BuildStatus = "Complete" | "In Progress" | "Not Started";
+export type BuildStatus =
+  | "Tested"
+  | "Tested · open issue listed"
+  | "Partly tested";
 
 export interface BuildFinding {
   headline: string;

@@ -3,7 +3,7 @@ import type { PlatformPageData } from "./types";
 const gohighlevel: PlatformPageData = {
   slug: "gohighlevel",
   name: "GoHighLevel",
-  status: "1 build complete",
+  status: "1 build, tested",
   tagline:
     "GoHighLevel plus an AI helper that qualifies leads by email, with hard limits on what the AI is allowed to do.",
   whyThisPlatform: [
@@ -27,7 +27,7 @@ const gohighlevel: PlatformPageData = {
     {
       id: "G3",
       title: "AI Email Qualifier with a Booking Gate",
-      status: "Complete",
+      status: "Tested",
       summary:
         "A prospect replies to an email. The AI reads the reply, pulls out four facts (how many trucks they run, what system they use now, when they plan to decide, and their role) and writes a short answer asking for whatever is missing. It has to quote the prospect’s own words for every fact it records. When all four are confirmed, the system books the demo. If the AI doesn’t answer within 90 seconds, a person takes over automatically.",
       whatItDoes:

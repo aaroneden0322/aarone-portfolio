@@ -3,7 +3,7 @@ import type { PlatformPageData } from "./types";
 const n8n: PlatformPageData = {
   slug: "n8n",
   name: "n8n",
-  status: "3 of 3 builds complete",
+  status: "3 builds, all tested",
   tagline:
     "Runs on a server I control, for a flat monthly fee no matter how complex the job gets.",
   whyThisPlatform: [
@@ -27,7 +27,7 @@ const n8n: PlatformPageData = {
     {
       id: "N1",
       title: "Lead Sorter & Demo Booker",
-      status: "Complete",
+      status: "Tested",
       summary:
         "Takes leads from five sources, cleans and scores them, and routes each one to the right next step in under a minute.",
       whatItDoes:
@@ -69,7 +69,7 @@ const n8n: PlatformPageData = {
     {
       id: "N2",
       title: "Failed-Payment Recovery",
-      status: "Complete",
+      status: "Tested",
       summary:
         "Automatically retries failed subscription payments and reminds the customer, so a business doesn’t quietly lose paying customers to an expired card.",
       whatItDoes:
@@ -115,7 +115,7 @@ const n8n: PlatformPageData = {
     {
       id: "N3",
       title: "AI Help-Desk Assistant",
-      status: "Complete",
+      status: "Tested",
       summary:
         "An AI support agent that answers from real documentation and is built to say \"I don't know, let me get you a person\" rather than guess.",
       whatItDoes:

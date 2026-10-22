@@ -10,9 +10,9 @@ import BuildVideo from "./BuildVideo";
 import type { BuildStatus, PlatformPageData } from "@/data/laneframe/types";
 
 const STATUS_COLOR: Record<BuildStatus, string> = {
-  Complete: "text-circuit",
-  "In Progress": "text-flow",
-  "Not Started": "text-ink-muted",
+  Tested: "text-circuit",
+  "Tested · open issue listed": "text-flow-soft",
+  "Partly tested": "text-flow",
 };
 
 const ALL_PLATFORMS = [

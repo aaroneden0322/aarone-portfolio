@@ -9,7 +9,7 @@ const STATS = [
   {
     value: "4",
     label: "Tools compared side by side",
-    body: "The same lead-handling system, built separately on n8n, Make, Zapier, and GoHighLevel and tested the same way. All four builds are finished.",
+    body: "The same lead-handling system, built separately on n8n, Make, Zapier, and GoHighLevel and tested the same way. Each build page lists what is still open.",
   },
   {
     value: "0",

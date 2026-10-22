@@ -32,6 +32,12 @@ export default function About() {
           the plan and the build, so testing and clear instructions are part
           of the job.
         </p>
+        <p className="mt-4 max-w-3xl text-ink-muted">
+          Training: I completed Libre Academy&rsquo;s Marketing Automation
+          Specialist certification, plus courses in Make and Zapier (Tara AI
+          Community+) and prompt engineering (Technical Virtual Assistants
+          PH).
+        </p>
       </Reveal>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">

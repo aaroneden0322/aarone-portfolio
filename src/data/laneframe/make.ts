@@ -3,7 +3,7 @@ import type { PlatformPageData } from "./types";
 const make: PlatformPageData = {
   slug: "make",
   name: "Make",
-  status: "3 of 3 builds complete",
+  status: "3 builds: 1 tested, 2 tested with an open issue listed",
   tagline:
     "A fully hosted, visual tool. You pay per step, so the price depends on how far each lead travels through the system.",
   whyThisPlatform: [
@@ -27,7 +27,7 @@ const make: PlatformPageData = {
     {
       id: "M1",
       title: "Lead Sorter & Demo Booker",
-      status: "Complete",
+      status: "Tested · open issue listed",
       summary:
         "Takes in leads from several places, removes duplicates, scores them and sends each one to the right next step. It’s the same job as the n8n version, built separately on Make.",
       whatItDoes:
@@ -75,11 +75,11 @@ const make: PlatformPageData = {
     {
       id: "M2",
       title: "Failed-Payment Recovery",
-      status: "Complete",
+      status: "Tested · open issue listed",
       summary:
         "Retries failed subscription payments, sends reminders that space out over time, and only brings in a person when recovery really fails. It’s the same job as the n8n version, built on Make.",
       whatItDoes:
-        "A Stripe webhook triggers the scenario, which checks for a duplicate event, verifies the account exists, and — on a failed payment — runs three retry attempts with backoff before opening a multi-step dunning sequence: widening wait-and-notify cycles, then a downgrade to read-only access, a Slack alert, and a churn-queue entry if nothing recovers.",
+        "A Stripe webhook triggers the scenario, which checks for a duplicate event, verifies the account exists, and on a failed payment runs three retry attempts with backoff (the waits were shortened for testing) before opening a multi-step dunning sequence: widening wait-and-notify cycles, then a downgrade to read-only access, a Slack alert, and a churn-queue entry if nothing recovers.",
       testedAgainst: [
         "The same payment alert sent twice",
         "A real declined card, all the way through",
@@ -123,7 +123,7 @@ const make: PlatformPageData = {
     {
       id: "M3",
       title: "AI Concierge Assistant",
-      status: "Complete",
+      status: "Tested",
       summary:
         "An AI assistant that answers customer questions from a real knowledge base and passes anything it isn’t sure about to a person. Nothing goes out until a human approves it. It’s the same job as the n8n version.",
       whatItDoes:
