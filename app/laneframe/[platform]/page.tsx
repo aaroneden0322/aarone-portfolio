@@ -6,6 +6,7 @@ import make from "@/data/laneframe/make";
 import zapier from "@/data/laneframe/zapier";
 import gohighlevel from "@/data/laneframe/gohighlevel";
 import type { PlatformPageData } from "@/data/laneframe/types";
+import { pageMeta } from "@/lib/seo";
 
 const PLATFORMS: Record<string, PlatformPageData> = {
   n8n,
@@ -25,10 +26,11 @@ export function generateMetadata({
 }): Metadata {
   const data = PLATFORMS[params.platform];
   if (!data) return {};
-  return {
-    title: `${data.name} build detail — Laneframe | Aarone Den Patayan`,
+  return pageMeta({
+    title: `${data.name} build detail | Laneframe | Aarone Den Patayan`,
     description: data.tagline,
-  };
+    path: `/laneframe/${params.platform}`,
+  });
 }
 
 export default function Page({ params }: { params: { platform: string } }) {

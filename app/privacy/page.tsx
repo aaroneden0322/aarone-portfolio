@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import { CONTACT_EMAIL } from "@/data/contact";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy note | Aarone Den Patayan",
   description:
     "What the chat, contact form, email and booking link keep, who helps run them, how long it is kept, and how to ask for it to be deleted.",
-};
+  path: "/privacy",
+});
 
 const SECTIONS: { heading: string; body: React.ReactNode }[] = [
   {
