@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/data/contact";
 import {
   FormEvent,
   KeyboardEvent,
@@ -41,16 +42,17 @@ const PRIVACY_URL =
   process.env.NEXT_PUBLIC_ASSISTANT_PRIVACY_URL || "/privacy";
 const STORAGE_KEY = "assistant-chat-v1";
 const MAX_CHARS = 500;
+const BOOKING = BOOKING_URL;
 
 const OPENING =
   "I'm an AI assistant on Aarone Den Patayan's site. Tell me about a task and I'll give you an honest read on whether it's worth automating, or ask me what he has built. Please keep passwords and customer data out of the chat.";
 const STARTERS = [
   "Is my task worth automating?",
   "What has Aarone built?",
-  "How do I get in touch?",
+  "Book a call with Aarone",
 ];
 const ERROR_TEXT =
-  "Something went wrong on my side. Please try again, or use the contact form and Aarone will reply within 24 hours.";
+  "Something went wrong on my side. Please try again, or book a call with Aarone at the Contact section of this page. Email works too.";
 
 function linkify(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
@@ -66,7 +68,7 @@ function linkify(text: string): ReactNode[] {
     const label = booking
       ? "book a call"
       : path === "/#contact"
-        ? "contact form"
+        ? "book a call"
         : path || "adautoteam.top";
     parts.push(
       <a
@@ -489,15 +491,24 @@ export default function ChatAssistant() {
 
           {ended ? (
             <div className="border-t border-border px-4 py-3 text-sm text-ink-muted">
-              We&apos;ve reached the end of this chat. Aarone would still like to hear from you, so the{" "}
+              We&apos;ve reached the end of this chat. Aarone would still like to hear from you, so{" "}
+              <a
+                href={BOOKING}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-circuit underline underline-offset-2"
+              >
+                booking a call
+              </a>{" "}
+              is the best next step. You can also email him from the{" "}
               <a
                 href="/#contact"
                 onClick={() => setOpen(false)}
                 className="font-medium text-circuit underline underline-offset-2"
               >
-                contact form
-              </a>{" "}
-              is the best next step. Or{" "}
+                Contact section
+              </a>
+              . Or{" "}
               <button
                 type="button"
                 onClick={startNewChat}

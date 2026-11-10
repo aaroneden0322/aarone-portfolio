@@ -1,64 +1,7 @@
-"use client";
-
-import { useState } from "react";
 import Reveal from "./Reveal";
 import { CONTACT_EMAIL, BOOKING_URL } from "@/data/contact";
 
-const WEBHOOK_URL = "https://assistant.adautoteam.top/webhook/portfolio-contact";
-
-const WEBMAIL_LINKS = [
-  {
-    label: "Gmail",
-    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`,
-  },
-  {
-    label: "Outlook",
-    href: `https://outlook.live.com/mail/0/deeplink/compose?to=${CONTACT_EMAIL}`,
-  },
-  {
-    label: "Yahoo",
-    href: `https://compose.mail.yahoo.com/?to=${CONTACT_EMAIL}`,
-  },
-  {
-    label: "Proton Mail",
-    href: `https://mail.proton.me/u/0/inbox?compose=new&to=${CONTACT_EMAIL}`,
-  },
-];
-
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle"
-  );
-  const [copied, setCopied] = useState(false);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("sending");
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Non-200 response");
-      setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
-  }
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // clipboard API unavailable — silently ignore
-    }
-  }
-
   return (
     <section id="contact" className="mx-auto max-w-6xl px-6 py-8">
       <Reveal>
@@ -70,156 +13,52 @@ export default function Contact() {
         </h2>
         <p className="mt-4 max-w-2xl text-ink-muted">
           Got a system that keeps breaking, or marketing work that&rsquo;s
-          outgrown doing it by hand? Tell me what you&rsquo;re dealing
-          with, and I&rsquo;ll reply within 24 hours.
+          outgrown doing it by hand? Pick a time and we&rsquo;ll talk it
+          through.
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-8 md:grid-cols-2">
-        <Reveal>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label htmlFor="name" className="text-sm text-ink-muted">
-                Name
-              </label>
-              <input
-                id="name"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="mt-1 w-full rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="text-sm text-ink-muted">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="mt-1 w-full rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm text-ink-muted">
-                Message
-              </label>
-              <textarea
-                id="message"
-                required
-                rows={5}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-1 w-full resize-y rounded-lg border border-border bg-surface/[0.03] px-4 py-3 text-ink outline-none focus:border-circuit/60"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="btn-glow w-full rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.01] disabled:opacity-60"
-            >
-              {status === "sending" ? "Sending…" : "Send My Message"}
-            </button>
-            <p className="text-xs text-ink-muted">
-              I keep contact details for up to 12 months after we last speak.{" "}
-              <a href="/privacy" className="text-circuit underline underline-offset-2">
-                Read the privacy note
-              </a>
-              .
-            </p>
-            {status === "sent" && (
-              <p className="text-sm text-circuit">
-                Thanks, I&rsquo;ll get back to you within 24 hours. Please also
-                check your spam folder for the confirmation email and my reply.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="text-sm text-flow">
-                Something went wrong sending that. Email me directly instead
-                at {CONTACT_EMAIL}.
-              </p>
-            )}
-          </form>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="h-full rounded-2xl border border-border p-6">
-            <p className="text-sm text-ink-muted">
-              Would you rather talk it through? Pick a time for a 30 minute
-              intro call.
-            </p>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-glow mt-3 inline-block rounded-full bg-circuit px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
-            >
-              Book a call
-            </a>
-
-            <p className="mt-6 text-sm text-ink-muted">
-              Prefer email? Reach me directly and skip the form.
-            </p>
+      <Reveal delay={100}>
+        <div className="mt-10 max-w-2xl rounded-2xl border border-border p-6 md:p-8">
+          <h3 className="font-display text-xl font-semibold text-ink">
+            Book a 30 minute intro call
+          </h3>
+          <p className="mt-3 text-ink-muted">
+            Tell me what&rsquo;s slowing you down. I&rsquo;ll give you an
+            honest read on whether it&rsquo;s worth automating and what the
+            next step would be. There&rsquo;s no pitch and no obligation. You
+            can pick any time that suits you, and the booking page shows it in
+            your own time zone.
+          </p>
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-glow mt-6 inline-block rounded-full bg-circuit px-8 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
+          >
+            Book a call
+          </a>
+          <p className="mt-8 text-sm text-ink-muted">
+            Prefer email?{" "}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-2 block break-all font-display text-lg font-semibold text-circuit hover:underline"
+              className="break-all font-medium text-circuit underline underline-offset-2 hover:opacity-80"
             >
               {CONTACT_EMAIL}
             </a>
-
-            <p className="mt-6 text-xs font-semibold tracking-widest text-ink-muted">
-              MOBILE APP → EMAIL ME
-            </p>
-            <div className="mt-3 flex flex-wrap gap-3">
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
-              >
-                Email Me
-              </a>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
-              >
-                {copied ? "Copied!" : "Copy address"}
-              </button>
-            </div>
-
-            <p className="mt-6 text-xs font-semibold tracking-widest text-ink-muted">
-              WEBMAIL → COMPOSE IN YOUR BROWSER
-            </p>
-            <div className="mt-3 flex flex-wrap gap-3">
-              {WEBMAIL_LINKS.map((w) => (
-                <a
-                  key={w.label}
-                  href={w.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-glow rounded-full border border-border px-4 py-2 text-sm text-ink hover:border-circuit/60"
-                >
-                  {w.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="mt-6 flex items-center gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/qr-email.png"
-                alt="QR code to email Aarone"
-                className="h-20 w-20 rounded-md border border-border bg-white p-1"
-              />
-              <p className="text-xs font-semibold tracking-widest text-ink-muted">
-                SCAN TO EMAIL ME
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </div>
+          </p>
+          <p className="mt-3 text-xs text-ink-muted">
+            I keep contact details for up to 12 months after we last speak.{" "}
+            <a
+              href="/privacy"
+              className="text-circuit underline underline-offset-2"
+            >
+              Read the privacy note
+            </a>
+            .
+          </p>
+        </div>
+      </Reveal>
     </section>
   );
 }
