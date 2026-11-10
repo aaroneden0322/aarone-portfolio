@@ -53,7 +53,8 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         <li>
           Airtable stores the contact details described above, Slack sends me
           a notice when someone gets in touch, and Cal.com runs the booking
-          link. Email to me is handled by Google Workspace.
+          calendar. The calendar on the Contact section loads from Cal.com only
+          when you scroll to it. Email to me is handled by Google Workspace.
         </li>
         <li>
           A bot check from Cloudflare runs when you send your first message,
@@ -96,8 +97,8 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
       <>
         <p>Chat messages are deleted after 30 days.</p>
         <p className="mt-3">
-          If you chose to share your name and email, or you used the contact
-          form, emailed me or booked a call, your details are kept in my
+          If you chose to share your name and email, emailed me or booked a
+          call, your details are kept in my
           contact records for up to 12 months after we last spoke, then
           deleted. Cal.com keeps its own record of a booking under its own
           privacy policy.
