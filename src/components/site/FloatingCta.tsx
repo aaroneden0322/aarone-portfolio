@@ -16,7 +16,7 @@ export default function FloatingCta() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    // The Contact section has its own real "Send Message" CTA, and the
+    // The Contact section has its own real "Book a call" CTA, and the
     // Footer follows right after it — the floating pill is redundant
     // (and visually overlaps the QR code / footer links) from that point
     // on, so hide it as soon as Contact starts entering the viewport.
