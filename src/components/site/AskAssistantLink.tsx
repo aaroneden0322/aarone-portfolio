@@ -3,7 +3,7 @@
 /**
  * Opens the chat assistant from a link. If the assistant is not on the page
  * (nothing handles the event) the link behaves as a normal link to the
- * contact form, so it never dead-ends.
+ * Contact section (booking), so it never dead-ends.
  */
 export default function AskAssistantLink({
   children,
