@@ -26,9 +26,9 @@ const RESPONSE_TYPES = new Set([
 ]);
 
 const PAUSED_REPLY =
-  "The assistant is paused right now. The contact form still works, and Aarone replies within 24 hours.";
+  "The assistant is paused right now. You can still book a call with Aarone from the Contact section of this page, or email him.";
 const ERROR_REPLY =
-  "Something went wrong on my side. Try again, or use the contact form.";
+  "Something went wrong on my side. Try again, or book a call with Aarone from the Contact section of this page.";
 
 type Reply = {
   type: string;
