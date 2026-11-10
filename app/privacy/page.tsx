@@ -7,7 +7,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Privacy note | Aarone Den Patayan",
   description:
-    "What the chat, contact form, email and booking link keep, who helps run them, how long it is kept, and how to ask for it to be deleted.",
+    "What the chat, email and booking link keep, who helps run them, how long it is kept, and how to ask for it to be deleted.",
   path: "/privacy",
 });
 
@@ -27,7 +27,7 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
           through Slack.
         </li>
         <li>
-          If you use the contact form or email me, I keep your name, email
+          If you email me, I keep your name, email
           address and message so I can reply. They are stored in Airtable and
           I&rsquo;m notified through Slack.
         </li>
@@ -45,7 +45,7 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
       <ul className="list-disc space-y-2 pl-5">
         <li>
           An AI service (Anthropic) reads your chat messages to write the
-          replies. It also reads contact form and email messages so it can
+          replies. It also reads email messages so it can
           draft a reply for me, which I check before anything is sent. Under
           its business terms it doesn&rsquo;t use them to train its models,
           and it normally deletes them within 30 days.
@@ -61,7 +61,7 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         </li>
         <li>
           The site is hosted by Vercel, and the chat and the automations behind
-          the contact form run on a server I operate.
+          email and booking run on a server I operate.
         </li>
         <li>
           Vercel Web Analytics counts page visits without cookies, and the
@@ -85,7 +85,7 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         </li>
         <li>
           I don&rsquo;t ask you for passwords or customer records. Please
-          don&rsquo;t share them in the chat, the form or email.
+          don&rsquo;t share them in the chat or email.
         </li>
       </ul>
     ),
@@ -118,8 +118,7 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         </a>{" "}
         and, if you can, include roughly when you got in touch so I can find
         it.
-        I&rsquo;ll reply within 24 hours on business days. The contact form on
-        the site always works too.
+        I&rsquo;ll reply within 24 hours on business days.
       </p>
     ),
   },
@@ -141,8 +140,7 @@ export default function PrivacyPage() {
             I take your privacy seriously, and I&rsquo;ve kept this chat simple
             on purpose. This note says, in plain words, what the chat keeps,
             who helps run it, and how to get your messages deleted. It covers
-            the chat assistant, the contact form, email to me, and the
-            booking link.
+            the chat assistant, email to me, and the booking link.
           </p>
           {SECTIONS.map((s) => (
             <div key={s.heading} className="mt-10">
